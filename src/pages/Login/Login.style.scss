@@ -1,0 +1,36 @@
+.logo {
+  position: absolute;
+  top: 10%;
+  left: 0%;
+}
+
+.card-login {
+  width: 100%;
+  max-width: 375px;
+  position: relative;
+  height: 100%;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 400;
+  color: #26273B;
+}
+.subtitle {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 12px;
+  font-weight: 400;
+  color: #737373;
+
+  p {
+    margin: 0;
+  }
+}
