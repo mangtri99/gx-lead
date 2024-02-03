@@ -22,6 +22,12 @@ button, input[type="submit"], input[type="reset"] {
 .h-screen {
   height: 100vh;
 }
+.min-h-screen {
+  min-height: 100vh;
+}
+.flex-1 {
+  flex: 1;
+}
 .object-center {
   object-position: center;
 }
@@ -36,4 +42,13 @@ button, input[type="submit"], input[type="reset"] {
 }
 .fs-14 {
   font-size: 14px;
+}
+.fs-20 {
+  font-size: 20px;
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.uppercase {
+  text-transform: uppercase;
 }

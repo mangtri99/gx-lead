@@ -1,0 +1,27 @@
+$primary-menu: #ACADC1;
+$active-menu: #666666;
+
+.menu-title {
+  color: $primary-menu;
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+.menu-item {
+  color: $primary-menu;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+.menu-item-link {
+  padding: 12px 0px;
+  color: $primary-menu;
+  text-decoration: none;
+  &.active {
+    color: $active-menu;
+    font-weight: bold;
+  }
+  &:hover {
+    color: $active-menu;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+  }
+}
