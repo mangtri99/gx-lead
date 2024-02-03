@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../composables/useFetch";
 import { CHART_URL } from "../../../config/api";
-import { APIResponse, ChartItem } from "../../../config/types";
+import { APIResponse, CardItem, ChartItem } from "../../../config/types";
 
 interface ChartData {
-  branches: ChartItem[];
-  statuses: ChartItem[];
-  probabilities: ChartItem[];
-  types: ChartItem[];
-  channels: ChartItem[];
-  medias: ChartItem[];
-  sources: ChartItem[];
+  statuses: CardItem[];
+  branches: ChartItem;
+  probabilities: ChartItem;
+  types: ChartItem;
+  channels: ChartItem;
+  medias: ChartItem;
+  sources: ChartItem;
   leads: {
     total: number;
   };
