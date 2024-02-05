@@ -5,6 +5,8 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import Dashboard from "./pages/Dashboard/Index";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from 'chart.js';
 import Index from "./pages/Lead/Index";
+import { Toaster } from "react-hot-toast";
+import Detail from "./pages/Lead/Detail";
 
 ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
@@ -16,8 +18,10 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/leads" element={<Index />} />
+          <Route path="/leads/:id/detail" element={<Detail />} />
         </Route>
       </Routes>
+      <Toaster position="top-right" />
     </div>
   );
 }

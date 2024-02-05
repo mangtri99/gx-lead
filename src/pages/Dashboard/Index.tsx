@@ -4,7 +4,7 @@ import PieChart from "../../components/PieChart";
 import { LuImage } from "react-icons/lu";
 
 export default function Index() {
-  const { data, query, setQuery, search, reset, saveToImage } = useChartState();
+  const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
   return (
     <div>
       <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-center">
@@ -53,7 +53,7 @@ export default function Index() {
           <button
             type="button"
             className="btn btn-sm btn-warning ms-2"
-            onClick={() => search()}
+            onClick={() => filter()}
             disabled={!query.date_start && !query.date_end}
           >
             Search

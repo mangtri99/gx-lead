@@ -4,6 +4,7 @@ import { CHART_URL } from "../../../config/api";
 import { APIResponse, CardItem, ChartItem } from "../../../config/types";
 import { useSearchParams } from "react-router-dom";
 import * as htmlToImage from 'html-to-image';
+import filterQs from "../../../composables/filterQs";
 
 interface ChartData {
   statuses: CardItem[];
@@ -33,7 +34,7 @@ export default function useChartState() {
     try {
       const res = await $fetch<APIResponse<ChartData>>(CHART_URL, {
         method: 'GET',
-        params: query,
+        params: searchParams,
       })
       setData(res.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,17 +46,8 @@ export default function useChartState() {
   };
 
   // filter and search
-  const search = () => {
-    const filteredQuery = Object.keys(query)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    .filter((key) => query[key] !== undefined)
-    .reduce((obj, key) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      obj[key] = query[key]
-      return obj
-    }, {})
+  const filter = () => {
+    const filteredQuery = filterQs(query)
     setSearchParams(filteredQuery)
     fetchChartData()
   }
@@ -95,7 +87,7 @@ export default function useChartState() {
     loading,
     query,
     setQuery,
-    search,
+    filter,
     reset,
     saveToImage
   };
