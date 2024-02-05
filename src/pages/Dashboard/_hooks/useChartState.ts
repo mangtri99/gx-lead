@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../composables/useFetch";
 import { CHART_URL } from "../../../config/api";
 import { APIResponse, CardItem, ChartItem } from "../../../config/types";
+import { useSearchParams } from "react-router-dom";
+import * as htmlToImage from 'html-to-image';
 
 interface ChartData {
   statuses: CardItem[];
@@ -18,18 +20,71 @@ interface ChartData {
 
 export default function useChartState() {
   const [data, setData] = useState<APIResponse<ChartData>>();
+  const [loading, setLoading] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [query, setQuery] = useState({
+    date_start: searchParams.get('date_start') || undefined,
+    date_end: searchParams.get('date_end') || undefined,
+  })
   const { $fetch } = useFetch();
 
   const fetchChartData = async () => {
-    await $fetch(CHART_URL)
-      .then((res) => {
-        setData(res.data);
+    setLoading(true)
+    try {
+      const res = await $fetch<APIResponse<ChartData>>(CHART_URL, {
+        method: 'GET',
+        params: query,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      setData(res.data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   };
 
+  // filter and search
+  const search = () => {
+    const filteredQuery = Object.keys(query)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    .filter((key) => query[key] !== undefined)
+    .reduce((obj, key) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      obj[key] = query[key]
+      return obj
+    }, {})
+    setSearchParams(filteredQuery)
+    fetchChartData()
+  }
+
+  // reset filter
+  const reset = async () => {
+    setQuery({
+      date_start: undefined,
+      date_end: undefined,
+    })
+    setSearchParams({})
+    fetchChartData()
+  }
+
+  // save dashboard to image
+  const saveToImage = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    htmlToImage.toPng(document.getElementById('chart-container'))
+     .then(function (dataUrl) {
+      const link = document.createElement('a');
+      link.download = 'chart.png';
+      link.href = dataUrl;
+      link.click();
+
+    });
+  }
+
+  // fetch data on mount
   useEffect(() => {
     fetchChartData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,5 +92,11 @@ export default function useChartState() {
 
   return {
     data,
+    loading,
+    query,
+    setQuery,
+    search,
+    reset,
+    saveToImage
   };
 }

@@ -4,6 +4,7 @@ import Login from './pages/Login/Index';
 import DefaultLayout from "./layouts/DefaultLayout";
 import Dashboard from "./pages/Dashboard/Index";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from 'chart.js';
+import Index from "./pages/Lead/Index";
 
 ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/leads" element={<Index />} />
         </Route>
       </Routes>
     </div>

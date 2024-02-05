@@ -1,10 +1,26 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { GoBell } from "react-icons/go";
 import { IoMenu } from "react-icons/io5";
 import Profile from "../assets/user.png";
 import { RiArrowDropDownFill } from "react-icons/ri";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const [title, setTitle] = useState("Dashboard");
+  const location = useLocation();
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/leads":
+        setTitle("Leads");
+        break;
+      case "/setting":
+        setTitle("Leads Settings");
+        break;
+      default:
+        setTitle("Dashboard");
+        break;
+    }
+  }, [location.pathname]);
   return (
     <div className="bg-white shadow-sm p-3">
       <div className="d-flex align-items-center justify-content-between">
@@ -12,7 +28,9 @@ export default function Navbar() {
           <button className="btn">
             <IoMenu size={24} />
           </button>
-          <h1 className="nav-title ms-3">Dashboard</h1>
+          <p className="nav-title ms-3">
+            {title}
+          </p>
         </div>
         <div className="d-flex align-items-center">
           <button className="btn">
