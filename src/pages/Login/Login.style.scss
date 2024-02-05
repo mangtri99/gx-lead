@@ -34,3 +34,24 @@
     margin: 0;
   }
 }
+
+.quote-wrapper {
+  position: absolute;
+  color: white;
+  bottom: 10%;
+  left: 10%;
+}
+.quote {
+  font-size: 34px;
+  color: white;
+  font-weight: 500;
+  max-width: 610px;
+}
+
+.image-quote {
+  object-fit: cover;
+  object-position: bottom;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.8);
+}

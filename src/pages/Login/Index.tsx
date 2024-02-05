@@ -9,6 +9,26 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 export default function Index() {
   const [tooglePassword, setTooglePassword] = useState(false);
   const { form, onSubmit } = useLoginFormState();
+  const [imgCarousel] = useState([
+    {
+      id: 1,
+      img: Login,
+      title: "- Gordon B. Hinckley",
+      quote: `"Without hard work, noting grows but weeds."`,
+    },
+    {
+      id: 2,
+      img: Login,
+      title: "- Gordon B. Hinckley",
+      quote: `"Without hard work, noting grows but weeds."`,
+    },
+    {
+      id: 3,
+      img: Login,
+      title: "- Gordon B. Hinckley",
+      quote: `"Without hard work, noting grows but weeds."`,
+    },
+  ]);
 
   return (
     <div className="bg-white p-4 h-screen overflow-hidden">
@@ -93,12 +113,43 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className="col-lg-7 d-none d-lg-flex flex-column h-full">
-          <img
-            className="object-cover w-100 h-full rounded-4"
-            src={Login}
-            alt="login"
-          />
+        <div className="col-lg-7 d-none d-lg-flex flex-column h-full position-relative">
+          <div
+            id="carouselExampleIndicators"
+            className="carousel slide h-full rounded-4"
+          >
+            <div className="carousel-indicators">
+              {imgCarousel.map((item, index) => (
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to={index}
+                  className={`${index === 0 ? "active" : ""} mx-0`}
+                  aria-current={index === 0 ? "true" : "false"}
+                  aria-label={`Slide ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+            <div className="carousel-inner h-full rounded-4">
+              {imgCarousel.map((item, index) => (
+                <div
+                  className={`carousel-item rounded-4 h-full position-relative ${
+                    index === 0 ? "active" : ""
+                  }`}
+                >
+                  <img
+                    className="image-quote rounded-4"
+                    src={item.img}
+                    alt="image"
+                  />
+                  <div className="quote-wrapper">
+                    <p className="text-white mb-2">{item.title}</p>
+                    <blockquote className="quote">{item.quote}</blockquote>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

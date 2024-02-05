@@ -34,6 +34,9 @@ button, input[type="submit"], input[type="reset"] {
 .object-cover {
   object-fit: cover;
 }
+.object-bottom {
+  object-position: bottom;
+}
 .overflow-hidden {
   overflow: hidden;
 }
