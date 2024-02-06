@@ -7,6 +7,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from 'chart.js'
 import Index from "./pages/Lead/Index";
 import { Toaster } from "react-hot-toast";
 import Detail from "./pages/Lead/Detail";
+import Setting from "./pages/Setting/Index";
 
 ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/leads" element={<Index />} />
           <Route path="/leads/:id/detail" element={<Detail />} />
+          <Route path="/setting" element={<Setting />} />
         </Route>
       </Routes>
       <Toaster position="top-right" />

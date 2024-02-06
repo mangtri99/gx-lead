@@ -1,0 +1,13 @@
+.tab-item {
+  margin-bottom: -3px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--bs-secondary);
+  &.active {
+    border-bottom: 2px solid var(--bs-warning);
+  }
+}
