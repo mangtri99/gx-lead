@@ -3,3 +3,11 @@
   color: #26273B;
   margin-bottom: 0px;
 }
+
+.main-content {
+  margin-left: 250px;
+  transition: all 0.2s ease-in;
+  @media screen and (max-width: 992px) {
+    margin-left: 0;
+  }
+}

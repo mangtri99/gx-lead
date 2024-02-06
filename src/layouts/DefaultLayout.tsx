@@ -1,16 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { LuLayoutDashboard } from "react-icons/lu";
-import { IoCubeOutline } from "react-icons/io5";
-import { LuArchive } from "react-icons/lu";
-
-import Logo2 from "../assets/logo2.svg";
 
 import "./layout.style.scss";
-import MenuLink from "../components/Menu/MenuLink";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../composables/useAuth";
+import { useRef } from "react";
+import Sidebar from "../components/Sidebar";
 
 export default function DefaultLayout() {
+  const mainContent = useRef<HTMLDivElement>(null);
+  const sidebar = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   // if not login, redirect to login
   if (!user) {
@@ -18,47 +16,39 @@ export default function DefaultLayout() {
   }
   return (
     <div className="min-h-screen d-flex">
-      {/* Sidebar */}
-      <div
-        className="bg-white d-flex flex-column"
-        style={{
-          width: "250px",
-          height: "100vh",
-          padding: "1rem",
-        }}
-      >
-        <div className="text-center">
-          <img src={Logo2} alt="Logo" />
-        </div>
-        <div className="flex-1 mt-5">
-          <p className="menu-title uppercase mb-3">Leads Management</p>
-          <ul className="list-unstyled">
-            <li className="menu-item">
-              <MenuLink
-                to="/"
-                title="Dashboard"
-                icon={<LuLayoutDashboard size={24} />}
-              />
-            </li>
-            <li className="menu-item">
-              <MenuLink
-                to="/leads"
-                title="Leads"
-                icon={<IoCubeOutline size={24} />}
-              />
-            </li>
-            <li className="menu-item">
-              <MenuLink
-                to="/setting"
-                title="Leads Settings"
-                icon={<LuArchive size={24} />}
-              />
-            </li>
-          </ul>
+
+      {/* Desktop */}
+      <div className="d-none d-lg-block position-fixed h-100">
+        <Sidebar ref={sidebar} />
+      </div>
+
+      {/* Mobile */}
+      <div className="d-lg-none d-block">
+        <div
+          className="offcanvas offcanvas-start"
+          style={{
+            width: "250px",
+          }}
+          tabIndex={-1}
+          id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel"
+        >
+          <div className="offcanvas-header d-flex justify-content-end">
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body p-0">
+            <Sidebar />
+          </div>
         </div>
       </div>
+
       {/* Main */}
-      <div className="w-100">
+      <div ref={mainContent} className="w-100 main-content">
         {/* Navbar */}
         <Navbar />
         {/* Content */}
