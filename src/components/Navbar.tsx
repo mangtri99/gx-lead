@@ -4,10 +4,12 @@ import { IoMenu } from "react-icons/io5";
 import Profile from "../assets/user.png";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../composables/useAuth";
 
 export default function Navbar() {
   const [title, setTitle] = useState("Dashboard");
   const location = useLocation();
+  const {logout} = useAuth();
   useEffect(() => {
     switch (location.pathname) {
       case "/leads":
@@ -58,7 +60,7 @@ export default function Navbar() {
             </button>
             <ul className="dropdown-menu">
               <li>
-                <a className="dropdown-item" href="#">
+                <a role="button" className="dropdown-item" onClick={()=> logout()}>
                   Logout
                 </a>
               </li>

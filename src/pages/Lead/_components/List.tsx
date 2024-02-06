@@ -6,9 +6,10 @@ import Badge from "../../../components/Badge";
 import { LuMoreVertical } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
 import Pagination from "../../../components/Pagination/Index";
+import Loading from "../../../components/Loading";
 
 export default function List() {
-  const { data, deleteLead, handlePagination } = useLeadListState();
+  const { data, deleteLead, handlePagination,loading } = useLeadListState();
   const probabilityColor = (probability: string) => {
     if (probability === "Pending") {
       return "warning";
@@ -26,6 +27,10 @@ export default function List() {
   const nameWithPlus = (name: string) => {
     return name.replace(/\s/g, "+");
   };
+  
+  if(loading){
+    return <Loading />
+  }
   return (
     <div>
       <Table>

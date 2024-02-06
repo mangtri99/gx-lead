@@ -22,7 +22,8 @@ export default function Filter() {
               })
             }
             type="text"
-            className="form-control w-100"
+            className="form-control w-100 text-secondary"
+            placeholder="Search by Text"
           />
         </label>
       </div>
@@ -39,7 +40,8 @@ export default function Filter() {
               })
             }
             type="date"
-            className="form-control w-100"
+            className="form-control w-100 text-secondary"
+            placeholder="12/02/2022 - 13/03/2022"
           />
         </label>
       </div>

@@ -5,10 +5,13 @@ import useLoginFormState from "./_hooks/useLoginFormState";
 import TextInput from "../../components/TextInput";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../composables/useAuth";
 
 export default function Index() {
   const [tooglePassword, setTooglePassword] = useState(false);
   const { form, onSubmit } = useLoginFormState();
+  const { user } = useAuth();
   const [imgCarousel] = useState([
     {
       id: 1,
@@ -29,6 +32,11 @@ export default function Index() {
       quote: `"Without hard work, noting grows but weeds."`,
     },
   ]);
+
+  // if already login, redirect to home
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="bg-white p-4 h-screen overflow-hidden">

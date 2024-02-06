@@ -35,6 +35,17 @@ export default function SelectInput(props: Props) {
       // @ts-ignore
       components={{ IndicatorSeparator }}
       placeholder={placeholder}
+      styles={{
+        option: (provided, state) => ({
+          ...provided,
+          color: state.isSelected ? "white" : "black",
+          backgroundColor: state.isSelected ? "#FFC007" : "white",
+          "&:hover": {
+            backgroundColor: "#FFC007",
+            color: "white",
+          },
+        }),
+      }}
     />
   );
 }

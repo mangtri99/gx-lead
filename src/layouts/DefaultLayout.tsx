@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoCubeOutline } from "react-icons/io5";
 import { LuArchive } from "react-icons/lu";
@@ -8,8 +8,14 @@ import Logo2 from "../assets/logo2.svg";
 import "./layout.style.scss";
 import MenuLink from "../components/Menu/MenuLink";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../composables/useAuth";
 
 export default function DefaultLayout() {
+  const { user } = useAuth();
+  // if not login, redirect to login
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className="min-h-screen d-flex">
       {/* Sidebar */}

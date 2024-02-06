@@ -60,6 +60,7 @@ export interface Lead {
   longitude: string;
   company_name: string;
   notes: string | null;
+  is_coverage: number;
   created_at: Date;
   updated_at: Date;
   user: User;
