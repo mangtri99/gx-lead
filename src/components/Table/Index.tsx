@@ -33,8 +33,8 @@ function Head({ children }: { children?: React.ReactNode }) {
   );
 }
 
-function Item({ children, className }: { children?: React.ReactNode, className?: string}) {
-  return <td className={`fs-12 ${className}`}>{children}</td>;
+function Item({ children, className, colSpan }: { children?: React.ReactNode, className?: string, colSpan?: number }) {
+  return <td className={`fs-12 ${className}`} colSpan={colSpan}>{children}</td>;
 }
 
 Table.Header = Header;

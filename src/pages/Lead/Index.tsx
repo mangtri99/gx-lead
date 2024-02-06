@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { LuPlus } from "react-icons/lu";
-import Filter from "./_components/filter";
+import Filter from "./_components/Filter";
 import List from "./_components/List";
 
 export default function Index() {

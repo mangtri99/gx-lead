@@ -38,9 +38,21 @@ export default function useLeadListState() {
 
   const filter = () => {
     const filteredQuery = filterQs(query)
-    console.log(filteredQuery)
     setSearchParams(filteredQuery)
   }
+
+  const resetFilter = async () => {
+    setQuery({
+      search: '',
+      date_start: '',
+      date_end: '',
+      status: '',
+      branch: '',
+      page: '',
+    })
+    setSearchParams({})
+  }
+  
 
   const handlePagination = (page: string) => {
     if(data){
@@ -60,8 +72,6 @@ export default function useLeadListState() {
           page
         })
       }
-
-      filter()
     }
   }
 
@@ -78,10 +88,18 @@ export default function useLeadListState() {
     }
   }
 
+  // trigger when searchParams changes
   useEffect(() => {
     fetchLeads()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
+
+  // trigger when query.page changes (pagination)
+  useEffect(() => {
+    const filteredQuery = filterQs(query)
+    setSearchParams(filteredQuery)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.page])
 
   return {
     data,
@@ -90,6 +108,7 @@ export default function useLeadListState() {
     setQuery,
     filter,
     handlePagination,
-    deleteLead
+    deleteLead,
+    resetFilter
   }
 }
