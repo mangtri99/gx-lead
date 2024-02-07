@@ -27,7 +27,8 @@ const TextInput = forwardRef(function TextInput(props: Props, ref) {
         }
         placeholder={placeholder || ""}
         style={{
-          marginTop: "4px"
+          marginTop: "4px",
+          fontSize: "14px"
         }}
       />
       <div className="invalid-feedback" id={id}>

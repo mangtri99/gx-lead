@@ -16,13 +16,13 @@ interface Props {
 export default function Card(props: Props) {
   const { item, onDelete, onEdit } = props;
   return (
-    <div className="card p-3">
+    <div className="card h-100 p-3">
       <div className="row justify-content-between align-items-start">
-        <div className="col-auto">
+        <div className="col-9">
           <p className="mb-0 text-black fs-14">{item.name}</p>
           <p className="mb-0 text-secondary fs-12">{item.description || "-"}</p>
         </div>
-        <div className="col-auto d-flex align-items-start">
+        <div className="col-3 d-flex align-items-start justify-content-end">
           <button
             className="d-flex align-items-center me-2"
             type="button"

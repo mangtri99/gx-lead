@@ -1,18 +1,19 @@
-import React, { useMemo } from 'react'
+import { useState } from 'react'
 import { APIResponse, Option, OptionMedia, OptionSource } from '../../../config/types';
 import { CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from '../../../config/api';
 import useFetch from '../../../composables/useFetch';
 
 
 export default function useSettingState() {
-  const [types, setTypes] = React.useState<Option[]>();
-  const [channels, setChannels] = React.useState<Option[]>();
-  const [media, setMedia] = React.useState<Option[]>();
-  const [sources, setSources] = React.useState<Option[]>();
-  const [probabilities, setProbabilities] = React.useState<Option[]>();
-  const [statuses, setStatuses] = React.useState<Option[]>();
-
+  const [types, setTypes] = useState<Option[]>();
+  const [channels, setChannels] = useState<Option[]>();
+  const [media, setMedia] = useState<Option[]>();
+  const [sources, setSources] = useState<Option[]>();
+  const [probabilities, setProbabilities] = useState<Option[]>();
+  const [statuses, setStatuses] = useState<Option[]>();
   const { $fetch } = useFetch();
+
+  
   const fetchOptions = async () => {
     
     try {
@@ -59,19 +60,6 @@ export default function useSettingState() {
     }
   };
 
-  const handleDelete = (id: number, setting: string) => {
-    console.log(id, setting);
-  }
-
-  const handleEdit = (id: number, setting: string) => {
-    console.log(id, setting);
-  }
-
-  useMemo(() => {
-    fetchOptions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return {
     types,
     channels,
@@ -79,7 +67,6 @@ export default function useSettingState() {
     sources,
     probabilities,
     statuses,
-    handleDelete,
-    handleEdit
+    fetchOptions
   }
 }

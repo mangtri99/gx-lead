@@ -2,19 +2,18 @@
 import Select, {
   IndicatorSeparatorProps,
 } from "react-select";
+import { SelectOptions } from "../../config/types";
+import { forwardRef } from "react";
 
 
 interface Props extends React.HTMLProps<HTMLSelectElement>{
   value: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (e: any) => void;
-  options: {
-    value: string;
-    label: string;
-  }[];
+  options: SelectOptions[];
 }
 
-export default function SelectInput(props: Props) {
+const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
   const { value, onChange, options, placeholder } = props;
   const indicatorSeparatorStyle = {
     width: 0,
@@ -27,6 +26,9 @@ export default function SelectInput(props: Props) {
 
   return (
     <Select
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      ref={ref}
       className="fs-14"
       options={options}
       value={value && options ? options.find((option) => option.value === value) : ""}
@@ -48,4 +50,6 @@ export default function SelectInput(props: Props) {
       }}
     />
   );
-}
+});
+
+export default SelectInput;

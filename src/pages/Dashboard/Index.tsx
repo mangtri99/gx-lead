@@ -15,39 +15,38 @@ export default function Index() {
               Date Range (<span className="text-blue">Max 3 Month</span>)
             </span>
             <div className="d-flex">
-              <input
-                value={query.date_start === undefined ? "" : query.date_start}
-                onChange={(e) =>
-                  setQuery({
-                    ...query,
-                    date_start: e.target.value,
-                  })
-                }
-                type="date"
-                className="form-control form-control-sm rounded-0"
-              />
-              <div>
-                <span
-                  className="fs-14 rounded-0"
-                  style={{
-                    backgroundColor: "#E8E8E8",
-                    padding: "5px 10px 10px 10px",
-                  }}
-                >
-                  to
-                </span>
+              <div className="input-group">
+                <input
+                  value={query.date_start === undefined ? "" : query.date_start}
+                  onChange={(e) =>
+                    setQuery({
+                      ...query,
+                      date_start: e.target.value,
+                    })
+                  }
+                  type="date"
+                  className="form-control form-control-sm fs-14"
+                  aria-label="Date start"
+                  placeholder="21/12/2023"
+                />
+                <span className="input-group-text" style={{
+                  fontSize: "12px",
+                  backgroundColor: '#E8E8E8',
+                }}>to</span>
+                <input
+                  value={query.date_end === undefined ? "" : query.date_end}
+                  onChange={(e) =>
+                    setQuery({
+                      ...query,
+                      date_end: e.target.value,
+                    })
+                  }
+                  type="date"
+                  className="form-control form-control-sm fs-14"
+                  aria-label="Date end"
+                  placeholder="21/01/2024"
+                />
               </div>
-              <input
-                value={query.date_end === undefined ? "" : query.date_end}
-                onChange={(e) =>
-                  setQuery({
-                    ...query,
-                    date_end: e.target.value,
-                  })
-                }
-                type="date"
-                className="form-control form-control-sm rounded-0"
-              />
             </div>
           </label>
           <button
@@ -76,9 +75,13 @@ export default function Index() {
           </button>
         </div>
       </div>
-      <div className="mt-5" style={{
-        backgroundColor: "#F5F6F9",
-      }} id="chart-container">
+      <div
+        className="mt-5"
+        style={{
+          backgroundColor: "#F5F6F9",
+        }}
+        id="chart-container"
+      >
         <div className="row align-items-stretch">
           <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
             <CardWidget title={data?.data.leads.total} subtitle="Leads" />
