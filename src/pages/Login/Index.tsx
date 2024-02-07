@@ -127,7 +127,7 @@ export default function Index() {
             className="carousel slide h-full rounded-4"
           >
             <div className="carousel-indicators">
-              {imgCarousel.map((item, index) => (
+              {imgCarousel.map((_item, index) => (
                 <button
                   type="button"
                   data-bs-target="#carouselExampleIndicators"

@@ -63,7 +63,7 @@ export default function useSettingFormState() {
 
   const form = useForm<z.infer<typeof LeadSettingSchema>>({
     resolver: zodResolver(LeadSettingSchema),
-    defaultValues
+    defaultValues,
   });
 
   async function onSubmit(data: z.infer<typeof LeadSettingSchema>){
@@ -80,9 +80,17 @@ export default function useSettingFormState() {
       btnCloseModal.click()
       fetchOptions()
       toast.success('Setting has been saved.')
-    } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       toast.error('Something went wrong. Please try again later.')
-      console.log(err)
+
+      if(err.response?.data?.errors?.name && err.response?.data?.errors?.name[0]){
+        form.setError('name', {
+          type: 'manual',
+          message: err.response.data.errors.email[0]
+        })
+      }
+      
     }
   }
 
@@ -92,12 +100,13 @@ export default function useSettingFormState() {
       await $fetch(`${tab}/${idSetting}`, {
         method: 'DELETE'
       })
+      const btnCloseModalConfirm = document.getElementById('btn-close-confirm-delete') as HTMLButtonElement
+      btnCloseModalConfirm.click()
       fetchOptions()
       toast.success('Setting has been deleted.')
       setIdSetting('');
     } catch (err) {
       toast.error('Something went wrong. Please try again later.')
-      console.log(err)
     }
   }
 

@@ -7,6 +7,7 @@ import { LuMoreVertical } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
 import Pagination from "../../../components/Pagination/Index";
 import Loading from "../../../components/Loading";
+import Dialog from "../../../components/Dialog/Index";
 
 export default function List() {
   const { data, deleteLead, handlePagination,loading } = useLeadListState();
@@ -155,7 +156,6 @@ export default function List() {
                     <Table.Item className="text-end">
                       <div className="dropdown">
                         <button
-                          className="btn"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -220,6 +220,19 @@ export default function List() {
           />
         )}
       </div>
+      <Dialog id="modalConfirmDeleteLead" title="Confirm Delete">
+        <div>
+          <p className="text-black fs-14">Are you sure to delete this?</p>
+          <div className="d-flex align-items-center justify-content-end mt-4">
+            <button type="button" className="btn btn-sm btn-secondary me-2">
+              Cancel
+            </button>
+            <button type="button" className="btn btn-sm btn-danger" onClick={() => {}}>
+              Delete
+            </button>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 }

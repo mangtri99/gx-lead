@@ -4,7 +4,8 @@ import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
 import Logo2 from "../assets/logo2.svg";
 import { IoCubeOutline } from "react-icons/io5";
 
-const Sidebar = forwardRef(function Sidebar(props, ref) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Sidebar = forwardRef(function Sidebar(_props, ref) {
   return (
     <div
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

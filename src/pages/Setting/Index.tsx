@@ -40,6 +40,7 @@ export default function Index() {
     handleEdit,
     isEdit,
     handleAdd,
+    onDelete
   } = useSettingFormState();
   const [mediaOptions, setMediaOptions] = useState<SelectOptions[]>();
   const [channelOptions, setChannelOptions] = useState<SelectOptions[]>();
@@ -61,14 +62,18 @@ export default function Index() {
   }, [media]);
 
   useEffect(() => {
-    if (sources) {
-      const options = sources.map((item) => ({
+    if (channels) {
+      const options = channels.map((item) => ({
         value: String(item.id),
         label: item.name,
       }));
       setChannelOptions(options);
     }
-  }, [sources]);
+  }, [channels]);
+
+  useEffect(() => {
+    console.log('type', types)
+  }, [types]);
 
   return (
     <div>
@@ -78,7 +83,6 @@ export default function Index() {
           items={tabs}
           value={tab}
           onChangeTab={(val) => {
-            console.log(val);
             handleChangeTab(val);
           }}
         />
@@ -219,7 +223,7 @@ export default function Index() {
                       options={channelOptions || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) =>
-                        field.onChange(e.value === "" ? undefined : e.value)
+                        field.onChange(e.value === "" ? undefined : Number(e.value))
                       }
                       onBlur={field.onBlur}
                       placeholder="Select Channel"
@@ -243,8 +247,9 @@ export default function Index() {
                       ref={field.ref}
                       options={mediaOptions || []}
                       value={field.value ? String(field.value) : ""}
-                      onChange={(e) =>
-                        field.onChange(e.value === "" ? undefined : e.value)
+                      onChange={(e) => {
+                        field.onChange(e.value === "" ? undefined : Number(e.value))
+                       }
                       }
                       onBlur={field.onBlur}
                       placeholder="Select Media"
@@ -266,10 +271,10 @@ export default function Index() {
         <div>
           <p className="text-black fs-14">Are you sure to delete this?</p>
           <div className="d-flex align-items-center justify-content-end mt-4">
-            <button type="button" className="btn btn-sm btn-secondary me-2">
+            <button id="btn-close-confirm-delete" type="button" className="btn btn-sm btn-secondary me-2" data-bs-dismiss="modal">
               Cancel
             </button>
-            <button type="button" className="btn btn-sm btn-danger">
+            <button type="button" className="btn btn-sm btn-danger" onClick={() => onDelete()}>
               Delete
             </button>
           </div>
