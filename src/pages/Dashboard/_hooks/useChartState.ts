@@ -4,7 +4,7 @@ import { CHART_URL } from "../../../config/api";
 import { APIResponse, CardItem, ChartItem } from "../../../config/types";
 import { useSearchParams } from "react-router-dom";
 import * as htmlToImage from 'html-to-image';
-import filterQs from "../../../composables/filterQs";
+import filterQs from "../../../helpers/filterQs";
 
 interface ChartData {
   statuses: CardItem[];

@@ -3,7 +3,7 @@ import { APIResponsePagination, Lead } from '../../../config/types';
 import { useSearchParams } from 'react-router-dom';
 import useFetch from '../../../composables/useFetch';
 import { LEADS_URL } from '../../../config/api';
-import filterQs from '../../../composables/filterQs';
+import filterQs from '../../../helpers/filterQs';
 import toast from 'react-hot-toast';
 
 export default function useLeadListState() {

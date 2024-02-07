@@ -129,6 +129,7 @@ export default function Index() {
             <div className="carousel-indicators">
               {imgCarousel.map((_item, index) => (
                 <button
+                  key={index}
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to={index}
@@ -141,6 +142,7 @@ export default function Index() {
             <div className="carousel-inner h-full rounded-4">
               {imgCarousel.map((item, index) => (
                 <div
+                  key={index}
                   className={`carousel-item rounded-4 h-full position-relative ${
                     index === 0 ? "active" : ""
                   }`}

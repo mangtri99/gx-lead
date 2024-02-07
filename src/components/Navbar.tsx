@@ -28,13 +28,13 @@ export default function Navbar() {
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           {/* Desktop */}
-          <button className="btn d-none d-lg-flex">
+          <button className="d-none d-lg-flex">
             <IoMenu size={24} />
           </button>
 
           {/* Mobile */}
           <button
-            className="btn d-lg-none"
+            className="d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExample"
