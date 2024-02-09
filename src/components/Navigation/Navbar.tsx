@@ -5,6 +5,7 @@ import Profile from "@/assets/images/user.png";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../composables/useAuth";
+import ButtonActionIcon from "../Button/ButtonActionIcon";
 
 export default function Navbar() {
   const [title, setTitle] = useState("Dashboard");
@@ -28,12 +29,12 @@ export default function Navbar() {
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           {/* Desktop */}
-          <button className="d-none d-lg-flex">
+          <ButtonActionIcon className="d-none d-lg-flex">
             <IoMenu size={24} />
-          </button>
+          </ButtonActionIcon>
 
           {/* Mobile */}
-          <button
+          <ButtonActionIcon
             className="d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
@@ -41,20 +42,19 @@ export default function Navbar() {
             aria-controls="offcanvasExample"
           >
             <IoMenu size={24} />
-          </button>
+          </ButtonActionIcon>
 
           <p className="nav-title ms-3">
             {title}
           </p>
         </div>
         <div className="d-flex align-items-center">
-          <button className="btn">
+          <ButtonActionIcon className="p-2 me-2">
             <GoBell size={24} />
-          </button>
+          </ButtonActionIcon>
           <div className="dropdown">
-            <button
-              className="btn"
-              type="button"
+            <ButtonActionIcon
+              className="p-2"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
@@ -70,7 +70,7 @@ export default function Navbar() {
                 />
                 <RiArrowDropDownFill size={24} />
               </div>
-            </button>
+            </ButtonActionIcon>
             <ul className="dropdown-menu">
               <li>
                 <a role="button" className="dropdown-item" onClick={()=> logout()}>

@@ -89,14 +89,14 @@ export default function Index() {
         />
         <div className="mt-3 d-flex justify-content-between align-items-center">
           <p className="fs-20 mb-0 fw-medium">{getLabelTab()}</p>
-          <button
-            className="btn btn-sm btn-warning d-flex align-items-center me-2"
-            type="button"
+          <Button
+            size="sm"
+            className="d-flex align-items-center me-2"
             onClick={() => handleAdd()}
           >
             <span className="me-2 fs-14">Add New</span>
             <LuPlus size={24} />
-          </button>
+          </Button>
         </div>
         <div className="row g-2 mt-3">
           {tab === TYPE_URL &&

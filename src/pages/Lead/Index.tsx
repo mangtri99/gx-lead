@@ -3,6 +3,7 @@ import { LuPlus } from "react-icons/lu";
 import Filter from "./_components/Filter";
 import List from "./_components/List";
 import Card from "../../components/Card/Card";
+import Button from "../../components/Button/Button";
 
 export default function Index() {
   return (
@@ -10,13 +11,13 @@ export default function Index() {
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="fs-20">Leads Manage</h1>
         <Link to={"/leads/create"} className="text-decoration-none">
-          <button
-            className="btn btn-warning d-flex align-items-center"
-            type="button"
+          <Button
+            size="sm"
+            className="d-flex align-items-center me-2"
           >
-            <span className="me-2">Add New</span>
+            <span className="me-2 fs-14">Add New</span>
             <LuPlus size={24} />
-          </button>
+          </Button>
         </Link>
       </div>
       <Filter />
