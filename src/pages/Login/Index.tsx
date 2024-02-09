@@ -113,10 +113,10 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className="col-lg-7 d-none d-lg-flex flex-column h-full position-relative">
+        <div className="col-lg-7 d-none d-lg-flex flex-column h-100 position-relative">
           <div
             id="carouselExampleIndicators"
-            className="carousel slide h-full rounded-4"
+            className="carousel slide h-100 rounded-4"
           >
             <div className="carousel-indicators">
               {imgCarousel.map((_item, index) => (
@@ -131,11 +131,11 @@ export default function Index() {
                 ></button>
               ))}
             </div>
-            <div className="carousel-inner h-full rounded-4">
+            <div className="carousel-inner h-100 rounded-4">
               {imgCarousel.map((item, index) => (
                 <div
                   key={index}
-                  className={`carousel-item rounded-4 h-full position-relative ${
+                  className={`carousel-item rounded-4 h-100 position-relative ${
                     index === 0 ? "active" : ""
                   }`}
                 >

@@ -53,7 +53,7 @@ export default function DefaultLayout() {
         <Navbar />
         {/* Content */}
         <div
-          className="h-full w-100 p-3"
+          className="h-100 w-100 p-3"
           style={{
             backgroundColor: "#F5F6F9",
           }}
