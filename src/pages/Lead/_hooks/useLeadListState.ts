@@ -3,7 +3,7 @@ import { APIResponsePagination, Lead } from "../../../config/types";
 import useFetch from "../../../composables/useFetch";
 import { LEADS_URL } from "../../../config/api";
 import toast from "react-hot-toast";
-import filterQs from "../../../helpers/filterQs";
+import filterQs from "../../../helper/filterQs";
 
 export default function useLeadListState() {
   const [data, setData] = useState<APIResponsePagination<Lead[]>>();

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Table from "../../../components/Table/Table";
+import Table from "../../../components/General/Table";
 import dayjs from "dayjs";
-import Badge from "../../../components/Badge/Badge";
+import Badge from "../../../components/General/Badge";
 import { LuMoreVertical } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
-import Pagination from "../../../components/Pagination/Pagination";
-import Loading from "../../../components/Loading/Loading";
-import Dialog from "../../../components/Dialog/Index";
+import Pagination from "../../../components/General/Pagination";
+import Loading from "../../../components/General/Loading";
+import Dialog from "../../../components/General/Dialog";
 import Button from "../../../components/Button/Button";
 import { APIResponsePagination, Lead } from "../../../config/types";
 import Modal from "bootstrap/js/dist/modal";

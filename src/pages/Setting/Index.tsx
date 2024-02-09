@@ -1,8 +1,8 @@
-import Tabs from "../../components/Tabs/Tabs";
+import Tabs from "../../components/General/Tabs";
 import { LuPlus } from "react-icons/lu";
 import useSettingState from "./_hooks/useSettingState";
 import SettingItem from "./_components/SettingItem";
-import Dialog from "../../components/Dialog/Index";
+import Dialog from "../../components/General/Dialog";
 import TextInput from "../../components/Input/TextInput";
 import useSettingFormState from "./_hooks/useSettingFormState";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ import {
   TYPE_URL,
 } from "../../config/api";
 import { Controller } from "react-hook-form";
-import SelectInput from "../../components/Select/SelectInput";
+import SelectInput from "../../components/Input/SelectInput";
 import { SelectOptions } from "../../config/types";
 import Button from "../../components/Button/Button";
 

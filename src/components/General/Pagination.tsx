@@ -1,5 +1,3 @@
-import './Pagination.style.scss';
-
 interface Props {
   currentPage: number;
   lastPage: number;

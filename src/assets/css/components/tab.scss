@@ -9,5 +9,6 @@
   color: var(--bs-secondary);
   &.active {
     border-bottom: 2px solid var(--bs-primary);
+    color: var(--bs-secondary-subtle);
   }
 }

@@ -21,12 +21,7 @@ function Row({ children }: { children: React.ReactNode }) {
 function Head({ children }: { children?: React.ReactNode }) {
   return (
     <th
-      className="fs-14"
-      style={{
-        backgroundColor: "#F0F0F5",
-        fontWeight: "bold",
-        textWrap: "nowrap",
-      }}
+      className="fs-14 table-header"
     >
       {children}
     </th>

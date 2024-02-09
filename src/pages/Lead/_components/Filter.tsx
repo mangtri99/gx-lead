@@ -1,6 +1,6 @@
 import Button from "../../../components/Button/Button";
 import TextInput from "../../../components/Input/TextInput";
-import SelectInput from "../../../components/Select/SelectInput";
+import SelectInput from "../../../components/Input/SelectInput";
 import useLeadOptionFilter from "../_hooks/useLeadOptionFilter";
 import { FiSearch } from "react-icons/fi";
 import { LuFilter } from "react-icons/lu";

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
-import Badge from "../../components/Badge/Badge";
+import Badge from "../../components/General/Badge";
 import useLeadDetailState from "./_hooks/useLeadDetailState";
 import dayjs from "dayjs";
 import TextInfo from "./_components/TextInfo";
-import NotFound from "../../components/Common/NotFound";
-import Loading from "../../components/Loading/Loading";
+import NotFound from "../../components/General/NotFound";
+import Loading from "../../components/General/Loading";
 import Button from "../../components/Button/Button";
 
 export default function Detail() {

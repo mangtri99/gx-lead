@@ -1,4 +1,3 @@
-import "./Tabs.style.scss";
 import clsx from "clsx";
 
 interface Tabs {

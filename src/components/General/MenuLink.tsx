@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './menu.style.scss'
 
 interface Props {
   to: string;

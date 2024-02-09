@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import MenuLink from "../Menu/MenuLink";
+import MenuLink from "./MenuLink";
 import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
 import Logo2 from "@/assets/images/logo2.svg";
 import { IoCubeOutline } from "react-icons/io5";
