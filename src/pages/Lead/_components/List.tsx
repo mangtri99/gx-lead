@@ -9,6 +9,8 @@ import Loading from "../../../components/Loading/Loading";
 import Dialog from "../../../components/Dialog/Index";
 import Button from "../../../components/Button/Button";
 import { APIResponsePagination, Lead } from "../../../config/types";
+import Modal from "bootstrap/js/dist/modal";
+import { useState } from "react";
 
 interface Props {
   data: APIResponsePagination<Lead[]> | undefined;
@@ -19,6 +21,7 @@ interface Props {
 
 export default function List(props: Props) {
   const { data, handleDelete, handlePagination, loading } = props;
+  const [item, setItem] = useState<Lead>();
   const probabilityColor = (probability: string) => {
     if (probability === "Pending") {
       return "primary";
@@ -36,6 +39,21 @@ export default function List(props: Props) {
   const nameWithPlus = (name: string) => {
     return name.replace(/\s/g, "+");
   };
+
+  // show modal confirm delete
+  const confirmDelete = (lead: Lead) => {
+    setItem(lead);
+    const formModal = new Modal("#modalConfirmDeleteLead");
+    formModal.show();
+  };
+
+  const onDelete = async () => {
+    // perform delete
+    handleDelete(item?.id ? String(item.id) : "");
+    // close modal after delete
+    const btnCloseModal = document.getElementById('btn-close-confirm-delete') as HTMLButtonElement
+    btnCloseModal.click()
+  }
 
   if (loading) {
     return <Loading />;
@@ -194,7 +212,7 @@ export default function List(props: Props) {
                           <li>
                             <a
                               role="button"
-                              onClick={() => handleDelete(String(lead.id))}
+                              onClick={() => confirmDelete(lead)}
                               className="dropdown-item text-danger fs-14 text-decoration-none"
                             >
                               Delete
@@ -230,16 +248,23 @@ export default function List(props: Props) {
       </div>
       <Dialog id="modalConfirmDeleteLead" title="Confirm Delete">
         <div>
-          <p className="text-black fs-14">Are you sure to delete this?</p>
+          <p className="text-black fs-14">
+            Are you sure to delete lead <span className="fw-bold">#{item?.lead_number}</span>?
+          </p>
           <div className="d-flex align-items-center justify-content-end mt-4">
-            <Button className="me-2" size="sm">
+            <Button
+              className="me-2"
+              size="sm"
+              id="btn-close-confirm-delete"
+              data-bs-dismiss="modal"
+            >
               Cancel
             </Button>
             <Button
               className="me-2"
               size="sm"
               variant="danger"
-              onClick={() => {}}
+              onClick={() => onDelete()}
             >
               Delete
             </Button>
