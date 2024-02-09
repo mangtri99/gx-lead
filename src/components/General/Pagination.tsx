@@ -1,3 +1,5 @@
+import ButtonActionIcon from "../Button/ButtonActionIcon";
+
 interface Props {
   currentPage: number;
   lastPage: number;
@@ -26,38 +28,38 @@ export default function Pagination(props: Props) {
     <nav aria-label="Page navigation example">
       <ul className="pagination">
         <li className="pagination-item">
-          <button
+          <ButtonActionIcon
             disabled={currentPage === 1}
             className="pagination-link"
             aria-label="Previous"
             onClick={() => handleChangePage("prev")}
           >
             <span aria-hidden="true">&laquo;</span>
-          </button>
+          </ButtonActionIcon>
         </li>
         {getPaginationLinks().map((page) => (
           <li
             key={page}
             className='pagination-item'
           >
-            <button
+            <ButtonActionIcon
               className={`pagination-link ${currentPage === page ? "active" : ""}`}
               onClick={() => handleChangePage(String(page))}
             >
               {page}
-            </button>
+            </ButtonActionIcon>
           </li>
         ))}
 
         <li className="pagination-item">
-          <button
+          <ButtonActionIcon
             disabled={currentPage === lastPage}
             className="pagination-link"
             aria-label="Next"
             onClick={() => handleChangePage("next")}
           >
             <span aria-hidden="true">&raquo;</span>
-          </button>
+          </ButtonActionIcon>
         </li>
       </ul>
     </nav>
