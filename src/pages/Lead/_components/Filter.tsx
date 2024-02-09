@@ -1,14 +1,26 @@
 import Button from "../../../components/Button/Button";
 import TextInput from "../../../components/Input/TextInput";
 import SelectInput from "../../../components/Select/SelectInput";
-import useLeadListState from "../_hooks/useLeadListState";
 import useLeadOptionFilter from "../_hooks/useLeadOptionFilter";
 import { FiSearch } from "react-icons/fi";
 import { LuFilter } from "react-icons/lu";
 
-export default function Filter() {
+interface Props {
+  query: {
+    search: string;
+    date_start: string;
+    status: string;
+    branch: string;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setQuery: (val: any) => void;
+  filter: () => void;
+  resetFilter: () => void;
+}
+
+export default function Filter(props: Props) {
   const { branchOptions, statusOptions } = useLeadOptionFilter();
-  const { query, setQuery, filter, resetFilter } = useLeadListState();
+  const { query, setQuery, filter, resetFilter } = props
   return (
     <div className="row mt-4 g-2 align-items-end">
       <div className="col-xl-3 col-lg-4 col-12">

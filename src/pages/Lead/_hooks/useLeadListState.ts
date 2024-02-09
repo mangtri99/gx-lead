@@ -1,105 +1,98 @@
-import  { useEffect, useState } from 'react'
-import { APIResponsePagination, Lead } from '../../../config/types';
-import { useSearchParams } from 'react-router-dom';
-import useFetch from '../../../composables/useFetch';
-import { LEADS_URL } from '../../../config/api';
-import filterQs from '../../../helpers/filterQs';
-import toast from 'react-hot-toast';
+import { useEffect, useState } from "react";
+import { APIResponsePagination, Lead } from "../../../config/types";
+import useFetch from "../../../composables/useFetch";
+import { LEADS_URL } from "../../../config/api";
+import toast from "react-hot-toast";
+import filterQs from "../../../helpers/filterQs";
 
 export default function useLeadListState() {
   const [data, setData] = useState<APIResponsePagination<Lead[]>>();
-  const [loading, setLoading] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState({
-    search: searchParams.get('search') || '',
-    date_start: searchParams.get('date_start') || '',
-    date_end: searchParams.get('date_end') || '',
-    status: searchParams.get('status') || '',
-    branch: searchParams.get('branch') || '',
-    page: searchParams.get('page') || '',
-  })
+    search: "",
+    date_start: "",
+    date_end: "",
+    status: "",
+    branch: "",
+    page: "",
+  });
   const { $fetch } = useFetch();
 
   const fetchLeads = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
+      const filteredQuery = filterQs(query);
       const res = await $fetch<APIResponsePagination<Lead[]>>(LEADS_URL, {
-        method: 'GET',
-        params: searchParams,
-      })
+        method: "GET",
+        params: filteredQuery,
+      });
       setData(res.data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  const filter = () => {
-    const filteredQuery = filterQs(query)
-    setSearchParams(filteredQuery)
-  }
+  const filter = async () => {
+    // when filter is called, set page to 1
+    setQuery({
+      ...query,
+      page: "1",
+    });
+  };
 
   const resetFilter = async () => {
     setQuery({
-      search: '',
-      date_start: '',
-      date_end: '',
-      status: '',
-      branch: '',
-      page: '',
-    })
-    setSearchParams({})
-  }
-  
+      search: "",
+      date_start: "",
+      date_end: "",
+      status: "",
+      branch: "",
+      page: "",
+    });
+  };
 
   const handlePagination = (page: string) => {
-    if(data){
+    if (data) {
       if (page === "prev") {
         setQuery({
           ...query,
-          page: `${data?.meta.current_page - 1}`
-        })
+          page: `${data?.meta.current_page - 1}`,
+        });
       } else if (page === "next") {
         setQuery({
           ...query,
-          page: `${data?.meta.current_page + 1}`
-        })
+          page: `${data?.meta.current_page + 1}`,
+        });
       } else {
         setQuery({
           ...query,
-          page
-        })
+          page,
+        });
       }
     }
-  }
+  };
 
   const deleteLead = async (id: string) => {
     try {
       await $fetch(`${LEADS_URL}/${id}`, {
-        method: 'DELETE'
-      })
-      fetchLeads()
-      toast.success('Lead deleted successfully')
+        method: "DELETE",
+      });
+      fetchLeads();
+      toast.success("Lead deleted successfully");
     } catch (err) {
-      toast.error('Something went wrong. Please try again later.')
-      console.log(err)
+      toast.error("Something went wrong. Please try again later.");
+      console.log(err);
     }
-  }
+  };
 
-  // trigger when searchParams changes
+  // fetch immediatly when query.page changes
   useEffect(() => {
-    fetchLeads()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
-
-  // trigger when query.page changes (pagination)
-  useEffect(() => {
-    const filteredQuery = filterQs(query)
-    setSearchParams(filteredQuery)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.page])
+    fetchLeads();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.page]);
 
   return {
     data,
@@ -109,6 +102,6 @@ export default function useLeadListState() {
     filter,
     handlePagination,
     deleteLead,
-    resetFilter
-  }
+    resetFilter,
+  };
 }

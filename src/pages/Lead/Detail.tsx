@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
-
-
 import Badge from "../../components/Badge/Badge";
 import useLeadDetailState from "./_hooks/useLeadDetailState";
 import dayjs from "dayjs";

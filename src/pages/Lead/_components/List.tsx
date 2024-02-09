@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Table from "../../../components/Table/Table";
-import useLeadListState from "../_hooks/useLeadListState";
 import dayjs from "dayjs";
 import Badge from "../../../components/Badge/Badge";
 import { LuMoreVertical } from "react-icons/lu";
@@ -9,9 +8,17 @@ import Pagination from "../../../components/Pagination/Pagination";
 import Loading from "../../../components/Loading/Loading";
 import Dialog from "../../../components/Dialog/Index";
 import Button from "../../../components/Button/Button";
+import { APIResponsePagination, Lead } from "../../../config/types";
 
-export default function List() {
-  const { data, deleteLead, handlePagination,loading } = useLeadListState();
+interface Props {
+  data: APIResponsePagination<Lead[]> | undefined;
+  handleDelete: (val: string) => void;
+  handlePagination: (val: string) => void;
+  loading: boolean;
+}
+
+export default function List(props: Props) {
+  const { data, handleDelete, handlePagination, loading } = props;
   const probabilityColor = (probability: string) => {
     if (probability === "Pending") {
       return "primary";
@@ -29,9 +36,9 @@ export default function List() {
   const nameWithPlus = (name: string) => {
     return name.replace(/\s/g, "+");
   };
-  
-  if(loading){
-    return <Loading />
+
+  if (loading) {
+    return <Loading />;
   }
   return (
     <div>
@@ -187,7 +194,7 @@ export default function List() {
                           <li>
                             <a
                               role="button"
-                              onClick={() => deleteLead(String(lead.id))}
+                              onClick={() => handleDelete(String(lead.id))}
                               className="dropdown-item text-danger fs-14 text-decoration-none"
                             >
                               Delete
@@ -225,8 +232,17 @@ export default function List() {
         <div>
           <p className="text-black fs-14">Are you sure to delete this?</p>
           <div className="d-flex align-items-center justify-content-end mt-4">
-            <Button className="me-2" size="sm">Cancel</Button>
-            <Button className="me-2" size="sm" variant="danger" onClick={() => {}}>Delete</Button>
+            <Button className="me-2" size="sm">
+              Cancel
+            </Button>
+            <Button
+              className="me-2"
+              size="sm"
+              variant="danger"
+              onClick={() => {}}
+            >
+              Delete
+            </Button>
           </div>
         </div>
       </Dialog>
