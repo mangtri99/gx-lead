@@ -15,7 +15,7 @@ export default function Index() {
   const [tooglePassword, setTooglePassword] = useState(false);
   const { form, onSubmit } = useLoginFormState();
   const { user } = useAuth();
-  const [imgCarousel] = useState([
+  const imgCarousel = [
     {
       id: 1,
       img: Login,
@@ -34,7 +34,7 @@ export default function Index() {
       title: "- Gordon B. Hinckley",
       quote: `"Without hard work, noting grows but weeds."`,
     },
-  ]);
+  ];
 
   // if already login, redirect to home
   if (user) {

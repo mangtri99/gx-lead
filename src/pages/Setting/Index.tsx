@@ -72,10 +72,6 @@ export default function Index() {
     }
   }, [channels]);
 
-  useEffect(() => {
-    console.log("type", types);
-  }, [types]);
-
   return (
     <div>
       <h1 className="mb-0 fs-20 fw-medium text-black">Lead Setting</h1>
