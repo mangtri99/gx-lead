@@ -11,10 +11,9 @@ const Sidebar = forwardRef(function Sidebar(_props, ref) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       ref={ref}
-      className="bg-white d-flex flex-column h-100"
+      className="bg-white d-flex flex-column h-100 p-3"
       style={{
         width: "250px",
-        padding: "1rem",
       }}
     >
       <div className="text-center">

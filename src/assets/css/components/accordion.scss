@@ -1,0 +1,16 @@
+.accordion {
+  .accordion-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  .accordion-content {
+    padding: 1rem;
+    max-height: 0;
+    &.show {
+      transition: max-height 0.3s ease-in-out;
+      max-height: fit-content;
+    }
+  }
+}
