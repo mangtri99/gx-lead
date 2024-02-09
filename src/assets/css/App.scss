@@ -18,7 +18,7 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 p {
-  margin: 0;
+  margin-bottom: 0px;
 }
 
 .h-full {
@@ -46,16 +46,16 @@ p {
   overflow: hidden;
 }
 .fs-12 {
-  font-size: 12px;
+  font-size: 12px !important;
 }
 .fs-14 {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .fs-20 {
-  font-size: 20px;
+  font-size: 20px !important;
 }
 .fs-24 {
-  font-size: 24px;
+  font-size: 24px !important;
 }
 .shadow-sm {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

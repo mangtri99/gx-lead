@@ -8,6 +8,7 @@ import { FiUser } from "react-icons/fi";
 import Pagination from "../../../components/Pagination/Pagination";
 import Loading from "../../../components/Loading/Loading";
 import Dialog from "../../../components/Dialog/Index";
+import Button from "../../../components/Button/Button";
 
 export default function List() {
   const { data, deleteLead, handlePagination,loading } = useLeadListState();
@@ -224,12 +225,8 @@ export default function List() {
         <div>
           <p className="text-black fs-14">Are you sure to delete this?</p>
           <div className="d-flex align-items-center justify-content-end mt-4">
-            <button type="button" className="btn btn-sm btn-secondary me-2">
-              Cancel
-            </button>
-            <button type="button" className="btn btn-sm btn-danger" onClick={() => {}}>
-              Delete
-            </button>
+            <Button className="me-2" size="sm">Cancel</Button>
+            <Button className="me-2" size="sm" variant="danger" onClick={() => {}}>Delete</Button>
           </div>
         </div>
       </Dialog>

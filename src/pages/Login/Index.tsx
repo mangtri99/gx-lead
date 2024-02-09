@@ -7,6 +7,9 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../composables/useAuth";
+import ButtonActionIcon from "../../components/Button/ButtonActionIcon";
+import CheckboxInput from "../../components/Input/CheckboxInput";
+import Button from "../../components/Button/Button";
 
 export default function Index() {
   const [tooglePassword, setTooglePassword] = useState(false);
@@ -40,14 +43,14 @@ export default function Index() {
 
   return (
     <div className="bg-white p-4 h-screen overflow-hidden">
-      <div className="row h-full">
-        <div className="col-lg-5 col-12 d-flex flex-column justify-content-center align-items-center h-full position-relative">
+      <div className="row h-100">
+        <div className="col-lg-5 col-12 d-flex flex-column justify-content-center align-items-center h-100 position-relative">
           {/* Form */}
           <div className="card-login">
             <div className="logo">
               <img src={Logo} alt="logo" />
             </div>
-            <div className="d-flex flex-column justify-content-center align-items-center w-100 h-full">
+            <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100">
               <form className="w-100" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="mb-4">
                   <h1 className="title">
@@ -79,34 +82,23 @@ export default function Index() {
                       message={form.formState.errors.password?.message}
                     />
 
-                    <button
-                      onClick={() => setTooglePassword(!tooglePassword)}
-                      type="button"
+                    <ButtonActionIcon
                       className="position-absolute"
+                      onClick={() => setTooglePassword(!tooglePassword)}
                       style={{
                         right: "10px",
-                        top: "30px",
+                        top: "27px",
                       }}
                     >
                       {tooglePassword ? <FaEye /> : <FaEyeSlash />}
-                    </button>
+                    </ButtonActionIcon>
                   </div>
                 </div>
-                <div className="form-check mb-5">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value="1"
-                    id="remember"
-                  />
-                  <label htmlFor="remember" className="form-check-label fs-12">
-                    Keep Me Signed In
-                  </label>
+                <div className="mb-5">
+                  <CheckboxInput value="1" id="remember" label="Keep Me Signed In"/>
                 </div>
                 <div className="mb-3">
-                  <button type="submit" className="btn btn-warning w-100">
-                    Sign In
-                  </button>
+                  <Button type="submit" className="w-100">Sign In</Button>
                 </div>
               </form>
             </div>

@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { LuPlus } from "react-icons/lu";
 import Filter from "./_components/Filter";
 import List from "./_components/List";
+import Card from "../../components/Card/Card";
 
 export default function Index() {
   return (
-    <div className="card bg-white border-0 shadow-sm p-3">
+    <Card className="p-3">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="fs-20">Leads Manage</h1>
         <Link to={"/leads/create"} className="text-decoration-none">
@@ -22,6 +23,6 @@ export default function Index() {
       <div className="mt-4 w-100">
         <List />
       </div>
-    </div>
+    </Card>
   );
 }

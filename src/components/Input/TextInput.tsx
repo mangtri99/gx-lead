@@ -1,39 +1,44 @@
 import clsx from "clsx";
 import { forwardRef } from "react";
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement>{
-  label?: string;
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string | React.ReactNode;
   error?: boolean;
   message?: string;
-  children?: React.ReactNode;
 }
 
 const TextInput = forwardRef(function TextInput(props: Props, ref) {
-  const { label, children, error, type, id, placeholder, message, className, ...inputProps } = props;
+  const {
+    label,
+    error,
+    type,
+    id,
+    placeholder,
+    message,
+    className,
+    ...inputProps
+  } = props;
   return (
-    <label className="form-label fs-14 w-100 position-relative" htmlFor={id}>
-      {label || children}
+    <label className="fs-14 w-100 position-relative text-secondary" htmlFor={id}>
+      {label && <span className="mb-1 d-block">{label}</span>}
       <input
-        {...inputProps}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         ref={ref}
         type={type || "text"}
         id={id}
-        className={
-          clsx(`form-control ${className}`, {
-            "is-invalid": error
-          })
-        }
+        className={clsx(`form-control fs-14`, {
+          className,
+          "is-invalid": error,
+        })}
         placeholder={placeholder || ""}
-        style={{
-          marginTop: "4px",
-          fontSize: "14px"
-        }}
+        {...inputProps}
       />
-      <div className="invalid-feedback" id={id}>
-        {message}
-      </div>
+      {message && (
+        <div className="invalid-feedback" id={id}>
+          {message}
+        </div>
+      )}
     </label>
   );
 });

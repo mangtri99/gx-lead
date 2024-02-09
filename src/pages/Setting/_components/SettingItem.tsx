@@ -1,5 +1,6 @@
 import { LuTrash2 } from "react-icons/lu";
 import { FaRegEdit } from "react-icons/fa";
+import ButtonActionIcon from "../../../components/Button/ButtonActionIcon";
 
 interface Item {
   id: number;
@@ -13,7 +14,7 @@ interface Props {
   onEdit: (val: number) => void;
 }
 
-export default function Card(props: Props) {
+export default function SettingItem(props: Props) {
   const { item, onDelete, onEdit } = props;
   return (
     <div className="card h-100 p-3">
@@ -23,20 +24,12 @@ export default function Card(props: Props) {
           <p className="mb-0 text-secondary fs-12">{item.description || "-"}</p>
         </div>
         <div className="col-3 d-flex align-items-start justify-content-end">
-          <button
-            className="d-flex align-items-center me-2"
-            type="button"
-            onClick={() => onDelete(item.id)}
-          >
+          <ButtonActionIcon className="d-flex align-items-center me-2" onClick={() => onDelete(item.id)}>
             <LuTrash2 size={16} className="text-danger" />
-          </button>
-          <button
-            className="d-flex align-items-center"
-            type="button"
-            onClick={() => onEdit(item.id)}
-          >
+          </ButtonActionIcon>
+          <ButtonActionIcon className="d-flex align-items-center" onClick={() => onEdit(item.id)}>
             <FaRegEdit size={16} className="text-secondary" />
-          </button>
+          </ButtonActionIcon>
         </div>
       </div>
     </div>

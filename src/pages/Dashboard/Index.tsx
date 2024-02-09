@@ -2,6 +2,9 @@ import CardWidget from "../../components/Card/CardWidget";
 import useChartState from "./_hooks/useChartState";
 import PieChart from "../../components/Chart/PieChart";
 import { LuImage } from "react-icons/lu";
+import MultiDateInput from "../../components/Input/MultiDateInput";
+import Button from "../../components/Button/Button";
+import Card from "../../components/Card/Card";
 
 export default function Index() {
   const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
@@ -10,69 +13,55 @@ export default function Index() {
       <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-center">
         <h1 className="fw-bold fs-20 mb-0">Lead Summary</h1>
         <div className="d-flex align-items-end">
-          <label htmlFor="">
-            <span className="fs-12">
-              Date Range (<span className="text-blue">Max 3 Month</span>)
-            </span>
-            <div className="d-flex">
-              <div className="input-group">
-                <input
-                  value={query.date_start === undefined ? "" : query.date_start}
-                  onChange={(e) =>
-                    setQuery({
-                      ...query,
-                      date_start: e.target.value,
-                    })
-                  }
-                  type="date"
-                  className="form-control form-control-sm fs-14"
-                  aria-label="Date start"
-                  placeholder="21/12/2023"
-                />
-                <span className="input-group-text" style={{
-                  fontSize: "12px",
-                  backgroundColor: '#E8E8E8',
-                }}>to</span>
-                <input
-                  value={query.date_end === undefined ? "" : query.date_end}
-                  onChange={(e) =>
-                    setQuery({
-                      ...query,
-                      date_end: e.target.value,
-                    })
-                  }
-                  type="date"
-                  className="form-control form-control-sm fs-14"
-                  aria-label="Date end"
-                  placeholder="21/01/2024"
-                />
-              </div>
-            </div>
-          </label>
-          <button
-            type="button"
-            className="btn btn-sm btn-warning ms-2"
+          <MultiDateInput
+            separator="to"
+            label={
+              <>
+                Date Range (<span className="text-blue">Max 3 Month</span>)
+              </>
+            }
+            dateValueStart={query.date_start}
+            dateValueEnd={query.date_end}
+            onChangeDateStart={(e) =>
+              setQuery({
+                ...query,
+                date_start: e.target.value,
+              })
+            }
+            onChangeDateEnd={(e) =>
+              setQuery({
+                ...query,
+                date_end: e.target.value,
+              })
+            }
+            placeholderDateStart="21/12/2023"
+            placeholderDateEnd="21/01/2024"
+          />
+          <Button
+            className="ms-2"
+            size="sm"
             onClick={() => filter()}
             disabled={!query.date_start && !query.date_end}
           >
             Search
-          </button>
-          <button
-            type="button"
-            className="btn btn-sm btn-danger mx-2"
+          </Button>
+          <Button
+            className="mx-2"
+            size="sm"
             onClick={() => reset()}
             disabled={!query.date_start && !query.date_end}
           >
             Reset
-          </button>
-          <button
-            type="button"
-            className="btn btn-sm btn-warning d-flex align-items-center"
+          </Button>
+          <Button
+            className="mx-2 d-flex align-items-center"
+            size="sm"
             onClick={() => saveToImage()}
+            disabled={!query.date_start && !query.date_end}
           >
             Save to image
             <LuImage size={16} className="ms-2" />
-          </button>
+          </Button>
         </div>
       </div>
       <div
@@ -94,43 +83,59 @@ export default function Index() {
         </div>
         <div className="row align-items-stretch">
           <div className="col-md-6 col-12 mt-4">
-            <div className="card p-3 bg-white border-0 shadow-sm">
-              <p className="text-center">Probability</p>
-              <PieChart
-                data={data?.data.probabilities.total}
-                labels={data?.data.probabilities.name}
-              />
-            </div>
+            <Card>
+              <Card.Body>
+                <div>
+                  <p className="text-center">Probability</p>
+                  <PieChart
+                    data={data?.data.probabilities.total}
+                    labels={data?.data.probabilities.name}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </div>
 
           <div className="col-md-6 col-12 mt-4">
-            <div className="card p-3 bg-white border-0 shadow-sm">
-              <p className="text-center">Channel</p>
-              <PieChart
-                data={data?.data.channels.total}
-                labels={data?.data.channels.name}
-              />
-            </div>
+            <Card>
+              <Card.Body>
+                <div>
+                  <p className="text-center">Channel</p>
+                  <PieChart
+                    data={data?.data.channels.total}
+                    labels={data?.data.channels.name}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </div>
 
           <div className="col-md-6 col-12 mt-4">
-            <div className="card p-3 bg-white border-0 shadow-sm">
-              <p className="text-center">Media</p>
-              <PieChart
-                data={data?.data.medias.total}
-                labels={data?.data.medias.name}
-              />
-            </div>
+            <Card>
+              <Card.Body>
+                <div>
+                  <p className="text-center">Media</p>
+                  <PieChart
+                    data={data?.data.medias.total}
+                    labels={data?.data.medias.name}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </div>
 
           <div className="col-md-6 col-12 mt-4">
-            <div className="card p-3 bg-white border-0 shadow-sm">
-              <p className="text-center">Source</p>
-              <PieChart
-                data={data?.data.sources.total}
-                labels={data?.data.sources.name}
-              />
-            </div>
+            <Card>
+              <Card.Body>
+                <div>
+                  <p className="text-center">Source</p>
+                  <PieChart
+                    data={data?.data.sources.total}
+                    labels={data?.data.sources.name}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </div>
         </div>
       </div>

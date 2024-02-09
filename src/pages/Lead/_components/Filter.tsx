@@ -1,3 +1,5 @@
+import Button from "../../../components/Button/Button";
+import TextInput from "../../../components/Input/TextInput";
 import SelectInput from "../../../components/Select/SelectInput";
 import useLeadListState from "../_hooks/useLeadListState";
 import useLeadOptionFilter from "../_hooks/useLeadOptionFilter";
@@ -10,102 +12,80 @@ export default function Filter() {
   return (
     <div className="row mt-4 g-2 align-items-end">
       <div className="col-xl-3 col-lg-4 col-12">
-        <label className="w-100" htmlFor="search">
-          <span className="fs-14 text-secondary">Search</span>
-          <input
-            id="search"
-            value={query.search}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                search: e.target.value,
-              })
-            }
-            type="text"
-            className="form-control w-100 text-secondary"
-            placeholder="Search by Text"
-          />
-        </label>
+        <TextInput
+          placeholder="Search by Text"
+          label="Search"
+          className="w-100"
+          value={query.search}
+          id="search"
+          onChange={(e) => {
+            setQuery({
+              ...query,
+              search: e.target.value,
+            });
+          }}
+        />
       </div>
       <div className="col-xl-3 col-lg-4 col-12">
-        <label className="w-100" htmlFor="date">
-          <span className="fs-14 text-secondary">Date</span>
-          <input
-            id="date"
-            value={query.date_start}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                date_start: e.target.value,
-              })
-            }
-            type="date"
-            className="form-control w-100 text-secondary"
-            placeholder="12/02/2022 - 13/03/2022"
-          />
-        </label>
+        <TextInput
+          placeholder="12/02/2022 - 13/03/2022"
+          label="Date"
+          className="w-100"
+          value={query.date_start}
+          id="date"
+          onChange={(e) =>
+            setQuery({
+              ...query,
+              date_start: e.target.value,
+            })
+          }
+          type="date"
+        />
       </div>
       <div className="col-xl-2 col-lg-3 col-12">
-        <label className="w-100" htmlFor="status">
-          <span className="fs-14 text-secondary">Status</span>
-          <SelectInput
-            id="status"
-            options={statusOptions}
-            value={query.status}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                status: e.value,
-              })
-            }
-            placeholder="Select Status"
-          />
-        </label>
+        <SelectInput
+          id="status"
+          labelInput="Status"
+          options={statusOptions}
+          value={query.status}
+          onChange={(e) =>
+            setQuery({
+              ...query,
+              status: e.value,
+            })
+          }
+          placeholder="Select Status"
+        />
       </div>
       <div className="col-xl-2 col-lg-3 col-12">
-        <label className="w-100" htmlFor="branch">
-          <span className="fs-14 text-secondary">Branch Office</span>
-
-          <SelectInput
-            id="branch"
-            options={branchOptions}
-            value={query.branch}
-            onChange={(e) =>
-              setQuery({
-                ...query,
-                branch: e.value,
-              })
-            }
-            placeholder="Select Branch"
-          />
-        </label>
+        <SelectInput
+          id="branch"
+          labelInput="Branch Office"
+          options={branchOptions}
+          value={query.branch}
+          onChange={(e) =>
+            setQuery({
+              ...query,
+              branch: e.value,
+            })
+          }
+          placeholder="Select Branch"
+        />
       </div>
-      <div className="col-auto">
-        <button
+      <div className="col-auto d-flex">
+        <Button
+          className="me-2"
           onClick={() => filter()}
-          className="btn btn-warning"
-          type="button"
-          style={{
-            paddingTop: "6px",
-            paddingBottom: "6px",
-          }}
         >
           <span className="me-2 fs-14">Search</span>
           <FiSearch size={20} />
-        </button>
-      </div>
-      <div className="col-auto">
-        <button
+        </Button>
+        <Button
+          outline
           onClick={() => resetFilter()}
-          className="btn btn-outline-warning"
-          type="button"
-          style={{
-            paddingTop: "6px",
-            paddingBottom: "6px",
-          }}
         >
-          <LuFilter size={20} className="text-black" />
-        </button>
+          <LuFilter size={20} />
+        </Button>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import TextInfo from "./_components/TextInfo";
 import NotFound from "../../components/Common/NotFound";
 import Loading from "../../components/Loading/Loading";
+import Button from "../../components/Button/Button";
 
 export default function Detail() {
   const { data, loading } = useLeadDetailState();
@@ -29,18 +30,15 @@ export default function Detail() {
         <h1 className="fs-20 fw-medium mb-0">Lead Detail</h1>
         <div className="d-flex align-items-center">
           <Link to={"/leads/create"} className="text-decoration-none">
-            <button
-              className="btn btn-warning d-flex align-items-center me-2"
-              type="button"
-            >
+            <Button className="d-flex align-items-center me-2">
               <span className="me-2">Add New</span>
               <LuPlus size={24} />
-            </button>
+            </Button>
           </Link>
           <Link to={"/leads"} className="text-decoration-none">
-            <button className="btn btn-outline-secondary " type="button">
+            <Button outline>
               Back
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

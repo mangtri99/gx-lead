@@ -1,7 +1,7 @@
 import Tabs from "../../components/Tabs/Tabs";
 import { LuPlus } from "react-icons/lu";
 import useSettingState from "./_hooks/useSettingState";
-import Card from "./_components/Card";
+import SettingItem from "./_components/SettingItem";
 import Dialog from "../../components/Dialog/Index";
 import TextInput from "../../components/Input/TextInput";
 import useSettingFormState from "./_hooks/useSettingFormState";
@@ -17,6 +17,7 @@ import {
 import { Controller } from "react-hook-form";
 import SelectInput from "../../components/Select/SelectInput";
 import { SelectOptions } from "../../config/types";
+import Button from "../../components/Button/Button";
 
 export default function Index() {
   const {
@@ -40,7 +41,7 @@ export default function Index() {
     handleEdit,
     isEdit,
     handleAdd,
-    onDelete
+    onDelete,
   } = useSettingFormState();
   const [mediaOptions, setMediaOptions] = useState<SelectOptions[]>();
   const [channelOptions, setChannelOptions] = useState<SelectOptions[]>();
@@ -72,7 +73,7 @@ export default function Index() {
   }, [channels]);
 
   useEffect(() => {
-    console.log('type', types)
+    console.log("type", types);
   }, [types]);
 
   return (
@@ -103,7 +104,7 @@ export default function Index() {
             types?.length > 0 &&
             types.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -116,7 +117,7 @@ export default function Index() {
             channels?.length > 0 &&
             channels.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -129,7 +130,7 @@ export default function Index() {
             media?.length > 0 &&
             media.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -142,7 +143,7 @@ export default function Index() {
             probabilities?.length > 0 &&
             probabilities.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -155,7 +156,7 @@ export default function Index() {
             sources?.length > 0 &&
             sources.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -168,7 +169,7 @@ export default function Index() {
             statuses?.length > 0 &&
             statuses.map((item, index) => (
               <div key={index} className="col-lg-3 col-md-4 col-6">
-                <Card
+                <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
                   onEdit={() => handleEdit(item)}
@@ -215,20 +216,20 @@ export default function Index() {
                 control={form.control}
                 name="channel_id"
                 render={({ field }) => (
-                  <label htmlFor="channel" className="form-label fs-14 w-100">
-                    <span className="mb-1 d-block">Select Channel</span>
-                    <SelectInput
-                      id="channel"
-                      ref={field.ref}
-                      options={channelOptions || []}
-                      value={field.value ? String(field.value) : ""}
-                      onChange={(e) =>
-                        field.onChange(e.value === "" ? undefined : Number(e.value))
-                      }
-                      onBlur={field.onBlur}
-                      placeholder="Select Channel"
-                    />
-                  </label>
+                  <SelectInput
+                    labelInput="Select Channel"
+                    id="channel"
+                    ref={field.ref}
+                    options={channelOptions || []}
+                    value={field.value ? String(field.value) : ""}
+                    onChange={(e) =>
+                      field.onChange(
+                        e.value === "" ? undefined : Number(e.value)
+                      )
+                    }
+                    onBlur={field.onBlur}
+                    placeholder="Select Channel"
+                  />
                 )}
               />
             </div>
@@ -240,43 +241,50 @@ export default function Index() {
                 control={form.control}
                 name="media_id"
                 render={({ field }) => (
-                  <label htmlFor="status" className="form-label fs-14 w-100">
-                    <span className="mb-1 d-block">Select Media</span>
-                    <SelectInput
-                      id="status"
-                      ref={field.ref}
-                      options={mediaOptions || []}
-                      value={field.value ? String(field.value) : ""}
-                      onChange={(e) => {
-                        field.onChange(e.value === "" ? undefined : Number(e.value))
-                       }
-                      }
-                      onBlur={field.onBlur}
-                      placeholder="Select Media"
-                    />
-                  </label>
+                  <SelectInput
+                    labelInput="Select Media"
+                    id="status"
+                    ref={field.ref}
+                    options={mediaOptions || []}
+                    value={field.value ? String(field.value) : ""}
+                    onChange={(e) => {
+                      field.onChange(
+                        e.value === "" ? undefined : Number(e.value)
+                      );
+                    }}
+                    onBlur={field.onBlur}
+                    placeholder="Select Media"
+                  />
                 )}
               />
             </div>
           )}
 
           <div className="d-flex justify-content-end">
-            <button type="submit" className="btn btn-warning fs-14">
+            <Button type="submit" className="fs-14">
               Save
-            </button>
+            </Button>
           </div>
         </form>
       </Dialog>
+
+      {/* Dialog Confirm Delete */}
       <Dialog id="modalConfirmDelete" title="Confirm Delete">
         <div>
           <p className="text-black fs-14">Are you sure to delete this?</p>
           <div className="d-flex align-items-center justify-content-end mt-4">
-            <button id="btn-close-confirm-delete" type="button" className="btn btn-sm btn-secondary me-2" data-bs-dismiss="modal">
+            <Button
+              id="btn-close-confirm-delete"
+              type="button"
+              size="sm"
+              data-bs-dismiss="modal"
+              onClick={() => onDelete()}
+            >
               Cancel
-            </button>
-            <button type="button" className="btn btn-sm btn-danger" onClick={() => onDelete()}>
+            </Button>
+            <Button variant="danger" size="sm" onClick={() => onDelete()}>
               Delete
-            </button>
+            </Button>
           </div>
         </div>
       </Dialog>
