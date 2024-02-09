@@ -1,6 +1,6 @@
-import CardWidget from "../../components/CardWidget";
+import CardWidget from "../../components/Card/CardWidget";
 import useChartState from "./_hooks/useChartState";
-import PieChart from "../../components/PieChart";
+import PieChart from "../../components/Chart/PieChart";
 import { LuImage } from "react-icons/lu";
 
 export default function Index() {

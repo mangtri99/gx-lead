@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Table from "../../../components/Table/Index";
+import Table from "../../../components/Table/Table";
 import useLeadListState from "../_hooks/useLeadListState";
 import dayjs from "dayjs";
-import Badge from "../../../components/Badge";
+import Badge from "../../../components/Badge/Badge";
 import { LuMoreVertical } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
-import Pagination from "../../../components/Pagination/Index";
-import Loading from "../../../components/Loading";
+import Pagination from "../../../components/Pagination/Pagination";
+import Loading from "../../../components/Loading/Loading";
 import Dialog from "../../../components/Dialog/Index";
 
 export default function List() {

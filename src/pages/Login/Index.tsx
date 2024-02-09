@@ -1,8 +1,8 @@
-import Logo from "../../assets/logo.svg";
-import Login from "../../assets/login.png";
+import Logo from "../../assets/images/logo.svg";
+import Login from "../../assets/images/login.png";
 import "./Login.style.scss";
 import useLoginFormState from "./_hooks/useLoginFormState";
-import TextInput from "../../components/TextInput";
+import TextInput from "../../components/Input/TextInput";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Navigate } from "react-router-dom";

@@ -1,4 +1,4 @@
-import SelectInput from "../../../components/Select/Index";
+import SelectInput from "../../../components/Select/SelectInput";
 import useLeadListState from "../_hooks/useLeadListState";
 import useLeadOptionFilter from "../_hooks/useLeadOptionFilter";
 import { FiSearch } from "react-icons/fi";

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import MenuLink from "./Menu/MenuLink";
+import MenuLink from "../Menu/MenuLink";
 import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
-import Logo2 from "../assets/logo2.svg";
+import Logo2 from "@/assets/images/logo2.svg";
 import { IoCubeOutline } from "react-icons/io5";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

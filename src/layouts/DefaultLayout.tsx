@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 import "./layout.style.scss";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navigation/Navbar";
 import { useAuth } from "../composables/useAuth";
 import { useRef } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Navigation/Sidebar";
 
 export default function DefaultLayout() {
   const mainContent = useRef<HTMLDivElement>(null);

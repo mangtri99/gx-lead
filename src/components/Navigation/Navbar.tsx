@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { GoBell } from "react-icons/go";
 import { IoMenu } from "react-icons/io5";
-import Profile from "../assets/user.png";
+import Profile from "@/assets/images/user.png";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../composables/useAuth";
+import { useAuth } from "../../composables/useAuth";
 
 export default function Navbar() {
   const [title, setTitle] = useState("Dashboard");

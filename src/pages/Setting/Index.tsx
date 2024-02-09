@@ -1,9 +1,9 @@
-import Tabs from "../../components/Tabs/Index";
+import Tabs from "../../components/Tabs/Tabs";
 import { LuPlus } from "react-icons/lu";
 import useSettingState from "./_hooks/useSettingState";
 import Card from "./_components/Card";
 import Dialog from "../../components/Dialog/Index";
-import TextInput from "../../components/TextInput";
+import TextInput from "../../components/Input/TextInput";
 import useSettingFormState from "./_hooks/useSettingFormState";
 import { useEffect, useState } from "react";
 import {
@@ -15,7 +15,7 @@ import {
   TYPE_URL,
 } from "../../config/api";
 import { Controller } from "react-hook-form";
-import SelectInput from "../../components/Select/Index";
+import SelectInput from "../../components/Select/SelectInput";
 import { SelectOptions } from "../../config/types";
 
 export default function Index() {
@@ -82,7 +82,7 @@ export default function Index() {
         <Tabs
           items={tabs}
           value={tab}
-          onChangeTab={(val) => {
+          onChangeTab={(val: string) => {
             handleChangeTab(val);
           }}
         />

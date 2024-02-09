@@ -5,12 +5,12 @@ import { BiHomeAlt } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 
 
-import Badge from "../../components/Badge";
+import Badge from "../../components/Badge/Badge";
 import useLeadDetailState from "./_hooks/useLeadDetailState";
 import dayjs from "dayjs";
 import TextInfo from "./_components/TextInfo";
-import NotFound from "../../components/NotFound";
-import Loading from "../../components/Loading";
+import NotFound from "../../components/Common/NotFound";
+import Loading from "../../components/Loading/Loading";
 
 export default function Detail() {
   const { data, loading } = useLeadDetailState();

@@ -7,7 +7,7 @@ import useSettingState from './useSettingState';
 import useFetch from '../../../composables/useFetch';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 import { CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from '../../../config/api';
 import { useSearchParams } from 'react-router-dom';
 
@@ -100,8 +100,8 @@ export default function useSettingFormState() {
       await $fetch(`${tab}/${idSetting}`, {
         method: 'DELETE'
       })
-      const btnCloseModalConfirm = document.getElementById('btn-close-confirm-delete') as HTMLButtonElement
-      btnCloseModalConfirm.click()
+      const formModal = new Modal('#modalConfirmDelete') 
+      formModal.hide()
       fetchOptions()
       toast.success('Setting has been deleted.')
       setIdSetting('');
