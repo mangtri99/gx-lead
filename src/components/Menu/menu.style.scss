@@ -1,19 +1,18 @@
-$primary-menu: #ACADC1;
 $active-menu: #666666;
 
 .menu-title {
-  color: $primary-menu;
+  color: var(--bs-secondary);
   font-size: 16px;
   margin-bottom: 0px;
 }
 .menu-item {
-  color: $primary-menu;
+  color: var(--bs-secondary);
   font-size: 14px;
   margin-bottom: 0px;
 }
 .menu-item-link {
   padding: 12px 0px;
-  color: $primary-menu;
+  color: var(--bs-secondary);
   text-decoration: none;
   &.active {
     color: $active-menu;

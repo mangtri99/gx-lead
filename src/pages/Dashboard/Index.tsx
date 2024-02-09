@@ -17,7 +17,7 @@ export default function Index() {
             separator="to"
             label={
               <>
-                Date Range (<span className="text-blue">Max 3 Month</span>)
+                Date Range (<span className="text-warning">Max 3 Month</span>)
               </>
             }
             dateValueStart={query.date_start}

@@ -36,7 +36,7 @@ export default function Detail() {
             </Button>
           </Link>
           <Link to={"/leads"} className="text-decoration-none">
-            <Button outline>
+            <Button outline variant="secondary">
               Back
             </Button>
           </Link>
@@ -46,14 +46,14 @@ export default function Detail() {
         <div className="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-center">
           <div className="d-flex flex-lg-row flex-column align-items-lg-center">
             <div className="d-flex align-items-center">
-              <p className="fs-20 fw-medium text-warning mb-0">
+              <p className="fs-20 fw-medium text-primary mb-0">
                 #{data?.lead_number}
               </p>
               <button className="mx-3 rounded-circle">
                 <FaEdit size={12} />
               </button>
             </div>
-            <Badge color="warning" className="d-flex align-items-center">
+            <Badge color="primary" className="d-flex align-items-center">
               <BiHomeAlt size={16} />
               <span className="text-black fs-12 ms-1 fw-normal">
                 {data?.branch.name}
@@ -69,7 +69,7 @@ export default function Detail() {
           </Badge>
         </div>
         <div>
-          <p className="text-secondary fs-14 mb-1">
+          <p className="text-neutral-700 fs-14 mb-1">
             {dayjs(data?.created_at).format("DD MMM YYYY")}
           </p>
         </div>

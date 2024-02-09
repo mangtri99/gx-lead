@@ -1,0 +1,48 @@
+.h-full {
+  height: 100%;
+}
+.h-screen {
+  height: 100vh;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.flex-1 {
+  flex: 1;
+}
+.object-center {
+  object-position: center;
+}
+.object-cover {
+  object-fit: cover;
+}
+.object-bottom {
+  object-position: bottom;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.fs-12 {
+  font-size: 12px !important;
+}
+.fs-14 {
+  font-size: 14px !important;
+}
+.fs-20 {
+  font-size: 20px !important;
+}
+.fs-24 {
+  font-size: 24px !important;
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.w-fit {
+  width: fit-content;
+}

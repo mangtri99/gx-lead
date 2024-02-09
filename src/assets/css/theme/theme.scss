@@ -1,0 +1,6 @@
+$custom-theme-colors: (
+  "neutral-300": $neutral-300,
+  "neutral-700": $neutral-700,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);

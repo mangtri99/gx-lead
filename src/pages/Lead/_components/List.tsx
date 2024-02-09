@@ -14,7 +14,7 @@ export default function List() {
   const { data, deleteLead, handlePagination,loading } = useLeadListState();
   const probabilityColor = (probability: string) => {
     if (probability === "Pending") {
-      return "warning";
+      return "primary";
     }
     if (probability === "Cancel") {
       return "danger";
@@ -58,7 +58,7 @@ export default function List() {
                           {lead.fullname}
                         </p>
                         <p className="text-secondary mb-2">{lead.address}</p>
-                        <p className="text-warning mb-2 fw-medium">
+                        <p className="text-primary mb-2 fw-medium">
                           #{lead.lead_number}
                         </p>
                         <div className="mb-2">
@@ -109,7 +109,7 @@ export default function List() {
                       </div>
                       <div className="mb-2">
                         <p className="mb-0 text-secondary">Status:</p>
-                        <Badge color="primary">{lead.status.name}</Badge>
+                        <Badge color="warning">{lead.status.name}</Badge>
                       </div>
                       <div className="mb-2">
                         <p className="mb-0 text-secondary">Notes:</p>

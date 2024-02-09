@@ -16,7 +16,7 @@ export default function TextInfo(props: Props) {
         </p>
       </div>
       <div className="col-12 col-lg-8">
-        <p className="text-black fw-medium mb-0">
+        <p className="text-neutral-700 fw-medium mb-0">
           {props.value}
         </p>
       </div>

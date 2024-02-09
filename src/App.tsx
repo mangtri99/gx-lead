@@ -1,4 +1,3 @@
-import "@/assets/css/App.scss";
 import { Route, Routes } from "react-router-dom";
 import Login from './pages/Login/Index';
 import DefaultLayout from "./layouts/DefaultLayout";

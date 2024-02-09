@@ -41,6 +41,17 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
         components={{ IndicatorSeparator }}
         placeholder={placeholder}
         styles={{
+          control: (base) => ({
+            ...base,
+            '&:hover': {
+              borderColor: 'var(--bs-primary)',
+              boxShadow: '0 0 0 1px var(--bs-primary)',
+            },
+            '&:focus': {
+              borderColor: 'var(--bs-primary)',
+              boxShadow: '0 0 0 1px var(--bs-primary)',
+            },
+          }),
           placeholder: (base) => ({
             ...base,
             whiteSpace: 'nowrap',
@@ -50,9 +61,9 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
           option: (provided, state) => ({
             ...provided,
             color: state.isSelected ? "white" : "black",
-            backgroundColor: state.isSelected ? "#FFC007" : "white",
+            backgroundColor: state.isSelected ? 'var(--bs-primary)' : "white",
             "&:hover": {
-              backgroundColor: "#FFC007",
+              backgroundColor: "var(--bs-primary)",
               color: "white",
             },
           }),
