@@ -3,14 +3,12 @@ import { forwardRef } from "react";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string | React.ReactNode;
-  error?: boolean;
   message?: string;
 }
 
 const TextInput = forwardRef(function TextInput(props: Props, ref) {
   const {
     label,
-    error,
     type,
     id,
     placeholder,
@@ -29,7 +27,7 @@ const TextInput = forwardRef(function TextInput(props: Props, ref) {
         id={id}
         className={clsx(`form-control fs-14`, {
           className,
-          "is-invalid": error,
+          "is-invalid": message,
         })}
         placeholder={placeholder || ""}
         {...inputProps}

@@ -26,7 +26,7 @@ export const LeadSchema = z.object({
   longitude: z.string().refine((val) => val !== "", {
     message: "Longitude is required",
   }),
-  is_coverage: z.boolean(),
+  is_coverage: z.string(),
   status_id: z
     .number()
     .nullable()

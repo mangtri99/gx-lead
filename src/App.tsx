@@ -20,8 +20,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/leads" element={<Index />} />
           <Route path="/leads/:id/detail" element={<Detail />} />
-          <Route path="/leads/create" element={<Form />} />
-          <Route path="/leads/:id/edit" element={<Form />} />
+          <Route path="/leads/create" element={<Form isEdit={false} />} />
+          <Route path="/leads/:id/edit" element={<Form isEdit />} />
           <Route path="/setting" element={<Setting />} />
         </Route>
       </Routes>

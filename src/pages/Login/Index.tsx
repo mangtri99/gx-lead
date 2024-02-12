@@ -66,7 +66,6 @@ export default function Index() {
                     type="email"
                     label="Email"
                     placeholder="e.g. arbi@globalxtreme.net"
-                    error={form.formState.errors.email ? true : false}
                     message={form.formState.errors.email?.message}
                   />
                 </div>
@@ -78,7 +77,6 @@ export default function Index() {
                       type={tooglePassword ? "text" : "password"}
                       label="Password"
                       placeholder="*********"
-                      error={form.formState.errors.password ? true : false}
                       message={form.formState.errors.password?.message}
                     />
 

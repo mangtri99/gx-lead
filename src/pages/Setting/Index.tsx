@@ -190,7 +190,6 @@ export default function Index() {
               type="text"
               label="Name"
               placeholder="Name"
-              error={form.formState.errors.name ? true : false}
               message={form.formState.errors.name?.message}
             />
           </div>
@@ -201,7 +200,6 @@ export default function Index() {
               type="text"
               label="Description"
               placeholder="Description"
-              error={form.formState.errors.description ? true : false}
               message={form.formState.errors.description?.message}
             />
           </div>
