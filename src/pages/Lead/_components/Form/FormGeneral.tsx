@@ -32,15 +32,15 @@ export default function FormGeneral(props: Props) {
         handleOpen={(val) => setOpenGeneralForm(val)}
       >
         <div className="row">
-          <div className="col-12 col-lg-7 fw-semibold fs-14">
+          <div className="col-12 col-lg-8 fw-semibold fs-14">
             {/* Branch */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Branch Office <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <Controller
                   control={form.control}
                   name="branch_id"
@@ -66,13 +66,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Full Name */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Full Name
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <TextInput
                   {...form.register("fullname")}
                   id="fullname"
@@ -85,13 +85,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Company Name */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Company Name
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <TextInput
                   {...form.register("company_name")}
                   id="company_name"
@@ -104,13 +104,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Address */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Address
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <TextAreaInput
                   {...form.register("address")}
                   id="address"
@@ -122,13 +122,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Email */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Email
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <TextInput
                   {...form.register("email")}
                   id="email"
@@ -141,13 +141,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Phone Number */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Phone Number
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <TextInput
                   {...form.register("phone_number")}
                   id="phone_number"
@@ -162,13 +162,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Latitude & Longitude */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Latitude & Longitude
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <div className="row">
                   <div className="col-6">
                     <TextInput
@@ -198,13 +198,13 @@ export default function FormGeneral(props: Props) {
 
             {/* Is Coverage */}
             <div className="row mb-3">
-              <div className="col-4 text-neutral-700">
+              <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Is Coverage
                   <Required />{" "}
                 </p>
               </div>
-              <div className="col-8">
+              <div className="col-sm-7 col-12">
                 <div className="row">
                   {options.coverages?.map((coverage: SelectOptions) => (
                     <div className="col-auto" key={coverage.value}>
@@ -222,7 +222,7 @@ export default function FormGeneral(props: Props) {
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-5"></div>
+          <div className="col-12 col-lg-4"></div>
         </div>
       </Accordion>
     </div>

@@ -6,6 +6,7 @@ import Required from '../../../../components/General/Required';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import SelectInput from '../../../../components/Input/SelectInput';
 import { Option } from '../../../../config/types';
+import TextAreaInput from '../../../../components/Input/TextAreaInput';
 
 interface Props {
   form: UseFormReturn<any>
@@ -60,12 +61,12 @@ export default function FormOther(props: Props) {
         <div className="col-12 col-lg-8 fw-semibold fs-14">
           {/* Status */}
           <div className="row mb-3">
-            <div className="col-4 text-neutral-700">
+            <div className="col-sm-4 col-12 text-neutral-700">
               <p>
                 Status <Required />{" "}
               </p>
             </div>
-            <div className="col-8">
+            <div className="col-sm-8 col-12">
               <Controller
                 control={form.control}
                 name="status_id"
@@ -89,12 +90,12 @@ export default function FormOther(props: Props) {
           </div>
 
           <div className="row mb-3">
-            <div className="col-4 text-neutral-700">
+            <div className="col-sm-4 col-12 text-neutral-700">
               <p>
                 Probability <Required />{" "}
               </p>
             </div>
-            <div className="col-8">
+            <div className="col-sm-8 col-12">
               <Controller
                 control={form.control}
                 name="probability_id"
@@ -120,12 +121,12 @@ export default function FormOther(props: Props) {
           </div>
 
           <div className="row mb-3">
-            <div className="col-4 text-neutral-700">
+            <div className="col-sm-4 col-12 text-neutral-700">
               <p>
                 Lead Type <Required />{" "}
               </p>
             </div>
-            <div className="col-8">
+            <div className="col-sm-8 col-12">
               <Controller
                 control={form.control}
                 name="type_id"
@@ -149,12 +150,12 @@ export default function FormOther(props: Props) {
           </div>
 
           <div className="row mb-3">
-            <div className="col-4 text-neutral-700">
+            <div className="col-sm-4 col-12 text-neutral-700">
               <p>
                 Lead Channel <Required />{" "}
               </p>
             </div>
-            <div className="col-8">
+            <div className="col-sm-8 col-12">
               <Controller
                 control={form.control}
                 name="channel_id"
@@ -184,12 +185,12 @@ export default function FormOther(props: Props) {
               (item: any) => item.channel_id === String(form.getValues("channel_id"))
             ).length > 0 && (
               <div className="row mb-3">
-                <div className="col-4 text-neutral-700">
+                <div className="col-sm-4 col-12 text-neutral-700">
                   <p>
                     Lead Media <Required />{" "}
                   </p>
                 </div>
-                <div className="col-8">
+                <div className="col-sm-8 col-12">
                   <Controller
                     control={form.control}
                     name="media_id"
@@ -228,12 +229,12 @@ export default function FormOther(props: Props) {
               (item: any) => item.media_id === String(form.getValues("media_id"))
             ).length > 0 && (
               <div className="row mb-3">
-                <div className="col-4 text-neutral-700">
+                <div className="col-sm-4 col-12 text-neutral-700">
                   <p>
                     Lead Source <Required />{" "}
                   </p>
                 </div>
-                <div className="col-8">
+                <div className="col-sm-8 col-12">
                   <Controller
                     control={form.control}
                     name="source_id"
@@ -264,6 +265,24 @@ export default function FormOther(props: Props) {
                 </div>
               </div>
             )}
+
+            {/* Notes */}
+            <div className="row mb-3">
+              <div className="col-sm-4 col-12 text-neutral-700">
+                <p>
+                  Address
+                  <Required />{" "}
+                </p>
+              </div>
+              <div className="col-sm-8 col-12">
+                <TextAreaInput
+                  {...form.register("notes")}
+                  id="notes"
+                  placeholder="e.g. Leads Note"
+                  message={form.formState.errors.notes?.message as string}
+                />
+              </div>
+            </div>
         </div>
         <div className="col-12 col-lg-4"></div>
       </div>

@@ -82,13 +82,21 @@ export default function useSettingFormState() {
       toast.success('Setting has been saved.')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      toast.error('Something went wrong. Please try again later.')
-
-      if(err.response?.data?.errors?.name && err.response?.data?.errors?.name[0]){
-        form.setError('name', {
-          type: 'manual',
-          message: err.response.data.errors.email[0]
-        })
+      const validationErrors = err.response?.data?.errors
+      // if status 422, show validation
+      if(err.response.status === 422){
+        if(validationErrors){
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          Object.keys(validationErrors).forEach((key: any) => {
+            form.setError(key, {
+              type: "manual",
+              message: validationErrors[key][0],
+            });
+          });
+        }
+      // else, show toast error
+      } else {
+        toast.error('Something went wrong. Please try again later.')
       }
       
     }

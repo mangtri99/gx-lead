@@ -7,7 +7,8 @@ import { useEffect, useMemo, useState } from 'react';
 import useFetch from '../../../composables/useFetch';
 import { APIResponse, Option, OptionMedia, OptionSource } from '../../../config/types';
 import { BRANCH_URL, CHANNEL_URL, LEADS_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from '../../../config/api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 interface Props {
   isEdit: boolean
@@ -16,7 +17,7 @@ interface Props {
 
 export default function useLeadOptionFilter(props: Props) {
   const { isEdit } = props;
-
+  const navigate = useNavigate()
   const params = useParams<{ id: string }>();
   const [branches, setBranches] = useState<any>();
   const [statuses, setStatuses] = useState<any>();
@@ -172,9 +173,41 @@ export default function useLeadOptionFilter(props: Props) {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof LeadSchema>) => {
+  const onSubmit = async (data: z.infer<typeof LeadSchema>) => {
     // login user
-    console.log(data);
+    try {
+      let url = LEADS_URL
+      if(isEdit){
+        url = `${LEADS_URL}/${data.id}`
+      }
+      await $fetch(url, {
+        method: isEdit ? 'PATCH' : 'POST',
+        data: {
+          ...data,
+          is_coverage: Number(data.is_coverage)
+        }
+      })
+      toast.success('Leads has been saved.')
+      navigate('/leads')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      const validationErrors = err.response?.data?.errors
+      // if status 422, show validation
+      if(err.response.status === 422){
+        if(validationErrors){
+          Object.keys(validationErrors).forEach((key: any) => {
+            form.setError(key, {
+              type: "manual",
+              message: validationErrors[key][0],
+            });
+          });
+        }
+      // else, show toast error
+      } else {
+        toast.error('Something went wrong. Please try again later.')
+      }
+      
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

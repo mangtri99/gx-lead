@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useLeadFormState from "./_hooks/useLeadFormState";
 import Button from "../../components/Button/Button";
 import CheckboxInput from "../../components/Input/CheckboxInput";
 import FormOther from "./_components/Form/FormOther";
 import FormGeneral from "./_components/Form/FormGeneral";
+import { useState } from "react";
 
 interface Props {
   isEdit: boolean;
@@ -13,6 +14,8 @@ interface Props {
 export default function Form(props: Props) {
   const { isEdit } = props;
   const params = useParams();
+  const navigate = useNavigate();
+  const [agreement, setAgreement] = useState(false)
   const { form, onSubmit, onInvalid, options } = useLeadFormState({ isEdit });
 
   return (
@@ -49,13 +52,15 @@ export default function Form(props: Props) {
                   true and accurate.
                 </span>
               }
+              checked={agreement}
+              onChange={() => setAgreement(!agreement)}
             />
           </div>
           <div className="d-flex align-items-center">
             <Button
               variant="secondary"
               outline
-              onClick={() => console.log("cancel")}
+              onClick={() => navigate('/leads')}
             >
               Cancel
             </Button>
@@ -63,6 +68,7 @@ export default function Form(props: Props) {
               type="submit"
               className="ms-2"
               onClick={form.handleSubmit(onSubmit, onInvalid)}
+              disabled={!agreement}
             >
               Save
             </Button>
