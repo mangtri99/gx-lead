@@ -7,10 +7,16 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../composables/useAuth";
 import ButtonActionIcon from "../Button/ButtonActionIcon";
 
-export default function Navbar() {
+interface Props {
+  toggleSidebar: () => void
+}
+
+export default function Navbar(props: Props) {
+  const { toggleSidebar } = props
   const [title, setTitle] = useState("Dashboard");
   const location = useLocation();
-  const {logout} = useAuth();
+  const { logout } = useAuth();
+
   useEffect(() => {
     switch (location.pathname) {
       case "/leads":
@@ -24,12 +30,13 @@ export default function Navbar() {
         break;
     }
   }, [location.pathname]);
+
   return (
     <div className="bg-white shadow-sm p-3">
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           {/* Desktop */}
-          <ButtonActionIcon className="d-none d-lg-flex">
+          <ButtonActionIcon className="d-none d-lg-flex" onClick={() => toggleSidebar()}>
             <IoMenu size={24} />
           </ButtonActionIcon>
 
