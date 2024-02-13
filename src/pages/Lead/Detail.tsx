@@ -1,5 +1,5 @@
 import { LuPlus } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
@@ -13,6 +13,7 @@ import Button from "../../components/Button/Button";
 
 export default function Detail() {
   const { data, loading } = useLeadDetailState();
+  const navigate = useNavigate();
 
   if(loading){
     return <Loading/>
@@ -47,9 +48,9 @@ export default function Detail() {
               <p className="fs-20 fw-medium text-primary mb-0">
                 #{data?.lead_number}
               </p>
-              <button className="mx-3 rounded-circle">
+              <Button variant="secondary" className="mx-3 d-flex align-items-center p-2 rounded-circle" onClick={() => navigate(`/leads/${data.id}/edit`)}>
                 <FaEdit size={12} />
-              </button>
+              </Button>
             </div>
             <Badge color="primary" className="d-flex align-items-center">
               <BiHomeAlt size={16} />

@@ -17,7 +17,7 @@ export default function TextInfo(props: Props) {
       </div>
       <div className="col-12 col-lg-8">
         <p className="text-neutral-700 fw-medium mb-0">
-          {props.value}
+          {props.value || '-'}
         </p>
       </div>
     </div>

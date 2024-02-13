@@ -14,7 +14,7 @@ interface Props {
 export default function Tabs(props: Props) {
   const { items, value, onChangeTab } = props;
   return (
-    <ul className="list-unstyled d-flex align-items-center border-bottom">
+    <ul className="list-unstyled d-flex align-items-center flex-wrap border-bottom">
       {items.map((item, index) => (
         <li
           className={clsx("tab-item", {

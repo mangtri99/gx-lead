@@ -13,7 +13,12 @@ export default function useLeadListState() {
     date_start: "",
     date_end: "",
     status: "",
+    probability: "",
     branch: "",
+    type: "",
+    channel: "",
+    media: "",
+    source: "",
     page: "",
   });
   const { $fetch } = useFetch();
@@ -51,6 +56,11 @@ export default function useLeadListState() {
       date_end: "",
       status: "",
       branch: "",
+      probability: "",
+      type: "",
+      channel: "",
+      media: "",
+      source: "",
       page: "",
     });
   };

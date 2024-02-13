@@ -11,6 +11,7 @@ import Button from "../../../components/Button/Button";
 import { APIResponsePagination, Lead } from "../../../config/types";
 import Modal from "bootstrap/js/dist/modal";
 import { useState } from "react";
+import ButtonActionIcon from "../../../components/Button/ButtonActionIcon";
 
 interface Props {
   data: APIResponsePagination<Lead[]> | undefined;
@@ -170,24 +171,24 @@ export default function List(props: Props) {
                       </div>
                     </Table.Item>
                     <Table.Item className="nowrap">
-                      <button className="btn" type="button">
+                      <ButtonActionIcon type="button" className="py-2 px-3">
                         <div className="d-flex align-items-center">
                           <FiUser size={20} />
                           <span className="text-decoration-underline fs-12 ms-2">
                             ADD ASSIGNEE
                           </span>
                         </div>
-                      </button>
+                      </ButtonActionIcon>
                     </Table.Item>
                     <Table.Item className="text-end">
                       <div className="dropdown">
-                        <button
+                        <ButtonActionIcon
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
                           <LuMoreVertical size={24} />
-                        </button>
+                        </ButtonActionIcon>
                         <ul className="dropdown-menu">
                           <li>
                             <a
