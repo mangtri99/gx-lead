@@ -41,6 +41,7 @@ export default function useLeadListState() {
       ...query,
       page: "1",
     });
+    fetchLeads();
   };
 
   const resetFilter = async () => {

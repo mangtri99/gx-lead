@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { APIResponse, Option, OptionMedia, OptionSource } from '../../../config/types';
 import { CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from '../../../config/api';
 import useFetch from '../../../composables/useFetch';
@@ -13,7 +13,6 @@ export default function useSettingState() {
   const [statuses, setStatuses] = useState<Option[]>();
   const { $fetch } = useFetch();
 
-  
   const fetchOptions = async () => {
     
     try {
@@ -59,10 +58,6 @@ export default function useSettingState() {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    console.log('fetching options')
-  }, [types]);
 
   return {
     types,

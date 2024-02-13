@@ -63,10 +63,7 @@ export default function DefaultLayout() {
           <Navbar toggleSidebar={() => setIsShowSidebar(!isShowSidebar)} />
           {/* Content */}
           <div
-            className="h-100 w-100 p-3"
-            style={{
-              backgroundColor: "#F5F6F9",
-            }}
+            className="w-100 p-3"
           >
             <Outlet />
           </div>
