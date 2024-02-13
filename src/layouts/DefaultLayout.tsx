@@ -6,6 +6,7 @@ import { useAuth } from "../composables/useAuth";
 import { useRef, useState } from "react";
 import Sidebar from "../components/General/Sidebar";
 import { LayoutContext } from "./context/LayoutContext";
+import { SIDEBAR_WIDTH } from "../config/general";
 
 export default function DefaultLayout() {
   const isMobile = useMedia('(max-width: 992px)');
@@ -20,12 +21,13 @@ export default function DefaultLayout() {
   return (
     <LayoutContext.Provider value={{
       isShowSidebar,
+      setIsShowSidebar
     }}>
       <div className="min-h-screen d-flex">
 
         {/* Desktop */}
         <div ref={sidebar} className="d-none d-lg-block position-fixed h-100" style={{
-          transform: isShowSidebar ? 'translateX(0px)' : 'translateX(-250px)'
+          transform: isShowSidebar ? 'translateX(0px)' : `translateX(-${SIDEBAR_WIDTH}px)`
         }}>
           <Sidebar />
         </div>
@@ -35,7 +37,7 @@ export default function DefaultLayout() {
           <div
             className="offcanvas offcanvas-start"
             style={{
-              width: "250px",
+              width: `${SIDEBAR_WIDTH}px`
             }}
             tabIndex={-1}
             id="offcanvasExample"
@@ -57,10 +59,10 @@ export default function DefaultLayout() {
 
         {/* Main */}
         <div ref={mainContent} className="w-100 main-content" style={{
-          marginLeft: isShowSidebar && !isMobile ? '250px' : '0px'
+          marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : '0px'
         }}>
           {/* Navbar */}
-          <Navbar toggleSidebar={() => setIsShowSidebar(!isShowSidebar)} />
+          <Navbar />
           {/* Content */}
           <div
             className="w-100 p-3"

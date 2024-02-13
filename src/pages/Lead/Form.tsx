@@ -5,7 +5,9 @@ import Button from "../../components/Button/Button";
 import CheckboxInput from "../../components/Input/CheckboxInput";
 import FormOther from "./_components/Form/FormOther";
 import FormGeneral from "./_components/Form/FormGeneral";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LayoutContext } from "../../layouts/context/LayoutContext";
+import { SIDEBAR_WIDTH } from "../../config/general";
 
 interface Props {
   isEdit: boolean;
@@ -17,11 +19,12 @@ export default function Form(props: Props) {
   const navigate = useNavigate();
   const [agreement, setAgreement] = useState(false)
   const { form, onSubmit, onInvalid, options } = useLeadFormState({ isEdit });
+  const { isShowSidebar } = useContext(LayoutContext);
 
   return (
     <div className="position-relative h-100">
       <form
-        className="d-block"
+        className="d-block mb-5"
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
       >
         <h1 className="fs-20 fw-medium mb-4">
@@ -40,6 +43,7 @@ export default function Form(props: Props) {
           bottom: "0px",
           left: "0px",
           right: "0px",
+          marginLeft: isShowSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
         }}
       >
         <div className="bg-white d-flex justify-content-between align-items-center shadow-sm py-3 px-4">

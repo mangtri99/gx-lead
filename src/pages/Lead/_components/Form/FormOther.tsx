@@ -46,7 +46,7 @@ export default function FormOther(props: Props) {
     }
   }
   return (
-    <div>
+    <div className='mb-5'>
     <Accordion
       title={
         <>
@@ -271,7 +271,6 @@ export default function FormOther(props: Props) {
               <div className="col-sm-4 col-12 text-neutral-700">
                 <p>
                   Address
-                  <Required />{" "}
                 </p>
               </div>
               <div className="col-sm-8 col-12">

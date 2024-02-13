@@ -59,7 +59,7 @@ export default function List(props: Props) {
     return <Loading />;
   }
   return (
-    <div>
+    <>
       <Table>
         <Table.Header>
           <Table.Row>
@@ -271,6 +271,6 @@ export default function List(props: Props) {
           </div>
         </div>
       </Dialog>
-    </div>
+    </>
   );
 }

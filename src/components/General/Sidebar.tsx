@@ -3,6 +3,7 @@ import MenuLink from "./MenuLink";
 import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
 import Logo2 from "@/assets/images/logo2.svg";
 import { IoCubeOutline } from "react-icons/io5";
+import { SIDEBAR_WIDTH } from "../../config/general";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sidebar = forwardRef(function Sidebar(_props, ref) {
@@ -13,7 +14,7 @@ const Sidebar = forwardRef(function Sidebar(_props, ref) {
       ref={ref}
       className="bg-white d-flex flex-column h-100 p-3"
       style={{
-        width: "250px",
+        width: `${SIDEBAR_WIDTH}px`
       }}
     >
       <div className="text-center">

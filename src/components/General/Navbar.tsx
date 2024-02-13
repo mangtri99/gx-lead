@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GoBell } from "react-icons/go";
 import { IoMenu } from "react-icons/io5";
 import Profile from "@/assets/images/user.png";
@@ -6,13 +6,11 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../composables/useAuth";
 import ButtonActionIcon from "../Button/ButtonActionIcon";
+import { LayoutContext } from "../../layouts/context/LayoutContext";
 
-interface Props {
-  toggleSidebar: () => void
-}
 
-export default function Navbar(props: Props) {
-  const { toggleSidebar } = props
+export default function Navbar() {
+  const { isShowSidebar, setIsShowSidebar } = useContext(LayoutContext);
   const [title, setTitle] = useState("Dashboard");
   const location = useLocation();
   const { logout } = useAuth();
@@ -36,7 +34,7 @@ export default function Navbar(props: Props) {
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           {/* Desktop */}
-          <ButtonActionIcon className="d-none d-lg-flex" onClick={() => toggleSidebar()}>
+          <ButtonActionIcon className="d-none d-lg-flex" onClick={() => setIsShowSidebar(!isShowSidebar)}>
             <IoMenu size={24} />
           </ButtonActionIcon>
 
