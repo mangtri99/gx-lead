@@ -68,7 +68,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            color: message ? "var(--bs-danger)" : "var(--bs-secondary)",
+            color: message ? "var(--bs-danger)" : "var(--bs-secondary-color)",
             fontWeight: 400,
           }),
           option: (provided, state) => ({

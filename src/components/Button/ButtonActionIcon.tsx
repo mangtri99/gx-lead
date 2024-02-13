@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { forwardRef } from "react";
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -8,10 +8,13 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-export default function ButtonActionIcon(props: Props) {
+const ButtonActionIcon = forwardRef(function ButtonActionIcon(props: Props, ref) {
   const { children, className, disabled, type,...rest } = props;
   return (
     <button
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      ref={ref}
       type={type || "button"}
       className={clsx( className)}
       disabled={disabled}
@@ -20,4 +23,6 @@ export default function ButtonActionIcon(props: Props) {
       {children}
     </button>
   );
-}
+})
+
+export default ButtonActionIcon
