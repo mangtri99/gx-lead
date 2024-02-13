@@ -55,7 +55,7 @@ export default function Filter(props: Props) {
   };
   return (
     <div className="row mt-4 g-2 align-items-end">
-      <div className="col-xl-3 col-lg-4 col-12">
+      <div className="col-xl col-lg-4 col-12">
         <TextInput
           placeholder="Search by Text"
           label="Search"
@@ -70,7 +70,7 @@ export default function Filter(props: Props) {
           }}
         />
       </div>
-      <div className="col-xl-3 col-lg-4 col-12">
+      <div className="col-xl col-lg-4 col-12">
         <DatePickerInput
           selectedValue={{
             from: query.date_start ? new Date(query.date_start) : undefined,
