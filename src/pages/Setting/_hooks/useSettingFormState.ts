@@ -1,20 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { z } from 'zod';
 import { LeadSettingSchema } from '../../../schema/LeadSettingSchema';
-import useSettingState from './useSettingState';
 import useFetch from '../../../composables/useFetch';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Modal from 'bootstrap/js/dist/modal';
 import { CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from '../../../config/api';
 import { useSearchParams } from 'react-router-dom';
+import { SettingContext } from './context/SettingContext';
 
 export default function useSettingFormState() {
   const [isEdit, setIsEdit] = useState(false);
   const [idSetting, setIdSetting] = useState('');
-  const { fetchOptions } = useSettingState();
+  const { fetchOptions } = useContext(SettingContext);
   const { $fetch } = useFetch();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -78,7 +77,9 @@ export default function useSettingFormState() {
       })
       const btnCloseModal = document.getElementById('btn-close-modal') as HTMLButtonElement
       btnCloseModal.click()
-      fetchOptions()
+      if(fetchOptions) {
+        fetchOptions();
+      }
       toast.success('Setting has been saved.')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -108,9 +109,11 @@ export default function useSettingFormState() {
       await $fetch(`${tab}/${idSetting}`, {
         method: 'DELETE'
       })
-      const formModal = new Modal('#modalConfirmDelete') 
-      formModal.hide()
-      fetchOptions()
+      const btnCloseModal = document.getElementById('btn-close-confirm-delete') as HTMLButtonElement
+      btnCloseModal.click()
+      if(fetchOptions) {
+        fetchOptions();
+      }
       toast.success('Setting has been deleted.')
       setIdSetting('');
     } catch (err) {
