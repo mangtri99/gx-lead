@@ -61,7 +61,6 @@ export default function Index() {
               className="d-flex align-items-center"
               size="sm"
               onClick={() => saveToImage()}
-              disabled={!query.date_start && !query.date_end}
             >
               Save to image
               <LuImage size={16} className="ms-2" />
@@ -69,7 +68,7 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className="mt-lg-5 mt-4" id="chart-container">
+      <div className="mt-lg-5 mt-4 bg-background" id="chart-container">
         <div className="row align-items-stretch">
           <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
             <CardWidget title={data?.data.leads.total} subtitle="Leads" />
