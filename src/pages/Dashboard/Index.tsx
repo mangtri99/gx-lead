@@ -1,3 +1,4 @@
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from 'chart.js';
 import CardWidget from "../../components/Card/CardWidget";
 import useChartState from "./_hooks/useChartState";
 import PieChart from "../../components/Chart/PieChart";
@@ -5,6 +6,8 @@ import { LuImage } from "react-icons/lu";
 import MultiDateInput from "../../components/Input/MultiDateInput";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
+
+ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
 export default function Index() {
   const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
