@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../composables/useFetch";
 import { CHART_URL } from "../../../config/api";
 import { APIResponse, CardItem, ChartItem } from "../../../config/types";
-import { useSearchParams } from "react-router-dom";
 import * as htmlToImage from 'html-to-image';
 import filterQs from "../../../helper/filterQs";
 
@@ -20,21 +19,26 @@ interface ChartData {
 }
 
 export default function useChartState() {
+  const defaultQuery = {
+    date_start: '',
+    date_end: ''
+  }
   const [data, setData] = useState<APIResponse<ChartData>>();
   const [loading, setLoading] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [query, setQuery] = useState({
-    date_start: searchParams.get('date_start') || undefined,
-    date_end: searchParams.get('date_end') || undefined,
-  })
+  const [query, setQuery] = useState(defaultQuery)
   const { $fetch } = useFetch();
 
-  const fetchChartData = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fetchChartData = async (params?: typeof defaultQuery) => {
     setLoading(true)
     try {
+      let filteredQuery = filterQs(query)
+      if(params){
+        filteredQuery = filterQs(params)
+      }
       const res = await $fetch<APIResponse<ChartData>>(CHART_URL, {
         method: 'GET',
-        params: searchParams,
+        params: filteredQuery,
       })
       setData(res.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,19 +51,13 @@ export default function useChartState() {
 
   // filter and search
   const filter = () => {
-    const filteredQuery = filterQs(query)
-    setSearchParams(filteredQuery)
     fetchChartData()
   }
 
   // reset filter
   const reset = async () => {
-    setQuery({
-      date_start: undefined,
-      date_end: undefined,
-    })
-    setSearchParams({})
-    fetchChartData()
+    setQuery(defaultQuery)
+    fetchChartData(defaultQuery)
   }
 
   // save dashboard to image

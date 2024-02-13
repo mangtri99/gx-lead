@@ -10,9 +10,9 @@ export default function Index() {
   const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
   return (
     <div>
-      <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-center">
-        <h1 className="fw-bold fs-20 mb-0">Lead Summary</h1>
-        <div className="d-flex align-items-end">
+      <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-end">
+        <h1 className="fw-bold fs-20 mb-lg-0 mb-3">Lead Summary</h1>
+        <div className="d-flex flex-lg-row flex-column ">
           <MultiDateInput
             separator="to"
             label={
@@ -37,40 +37,36 @@ export default function Index() {
             placeholderDateStart="21/12/2023"
             placeholderDateEnd="21/01/2024"
           />
-          <Button
-            className="ms-2"
-            size="sm"
-            onClick={() => filter()}
-            disabled={!query.date_start && !query.date_end}
-          >
-            Search
-          </Button>
-          <Button
-            className="mx-2"
-            size="sm"
-            onClick={() => reset()}
-            disabled={!query.date_start && !query.date_end}
-          >
-            Reset
-          </Button>
-          <Button
-            className="mx-2 d-flex align-items-center"
-            size="sm"
-            onClick={() => saveToImage()}
-            disabled={!query.date_start && !query.date_end}
-          >
-            Save to image
-            <LuImage size={16} className="ms-2" />
-          </Button>
+          <div className="d-flex align-items-end mt-3 mt-lg-0 ms-lg-2 ms-0">
+            <Button
+              className="ms-2"
+              size="sm"
+              onClick={() => filter()}
+              disabled={!query.date_start && !query.date_end}
+            >
+              Search
+            </Button>
+            <Button
+              className="mx-2"
+              size="sm"
+              onClick={() => reset()}
+              disabled={!query.date_start && !query.date_end}
+            >
+              Reset
+            </Button>
+            <Button
+              className="d-flex align-items-center"
+              size="sm"
+              onClick={() => saveToImage()}
+              disabled={!query.date_start && !query.date_end}
+            >
+              Save to image
+              <LuImage size={16} className="ms-2" />
+            </Button>
+          </div>
         </div>
       </div>
-      <div
-        className="mt-5"
-        style={{
-          backgroundColor: "#F5F6F9",
-        }}
-        id="chart-container"
-      >
+      <div className="mt-lg-5 mt-4" id="chart-container">
         <div className="row align-items-stretch">
           <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
             <CardWidget title={data?.data.leads.total} subtitle="Leads" />
@@ -86,7 +82,7 @@ export default function Index() {
             <Card>
               <Card.Body>
                 <div>
-                  <p className="text-center">Probability</p>
+                  <p className="text-center mb-2">Probability</p>
                   <PieChart
                     data={data?.data.probabilities.total}
                     labels={data?.data.probabilities.name}
@@ -100,7 +96,7 @@ export default function Index() {
             <Card>
               <Card.Body>
                 <div>
-                  <p className="text-center">Channel</p>
+                  <p className="text-center mb-2">Channel</p>
                   <PieChart
                     data={data?.data.channels.total}
                     labels={data?.data.channels.name}
@@ -114,7 +110,7 @@ export default function Index() {
             <Card>
               <Card.Body>
                 <div>
-                  <p className="text-center">Media</p>
+                  <p className="text-center mb-2">Media</p>
                   <PieChart
                     data={data?.data.medias.total}
                     labels={data?.data.medias.name}
@@ -128,7 +124,7 @@ export default function Index() {
             <Card>
               <Card.Body>
                 <div>
-                  <p className="text-center">Source</p>
+                  <p className="text-center mb-2">Source</p>
                   <PieChart
                     data={data?.data.sources.total}
                     labels={data?.data.sources.name}
