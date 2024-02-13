@@ -42,8 +42,8 @@ export default function Detail() {
         </div>
       </div>
       <div className="card bg-white p-3 mt-4">
-        <div className="d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-center">
-          <div className="d-flex flex-lg-row flex-column align-items-lg-center">
+        <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
+          <div className="d-flex flex-md-row flex-column align-items-md-center">
             <div className="d-flex align-items-center">
               <p className="fs-20 fw-medium text-primary mb-0">
                 #{data?.lead_number}
@@ -73,7 +73,7 @@ export default function Detail() {
           </p>
         </div>
         <div className="mt-4 row fs-14">
-          <div className="col-lg-6 col-12">
+          <div className="col-md-6 col-12">
             <div className="mb-3">
               <TextInfo title="Primary Contact" value={data?.fullname} />
             </div>
@@ -90,7 +90,7 @@ export default function Detail() {
               <TextInfo title="Is Coverage" value={data?.is_coverage ? 'Yes' : 'No'} />
             </div>
           </div>
-          <div className="col-lg-6 col-12">
+          <div className="col-md-6 col-12">
             <div className="mb-3">
               <TextInfo
                 title="Status"

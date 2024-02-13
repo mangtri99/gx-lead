@@ -8,6 +8,7 @@ import FormGeneral from "./_components/Form/FormGeneral";
 import { useContext, useState } from "react";
 import { LayoutContext } from "../../layouts/context/LayoutContext";
 import { SIDEBAR_WIDTH } from "../../config/general";
+import { useMedia } from "react-use";
 
 interface Props {
   isEdit: boolean;
@@ -15,6 +16,7 @@ interface Props {
 
 export default function Form(props: Props) {
   const { isEdit } = props;
+  const isMobile = useMedia('(max-width: 992px)');
   const params = useParams();
   const navigate = useNavigate();
   const [agreement, setAgreement] = useState(false)
@@ -43,7 +45,7 @@ export default function Form(props: Props) {
           bottom: "0px",
           left: "0px",
           right: "0px",
-          marginLeft: isShowSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
+          marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : "0px",
         }}
       >
         <div className="bg-white d-flex justify-content-between align-items-center shadow-sm py-3 px-4">

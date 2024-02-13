@@ -55,6 +55,7 @@ export default function FormGeneral(props: Props) {
                       }}
                       onBlur={field.onBlur}
                       placeholder="Select Branch"
+                      separator
                       message={
                         form.formState.errors.branch_id?.message as string
                       }

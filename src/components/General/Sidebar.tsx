@@ -3,7 +3,7 @@ import MenuLink from "./MenuLink";
 import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
 import Logo2 from "@/assets/images/logo2.svg";
 import { IoCubeOutline } from "react-icons/io5";
-import { SIDEBAR_WIDTH } from "../../config/general";
+import { SIDEBAR_WIDTH, VERSION_APP } from "../../config/general";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sidebar = forwardRef(function Sidebar(_props, ref) {
@@ -12,7 +12,7 @@ const Sidebar = forwardRef(function Sidebar(_props, ref) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       ref={ref}
-      className="bg-white d-flex flex-column h-100 p-3"
+      className="bg-white d-flex flex-column h-100 p-3 "
       style={{
         width: `${SIDEBAR_WIDTH}px`
       }}
@@ -45,6 +45,9 @@ const Sidebar = forwardRef(function Sidebar(_props, ref) {
             />
           </li>
         </ul>
+      </div>
+      <div className="text-center">
+        <p className="text-secondary fs-12 fw-medium">Version {VERSION_APP}</p>
       </div>
     </div>
   );
