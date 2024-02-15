@@ -10,8 +10,10 @@ interface Props extends React.HTMLProps<HTMLSelectElement> {
   onChange: (e: any) => void;
   options: SelectOptions[];
   labelInput?: string | React.ReactNode;
+  width?: string;
   message?: string;
   separator?: boolean;
+  className?: string;
 }
 
 const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
@@ -24,6 +26,8 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
     id,
     message,
     separator,
+    className,
+    width,
     ...rest
   } = props;
 
@@ -39,7 +43,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
         ref={ref}
         className={clsx("fs-14", {
           "is-invalid": message,
-        })}
+        }, className)}
         options={options}
         value={
           value && options
@@ -60,6 +64,10 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
         placeholder={placeholder}
         isClearable={true}
         styles={{
+          container: (base) => ({
+            ...base,
+            width: width ? width : "100%",
+          }),
           control: (base) => ({
             ...base,
             "&:hover": {

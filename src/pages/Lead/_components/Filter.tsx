@@ -1,13 +1,14 @@
 import Button from "../../../components/Button/Button";
 import TextInput from "../../../components/Input/TextInput";
 import SelectInput from "../../../components/Input/SelectInput";
-import useLeadOptionFilter from "../_hooks/useLeadOptionFilter";
 import { FiSearch } from "react-icons/fi";
 import { LuFilter, LuTrash2 } from "react-icons/lu";
 
 import DatePickerInput from "../../../components/Input/DatePickerInput";
 import Dialog from "../../../components/General/Dialog";
 import Modal from "bootstrap/js/dist/modal";
+import { useContext } from "react";
+import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
 
 interface Props {
   query: {
@@ -29,8 +30,7 @@ interface Props {
 }
 
 export default function Filter(props: Props) {
-  const { branch, channels, media, probabilities, sources, statuses, types } =
-    useLeadOptionFilter();
+  const { branch, channels, media, probabilities, sources, statuses, types } = useContext(LeadOptionContext);
   const { query, setQuery, filter, resetFilter } = props;
   const openAdvanceFilter = () => {
     const formModal = new Modal("#modalFilterAdvance");

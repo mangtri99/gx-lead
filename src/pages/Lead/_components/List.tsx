@@ -10,18 +10,28 @@ import Dialog from "../../../components/General/Dialog";
 import Button from "../../../components/Button/Button";
 import { APIResponsePagination, Lead } from "../../../config/types";
 import Modal from "bootstrap/js/dist/modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ButtonActionIcon from "../../../components/Button/ButtonActionIcon";
+import { FiEdit } from "react-icons/fi";
+import SelectInput from "../../../components/Input/SelectInput";
+import useLeadFormState from "../_hooks/useLeadFormState";
+import { Controller } from "react-hook-form";
+import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
 
 interface Props {
   data: APIResponsePagination<Lead[]> | undefined;
   handleDelete: (val: string) => void;
   handlePagination: (val: string) => void;
   loading: boolean;
+  fetchLeads: () => Promise<void>;
 }
 
 export default function List(props: Props) {
-  const { data, handleDelete, handlePagination, loading } = props;
+  const { data, handleDelete, handlePagination, loading, fetchLeads } = props;
+  const { probabilities, statuses } = useContext(LeadOptionContext);
+  const { onSubmit, form } = useLeadFormState({
+    isEdit: true,
+  });
   const [item, setItem] = useState<Lead>();
   const probabilityColor = (probability: string) => {
     if (probability === "Pending") {
@@ -52,8 +62,37 @@ export default function List(props: Props) {
     // perform delete
     handleDelete(item?.id ? String(item.id) : "");
     // close modal after delete
-    const btnCloseModal = document.getElementById('btn-close-confirm-delete') as HTMLButtonElement
-    btnCloseModal.click()
+    const btnCloseModal = document.getElementById(
+      "btn-close-confirm-delete"
+    ) as HTMLButtonElement;
+    btnCloseModal.click();
+  };
+
+  const onDropdownChange = (data: Lead) => {
+    form.reset({
+      address: data.address,
+      branch_id: data.branch.id,
+      channel_id: data.channel.id,
+      email: data.email,
+      fullname: data.fullname,
+      id: data.id,
+      company_name: data.company_name,
+      is_coverage: String(data.is_coverage),
+      latitude: data.latitude,
+      longitude: data.longitude,
+      media_id: data.media_id,
+      notes: data.notes,
+      phone_number: data.phone_number,
+      probability_id: data.probability.id,
+      source_id: data.source_id,
+      status_id: data.status_id,
+      type_id: data.type_id,
+    });
+  };
+
+  const onUpdate = () => {
+    form.handleSubmit(onSubmit);
+    fetchLeads();
   }
 
   if (loading) {
@@ -129,18 +168,120 @@ export default function List(props: Props) {
                     <Table.Item>
                       <div className="mb-2">
                         <p className="mb-0 text-secondary">Probability:</p>
-                        <Badge color={probabilityColor(lead.probability.name)}>
-                          {lead.probability.name}
-                        </Badge>
+                        <div className="d-flex align-items-center">
+                          <Badge
+                            color={probabilityColor(lead.probability.name)}
+                          >
+                            {lead.probability.name}
+                          </Badge>
+                          <div className="dropdown">
+                            <ButtonActionIcon
+                              className="d-flex align-items-center p-2 rounded-circle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              data-bs-auto-close="outside"
+                              onClick={() => onDropdownChange(lead)}
+                            >
+                              <FiEdit size={14} />
+                            </ButtonActionIcon>
+                            <ul className="dropdown-menu p-2">
+                              <Controller
+                                control={form.control}
+                                name="probability_id"
+                                render={({ field }) => (
+                                  <SelectInput
+                                    id="probability"
+                                    ref={field.ref}
+                                    options={probabilities || []}
+                                    labelInput="Probability"
+                                    value={
+                                      field.value ? String(field.value) : ""
+                                    }
+                                    onChange={(e) => {
+                                      field.onChange(Number(e.value));
+                                    }}
+                                    onBlur={field.onBlur}
+                                    placeholder="Select Probability"
+                                    separator
+                                    width="200px"
+                                    message={
+                                      form.formState.errors.status_id
+                                        ?.message as string
+                                    }
+                                  />
+                                )}
+                              />
+                              <div className="mt-2 d-flex justify-content-end">
+                                <Button
+                                  className="fs-12"
+                                  size="sm"
+                                  onClick={form.handleSubmit(onSubmit)}
+                                >
+                                  Update
+                                </Button>
+                              </div>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                       <div className="mb-2">
                         <p className="mb-0 text-secondary">Status:</p>
-                        <Badge color="warning">{lead.status.name}</Badge>
+                        <div className="d-flex align-items-center">
+                          <Badge color="warning">{lead.status.name}</Badge>
+                          <div className="dropdown">
+                            <ButtonActionIcon
+                              className="d-flex align-items-center p-2 rounded-circle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              data-bs-auto-close="outside"
+                              onClick={() => onDropdownChange(lead)}
+                            >
+                              <FiEdit size={14} />
+                            </ButtonActionIcon>
+                            <ul className="dropdown-menu p-2">
+                              <Controller
+                                control={form.control}
+                                name="status_id"
+                                render={({ field }) => (
+                                  <SelectInput
+                                    id="status"
+                                    ref={field.ref}
+                                    options={statuses || []}
+                                    labelInput="Status"
+                                    value={
+                                      field.value ? String(field.value) : ""
+                                    }
+                                    onChange={(e) => {
+                                      field.onChange(Number(e.value));
+                                    }}
+                                    onBlur={field.onBlur}
+                                    placeholder="Select Status"
+                                    separator
+                                    width="200px"
+                                    message={
+                                      form.formState.errors.status_id
+                                        ?.message as string
+                                    }
+                                  />
+                                )}
+                              />
+                              <div className="mt-2 d-flex justify-content-end">
+                                <Button
+                                  className="fs-12"
+                                  size="sm"
+                                  onClick={() => onUpdate()}
+                                >
+                                  Update
+                                </Button>
+                              </div>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                       <div className="mb-2">
                         <p className="mb-0 text-secondary">Notes:</p>
                         <p className="mb-0 text-black fw-medium">
-                          {lead.notes}
+                          {lead.notes || "-"}
                         </p>
                       </div>
                     </Table.Item>
@@ -250,7 +391,8 @@ export default function List(props: Props) {
       <Dialog id="modalConfirmDeleteLead" title="Confirm Delete">
         <div>
           <p className="text-black fs-14">
-            Are you sure to delete lead <span className="fw-bold">#{item?.lead_number}</span>?
+            Are you sure to delete lead{" "}
+            <span className="fw-bold">#{item?.lead_number}</span>?
           </p>
           <div className="d-flex align-items-center justify-content-end mt-4">
             <Button

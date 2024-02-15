@@ -114,5 +114,6 @@ export default function useLeadListState() {
     handlePagination,
     deleteLead,
     resetFilter,
+    fetchLeads,
   };
 }
