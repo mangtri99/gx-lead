@@ -58,7 +58,7 @@ export default function FormOther(props: Props) {
       handleOpen={(val) => setOpenOtherForm(val)}
     >
       <div className="row">
-        <div className="col-12 col-lg-8 fw-semibold fs-14">
+        <div className="col-12 col-lg-7 fw-semibold fs-14">
           {/* Status */}
           <div className="row mb-3">
             <div className="col-sm-4 col-12 text-neutral-700">
@@ -283,7 +283,7 @@ export default function FormOther(props: Props) {
               </div>
             </div>
         </div>
-        <div className="col-12 col-lg-4"></div>
+        <div className="col-12 col-lg-5"></div>
       </div>
     </Accordion>
   </div>

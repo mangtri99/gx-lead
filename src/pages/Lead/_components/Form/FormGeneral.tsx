@@ -9,6 +9,7 @@ import TextInput from "../../../../components/Input/TextInput";
 import TextAreaInput from "../../../../components/Input/TextAreaInput";
 import RadioInput from "../../../../components/Input/RadioInput";
 import { SelectOptions } from "../../../../config/types";
+import GoogleMaps from "../../../../components/General/GoogleMaps";
 
 interface Props {
   form: UseFormReturn<any>;
@@ -18,6 +19,16 @@ interface Props {
 export default function FormGeneral(props: Props) {
   const { form, options } = props;
   const [openGeneralForm, setOpenGeneralForm] = useState(true);
+
+  const onClickMap = (e: google.maps.MapMouseEvent) => {
+    form.setValue("latitude", e.latLng?.lat().toString());
+    form.setValue("longitude", e.latLng?.lng().toString());
+  }
+  const onMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
+    form.setValue("latitude", e.latLng?.lat().toString());
+    form.setValue("longitude", e.latLng?.lng().toString());
+  }
+
   return (
     <div className="mb-4">
       {/* General */}
@@ -31,8 +42,8 @@ export default function FormGeneral(props: Props) {
         value={openGeneralForm}
         handleOpen={(val) => setOpenGeneralForm(val)}
       >
-        <div className="row">
-          <div className="col-12 col-lg-8 fw-semibold fs-14">
+        <div className="row g-2 justify-content-between">
+          <div className="col-12 col-lg-7 fw-semibold fs-14">
             {/* Branch */}
             <div className="row mb-3">
               <div className="col-sm-4 col-12 text-neutral-700">
@@ -170,7 +181,7 @@ export default function FormGeneral(props: Props) {
                 </p>
               </div>
               <div className="col-sm-7 col-12">
-                <div className="row">
+                <div className="row g-2">
                   <div className="col-6">
                     <TextInput
                       {...form.register("latitude")}
@@ -223,7 +234,9 @@ export default function FormGeneral(props: Props) {
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-4"></div>
+          <div className="col-12 col-lg-5 d-flex justify-content-end">
+            <GoogleMaps onMarkerDragEnd={onMarkerDragEnd} onClickMap={onClickMap}/>
+          </div>
         </div>
       </Accordion>
     </div>
