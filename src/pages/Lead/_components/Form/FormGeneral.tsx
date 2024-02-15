@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Accordion from "../../../../components/General/Accordion";
 import { LuHome } from "react-icons/lu";
 import Required from "../../../../components/General/Required";
@@ -10,6 +10,7 @@ import TextAreaInput from "../../../../components/Input/TextAreaInput";
 import RadioInput from "../../../../components/Input/RadioInput";
 import { SelectOptions } from "../../../../config/types";
 import GoogleMaps from "../../../../components/General/GoogleMaps";
+import { INITIAL_CENTER_MAP } from "../../../../config/general";
 
 interface Props {
   form: UseFormReturn<any>;
@@ -19,16 +20,27 @@ interface Props {
 export default function FormGeneral(props: Props) {
   const { form, options } = props;
   const [openGeneralForm, setOpenGeneralForm] = useState(true);
-
-  const onClickMap = (e: google.maps.MapMouseEvent) => {
+  const [currentPosition, setCurrentPosition] = useState(INITIAL_CENTER_MAP);
+  const onChangePositionMarker = (e: google.maps.MapMouseEvent) => {
     form.setValue("latitude", e.latLng?.lat().toString());
     form.setValue("longitude", e.latLng?.lng().toString());
-  }
-  const onMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
-    form.setValue("latitude", e.latLng?.lat().toString());
-    form.setValue("longitude", e.latLng?.lng().toString());
-  }
+    form.trigger("latitude");
+    form.trigger("longitude");
+  };
 
+  // set current position on first load
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setCurrentPosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, []);
   return (
     <div className="mb-4">
       {/* General */}
@@ -109,7 +121,9 @@ export default function FormGeneral(props: Props) {
                   id="company_name"
                   type="text"
                   placeholder="e.g. Global Xtreme"
-                  message={form.formState.errors.company_name?.message as string}
+                  message={
+                    form.formState.errors.company_name?.message as string
+                  }
                 />
               </div>
             </div>
@@ -227,7 +241,6 @@ export default function FormGeneral(props: Props) {
                         label={coverage.label}
                         defaultChecked={Number(coverage.value) === 1}
                       />
-                      
                     </div>
                   ))}
                 </div>
@@ -235,7 +248,18 @@ export default function FormGeneral(props: Props) {
             </div>
           </div>
           <div className="col-12 col-lg-5 d-flex justify-content-end">
-            <GoogleMaps onMarkerDragEnd={onMarkerDragEnd} onClickMap={onClickMap}/>
+            <GoogleMaps
+              onMarkerDragEnd={onChangePositionMarker}
+              onClickMap={onChangePositionMarker}
+              markers={
+                form.getValues("latitude") && form.getValues("longitude")
+                  ? {
+                      lat: Number(form.getValues("latitude")),
+                      lng: Number(form.getValues("longitude")),
+                    }
+                  : currentPosition
+              }
+            />
           </div>
         </div>
       </Accordion>
