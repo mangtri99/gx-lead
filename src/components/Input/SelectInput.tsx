@@ -46,8 +46,19 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
             ? options.find((option) => option.value === value)
             : ""
         }
-        onChange={(e) => onChange(e)}
+        onChange={(e) => {
+          let val = e;
+          if(!e){
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            val = {
+              value: "", // used to reset the value
+            }
+          }
+          onChange(val);
+        }}
         placeholder={placeholder}
+        isClearable={true}
         styles={{
           control: (base) => ({
             ...base,

@@ -6,6 +6,7 @@ import Index from "./pages/Lead/Index";
 import Detail from "./pages/Lead/Detail";
 import Setting from "./pages/Setting/Index";
 import Form from "./pages/Lead/Form";
+import { default as NotFound } from "./pages/404/Index";
 
 export const router = createBrowserRouter(
   [
@@ -42,6 +43,11 @@ export const router = createBrowserRouter(
           element: <Setting />,
         },
       ],
+    },
+    // not found
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ],
 );
