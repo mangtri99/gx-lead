@@ -14,6 +14,7 @@ interface Props extends React.HTMLProps<HTMLSelectElement> {
   message?: string;
   separator?: boolean;
   className?: string;
+  isClearable?: boolean;
 }
 
 const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
@@ -28,6 +29,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
     separator,
     className,
     width,
+    isClearable = true,
     ...rest
   } = props;
 
@@ -62,7 +64,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
           onChange(val);
         }}
         placeholder={placeholder}
-        isClearable={true}
+        isClearable={isClearable}
         styles={{
           container: (base) => ({
             ...base,

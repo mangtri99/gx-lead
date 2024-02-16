@@ -90,8 +90,8 @@ export default function List(props: Props) {
     });
   };
 
-  const onUpdate = () => {
-    form.handleSubmit(onSubmit);
+  const onUpdate = async () => {
+    await onSubmit(form.getValues());
     fetchLeads();
   }
 
@@ -208,6 +208,7 @@ export default function List(props: Props) {
                                       form.formState.errors.status_id
                                         ?.message as string
                                     }
+                                    isClearable={false}
                                   />
                                 )}
                               />
@@ -215,7 +216,7 @@ export default function List(props: Props) {
                                 <Button
                                   className="fs-12"
                                   size="sm"
-                                  onClick={form.handleSubmit(onSubmit)}
+                                  onClick={() => onUpdate()}
                                 >
                                   Update
                                 </Button>
@@ -262,6 +263,7 @@ export default function List(props: Props) {
                                       form.formState.errors.status_id
                                         ?.message as string
                                     }
+                                    isClearable={false}
                                   />
                                 )}
                               />
