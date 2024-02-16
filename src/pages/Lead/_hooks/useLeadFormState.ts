@@ -7,7 +7,7 @@ import {
   useEffect, 
  } from 'react';
 import useFetch from '../../../composables/useFetch';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { LEADS_URL } from '../../../config/api';
 
@@ -20,6 +20,7 @@ export default function useLeadFormState(props: Props) {
   const { isEdit } = props;
   const navigate = useNavigate()
   const params = useParams<{ id: string }>();
+  const location = useLocation();
 
   const coverages = [
     {
@@ -75,7 +76,8 @@ export default function useLeadFormState(props: Props) {
         }
       })
       toast.success('Leads has been saved.')
-      if(params.id){
+      // if page is edit or create leads, redirect to leads page
+      if(params.id || location.pathname.includes('create')){
         navigate('/leads')
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -108,8 +110,6 @@ export default function useLeadFormState(props: Props) {
     form,
     onSubmit,
     onInvalid,
-    options: {
-      coverages
-    }
+    coverages
   }
 }

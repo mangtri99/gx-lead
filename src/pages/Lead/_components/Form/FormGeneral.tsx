@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Accordion from "../../../../components/General/Accordion";
 import { LuHome } from "react-icons/lu";
 import Required from "../../../../components/General/Required";
@@ -11,14 +11,15 @@ import RadioInput from "../../../../components/Input/RadioInput";
 import { SelectOptions } from "../../../../config/types";
 import GoogleMaps from "../../../../components/General/GoogleMaps";
 import { INITIAL_CENTER_MAP } from "../../../../config/general";
+import { LeadOptionContext } from "../../_hooks/context/LeadOptionContext";
 
 interface Props {
   form: UseFormReturn<any>;
-  options: any;
+  coverages: SelectOptions[];
 }
 
 export default function FormGeneral(props: Props) {
-  const { form, options } = props;
+  const { form, coverages } = props;
   const [openGeneralForm, setOpenGeneralForm] = useState(true);
   const [currentPosition, setCurrentPosition] = useState(INITIAL_CENTER_MAP);
   const onChangePositionMarker = (e: google.maps.MapMouseEvent) => {
@@ -41,6 +42,9 @@ export default function FormGeneral(props: Props) {
       console.log("Geolocation is not supported by this browser.");
     }
   }, []);
+
+  const { branch } = useContext(LeadOptionContext)
+
   return (
     <div className="mb-4">
       {/* General */}
@@ -71,7 +75,7 @@ export default function FormGeneral(props: Props) {
                     <SelectInput
                       id="branch"
                       ref={field.ref}
-                      options={options.branches || []}
+                      options={branch || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
                         field.onChange(Number(e.value));
@@ -232,7 +236,7 @@ export default function FormGeneral(props: Props) {
               </div>
               <div className="col-sm-7 col-12">
                 <div className="row">
-                  {options.coverages?.map((coverage: SelectOptions) => (
+                  {coverages?.map((coverage: SelectOptions) => (
                     <div className="col-auto" key={coverage.value}>
                       <RadioInput
                         {...form.register("is_coverage")}
