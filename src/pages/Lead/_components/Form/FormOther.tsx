@@ -297,8 +297,6 @@ export default function FormOther(props: Props) {
               <></>
             )}
 
-            <p>{JSON.stringify(form.getValues())}</p>
-
             {/* Notes */}
             <div className="row mb-3">
               <div className="col-sm-4 col-12 text-neutral-700">
