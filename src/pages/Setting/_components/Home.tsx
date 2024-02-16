@@ -220,11 +220,12 @@ export default function Home() {
                     value={field.value ? String(field.value) : ""}
                     onChange={(e) =>
                       field.onChange(
-                        e.value === "" ? undefined : Number(e.value)
+                        e.value === "" ? null : Number(e.value)
                       )
                     }
                     onBlur={field.onBlur}
                     placeholder="Select Channel"
+                    message={form.formState.errors.channel_id?.message as string}
                   />
                 )}
               />
@@ -245,11 +246,12 @@ export default function Home() {
                     value={field.value ? String(field.value) : ""}
                     onChange={(e) => {
                       field.onChange(
-                        e.value === "" ? undefined : Number(e.value)
+                        e.value === "" ? null : Number(e.value)
                       );
                     }}
                     onBlur={field.onBlur}
                     placeholder="Select Media"
+                    message={form.formState.errors.media_id?.message as string}
                   />
                 )}
               />
