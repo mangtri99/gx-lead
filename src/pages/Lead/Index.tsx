@@ -22,6 +22,7 @@ export default function Index() {
   } = useLeadListState();
 
   const {
+    branch,
     types,
     channels,
     media,
@@ -32,7 +33,7 @@ export default function Index() {
   } = useLeadOptionFilter();
 
   return (
-    <LeadOptionContext.Provider value={{ types, channels, media, sources, probabilities, statuses, fetchOptions }}>
+    <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, fetchOptions }}>
       <Card className="p-3">
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="fs-20">Leads Manage</h1>
