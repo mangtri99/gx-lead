@@ -3,9 +3,9 @@ import CardWidget from "../../components/Card/CardWidget";
 import useChartState from "./_hooks/useChartState";
 import PieChart from "../../components/Chart/PieChart";
 import { LuImage } from "react-icons/lu";
-import MultiDateInput from "../../components/Input/MultiDateInput";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
+import DateGroupInput from '../../components/Input/DateGroupInput';
 
 ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
@@ -15,26 +15,26 @@ export default function Index() {
     <div>
       <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-end">
         <h1 className="fw-bold fs-20 mb-lg-0 mb-3">Lead Summary</h1>
-        <div className="d-flex flex-lg-row flex-column ">
-          <MultiDateInput
+        <div className="d-flex flex-lg-row flex-column flex-wrap">
+          <DateGroupInput
             separator="to"
             label={
               <>
                 Date Range (<span className="text-warning">Max 3 Month</span>)
               </>
             }
-            dateValueStart={query.date_start}
-            dateValueEnd={query.date_end}
+            dateValueStart={query.date_start ? new Date(query.date_start) : undefined}
+            dateValueEnd={query.date_end ? new Date(query.date_end) : undefined}
             onChangeDateStart={(e) =>
               setQuery({
                 ...query,
-                date_start: e.target.value,
+                date_start: e ? e.toISOString() : "",
               })
             }
             onChangeDateEnd={(e) =>
               setQuery({
                 ...query,
-                date_end: e.target.value,
+                date_end: e ? e.toISOString() : "",
               })
             }
             placeholderDateStart="21/12/2023"
@@ -42,7 +42,6 @@ export default function Index() {
           />
           <div className="d-flex align-items-end mt-3 mt-lg-0 ms-lg-2 ms-0">
             <Button
-              className="ms-2"
               size="sm"
               onClick={() => filter()}
               disabled={!query.date_start && !query.date_end}
