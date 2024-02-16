@@ -11,6 +11,7 @@ import { SIDEBAR_WIDTH } from "../../config/general";
 import { useMedia } from "react-use";
 import { LeadOptionContext } from "./_hooks/context/LeadOptionContext";
 import useLeadOptionFilter from "./_hooks/useLeadOptionFilter";
+import { Helmet } from "react-helmet-async";
 
 interface Props {
   isEdit: boolean;
@@ -38,6 +39,10 @@ export default function Form(props: Props) {
 
   return (
     <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, fetchOptions }}>
+      <Helmet>
+        <title>{params.id ? 'Edit Lead' : 'Create Lead'}</title>
+        <meta name="description" content="Lead form" />
+      </Helmet>
       <div className="position-relative h-100">
         <form
           className="d-block mb-5"

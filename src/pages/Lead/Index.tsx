@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 import useLeadListState from "./_hooks/useLeadListState";
 import { LeadOptionContext } from "./_hooks/context/LeadOptionContext";
 import useLeadOptionFilter from "./_hooks/useLeadOptionFilter";
+import { Helmet } from "react-helmet-async";
 
 export default function Index() {
   const {
@@ -34,6 +35,10 @@ export default function Index() {
 
   return (
     <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, fetchOptions }}>
+      <Helmet>
+        <title>List of Lead</title>
+        <meta name="description" content="List of Lead" />
+      </Helmet>
       <Card className="p-3">
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="fs-20">Leads Manage</h1>

@@ -6,6 +6,7 @@ import { LuImage } from "react-icons/lu";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
 import DateGroupInput from '../../components/Input/DateGroupInput';
+import { Helmet } from 'react-helmet-async';
 
 ChartJS.register(Colors,ArcElement, Tooltip, Legend );
 
@@ -13,6 +14,10 @@ export default function Index() {
   const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
   return (
     <div>
+      <Helmet>
+        <title>Lead Summary</title>
+        <meta name="description" content="Lead Summary" />
+      </Helmet>
       <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-end">
         <h1 className="fw-bold fs-20 mb-lg-0 mb-3">Lead Summary</h1>
         <div className="d-flex flex-lg-row flex-column flex-wrap">

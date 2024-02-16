@@ -10,6 +10,7 @@ import { useAuth } from "../../composables/useAuth";
 import ButtonActionIcon from "../../components/Button/ButtonActionIcon";
 import CheckboxInput from "../../components/Input/CheckboxInput";
 import Button from "../../components/Button/Button";
+import { Helmet } from "react-helmet-async";
 
 export default function Index() {
   const [tooglePassword, setTooglePassword] = useState(false);
@@ -43,6 +44,10 @@ export default function Index() {
 
   return (
     <div className="bg-white p-4 h-screen overflow-hidden">
+      <Helmet>
+        <title>Login</title>
+        <meta name="description" content="Login page" />
+      </Helmet>
       <div className="row h-100">
         <div className="col-lg-5 col-12 d-flex flex-column justify-content-center align-items-center h-100 position-relative">
           {/* Form */}

@@ -10,6 +10,7 @@ import TextInfo from "./_components/TextInfo";
 import NotFound from "../../components/General/NotFound";
 import Loading from "../../components/General/Loading";
 import Button from "../../components/Button/Button";
+import { Helmet } from "react-helmet-async";
 
 export default function Detail() {
   const { data, loading } = useLeadDetailState();
@@ -25,6 +26,10 @@ export default function Detail() {
 
   return (
     <div>
+      <Helmet>
+        <title>Lead Detail - {data.lead_number}</title>
+        <meta name="description" content="Info Lead" />
+      </Helmet>
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="fs-20 fw-medium mb-0">Lead Detail</h1>
         <div className="d-flex align-items-center">
