@@ -10,7 +10,7 @@ import Dialog from "../../../components/General/Dialog";
 import Button from "../../../components/Button/Button";
 import { APIResponsePagination, Lead } from "../../../config/types";
 import Modal from "bootstrap/js/dist/modal";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import ButtonActionIcon from "../../../components/Button/ButtonActionIcon";
 import { FiEdit } from "react-icons/fi";
 import SelectInput from "../../../components/Input/SelectInput";
@@ -29,9 +29,6 @@ interface Props {
 export default function List(props: Props) {
   const { data, handleDelete, handlePagination, loading, fetchLeads } = props;
   const { probabilities, statuses } = useContext(LeadOptionContext);
-  useEffect(() => {
-    console.log("probabilities 1", probabilities);
-  }, [probabilities])
   const { onSubmit, form } = useLeadFormState({
     isEdit: true,
   });

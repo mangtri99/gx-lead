@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   GoogleMap,
   Libraries,
@@ -45,10 +45,6 @@ export default function GoogleMaps(props: Props) {
   const onUnmount = useCallback(function callback() {
     setMap(undefined);
   }, []);
-
-  useEffect(() => {
-    console.log('markers', markers) 
-  }, [markers])
 
   return isLoaded ? (
     <div className="w-100 position-relative">

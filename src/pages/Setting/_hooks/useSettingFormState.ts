@@ -135,7 +135,6 @@ export default function useSettingFormState() {
 
   // show modal form to edit
   const handleEdit = (item: z.infer<typeof LeadSettingSchema>) => {
-    console.log('item:', item)
     setIsEdit(true);
     form.reset(item);
     const formModal = new Modal('#modal') 
@@ -144,7 +143,6 @@ export default function useSettingFormState() {
 
   // show modal form to add
   const handleAdd = () => {
-    console.log('tab:', tab)
     // if tab is source or media, reset the form with default values and set the media_id or channel_id to null
     if(tab == SOURCE_URL){
       form.reset({...defaultValues, media_id: null});

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { APIResponse, Option, OptionMedia, OptionSource, SelectOptions } from "../../../config/types";
 import useFetch from "../../../composables/useFetch";
 import { BRANCH_URL, CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from "../../../config/api";
@@ -122,10 +122,6 @@ export default function useLeadOptionFilter() {
     fetchOptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    console.log("probabilities", probabilities);
-  }, [probabilities]);
 
   return {
     branch,
