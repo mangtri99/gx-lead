@@ -3,10 +3,8 @@ import { z } from "zod";
 export const LeadSchema = z.object({
   id: z.number().nullish(),
   branch_id: z
-    .number({
-      required_error: "Branch is required",
-    })
-    .nullable()
+    .number()
+    .nullish()
     .refine((val) => val !== null, { message: "Branch is required" }),
   fullname: z.string().refine((val) => val !== "", {
     message: "Fullname is required",
@@ -31,30 +29,26 @@ export const LeadSchema = z.object({
   }),
   is_coverage: z.string(),
   status_id: z
-    .number({
-      required_error: "Status is required",
-    })
+    .number()
     .nullable()
     .refine((val) => val !== null, { message: "Status is required" }),
   probability_id: z
-    .number({
-      required_error: "Probability is required",
-    })
+    .number()
     .nullable()
     .refine((val) => val !== null, { message: "Probability is required" }),
   type_id: z
-    .number({
-      required_error: "Type is required",
-    })
+    .number()
     .nullable()
     .refine((val) => val !== null, { message: "Type is required" }),
   channel_id: z
-    .number({
-      required_error: "Channel is required",
-    })
+    .number()
     .nullable()
     .refine((val) => val !== null, { message: "Channel is required" }),
-  media_id: z.number().nullable(),
-  source_id: z.number().nullable(),
+  media_id: z.number().nullish().optional().refine(val => val !== null, {
+    message: "Media is required",
+  }),
+  source_id: z.number().nullish().optional().refine(val => val !== null, {
+    message: "Source is required",
+  }),
   notes: z.string().nullish(),
 });

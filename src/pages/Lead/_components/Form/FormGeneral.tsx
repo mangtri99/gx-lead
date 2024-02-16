@@ -78,7 +78,7 @@ export default function FormGeneral(props: Props) {
                       options={branch || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
-                        field.onChange(Number(e.value));
+                        field.onChange(e.value ? Number(e.value) : null);
                       }}
                       onBlur={field.onBlur}
                       placeholder="Select Branch"

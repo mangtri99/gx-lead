@@ -57,7 +57,22 @@ export default function useLeadFormState(props: Props) {
   const form = useForm<z.infer<typeof LeadSchema>>({
     resolver: zodResolver(LeadSchema),
     defaultValues: {
-      
+      address: '',
+      branch_id: null,
+      channel_id: null,
+      company_name: '',
+      email: '',
+      fullname: '',
+      is_coverage: '1',
+      latitude: '',
+      longitude: '',
+      probability_id: null,
+      phone_number: '',
+      status_id: null,
+      type_id: null,
+      media_id: undefined,
+      source_id: undefined,
+      notes: undefined
     },
   });
 

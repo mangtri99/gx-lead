@@ -18,28 +18,49 @@ export default function FormOther(props: Props) {
   const { channels, media, probabilities, sources, statuses, types } =
     useContext(LeadOptionContext);
 
-  function onChannelChange(val: number) {
+  function onChannelChange(val: number | null) {
     const getCurrentMedia = media?.find(
       (item) => item.value === form.getValues("media_id")
     );
     const isOnSameChannel = getCurrentMedia?.channel_id === val;
-    if (form.getValues("media_id") && !isOnSameChannel) {
+    const hasChannelMedia =
+      media?.filter((item) => item.channel_id === val) || [];
+    console.log("hasChannelMedia", hasChannelMedia);
+
+    if (
+      (form.getValues("media_id") && !isOnSameChannel) || // if media_id set and not on same channel
+      (!form.getValues("media_id") && hasChannelMedia?.length > 0) // if media_id not set and has media on channel
+    ) {
+      // set null
       form.setValue("media_id", null);
     }
-
+    // if dont have media on channel, set undefined
+    if (hasChannelMedia?.length === 0 || val === null) {
+      form.setValue("media_id", undefined);
+    }
     // also reset source if not on same channel and media
     if (form.getValues("source_id")) {
       onMediaChange(form.getValues("media_id"));
     }
   }
 
-  function onMediaChange(val: number) {
+  function onMediaChange(val: number | null) {
     const getCurrentSource = sources?.find(
       (item) => item.value === form.getValues("source_id")
     );
     const isOnSameMedia = getCurrentSource?.media_id === val;
-    if (form.getValues("source_id") && !isOnSameMedia) {
+    const hasMediaSource =
+      sources?.filter((item) => item.media_id === val) || [];
+
+    if (
+      (form.getValues("source_id") && !isOnSameMedia) || // if source_id set and not on same media
+      (!form.getValues("source_id") && hasMediaSource?.length > 0) // if source_id not set and has source on media
+    ) {
+      // set null
       form.setValue("source_id", null);
+    }
+    if (hasMediaSource?.length === 0 || val === null) {
+      form.setValue("source_id", undefined);
     }
   }
   return (
@@ -74,7 +95,7 @@ export default function FormOther(props: Props) {
                       options={statuses || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
-                        field.onChange(Number(e.value));
+                        field.onChange(e.value ? Number(e.value) : null);
                       }}
                       onBlur={field.onBlur}
                       placeholder="Select..."
@@ -105,7 +126,7 @@ export default function FormOther(props: Props) {
                       options={probabilities || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
-                        field.onChange(Number(e.value));
+                        field.onChange(e.value ? Number(e.value) : null);
                       }}
                       onBlur={field.onBlur}
                       placeholder="Select..."
@@ -136,7 +157,7 @@ export default function FormOther(props: Props) {
                       options={types || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
-                        field.onChange(Number(e.value));
+                        field.onChange(e.value ? Number(e.value) : null);
                       }}
                       onBlur={field.onBlur}
                       placeholder="Select..."
@@ -165,8 +186,8 @@ export default function FormOther(props: Props) {
                       options={channels || []}
                       value={field.value ? String(field.value) : ""}
                       onChange={(e) => {
-                        field.onChange(Number(e.value));
-                        onChannelChange(Number(e.value));
+                        field.onChange(e.value ? Number(e.value) : null);
+                        onChannelChange(e.value ? Number(e.value) : null);
                         form.trigger("channel_id");
                       }}
                       onBlur={field.onBlur}
@@ -182,95 +203,101 @@ export default function FormOther(props: Props) {
             </div>
 
             {form.getValues("channel_id") &&
-              media &&
-              media.filter(
-                (item) => item.channel_id === form.getValues("channel_id")
-              ).length > 0 && (
-                <div className="row mb-3">
-                  <div className="col-sm-4 col-12 text-neutral-700">
-                    <p>
-                      Lead Media <Required />{" "}
-                    </p>
-                  </div>
-                  <div className="col-sm-8 col-12">
-                    <Controller
-                      control={form.control}
-                      name="media_id"
-                      render={({ field }) => (
-                        <SelectInput
-                          id="media"
-                          ref={field.ref}
-                          options={
-                            media && form.getValues("channel_id")
-                              ? media?.filter(
-                                  (item) =>
-                                    item.channel_id ===
-                                    form.getValues("channel_id")
-                                )
-                              : []
-                          }
-                          value={field.value ? String(field.value) : ""}
-                          onChange={(e) => {
-                            field.onChange(Number(e.value));
-                            onMediaChange(Number(e.value));
-                            form.trigger("media_id");
-                          }}
-                          onBlur={field.onBlur}
-                          placeholder="Select..."
-                          message={
-                            form.formState.errors.media_id?.message as string
-                          }
-                          separator
-                        />
-                      )}
-                    />
-                  </div>
+            media &&
+            media.filter(
+              (item) => item.channel_id === form.getValues("channel_id")
+            ).length > 0 ? (
+              <div className="row mb-3">
+                <div className="col-sm-4 col-12 text-neutral-700">
+                  <p>
+                    Lead Media <Required />{" "}
+                  </p>
                 </div>
-              )}
+                <div className="col-sm-8 col-12">
+                  <Controller
+                    control={form.control}
+                    name="media_id"
+                    render={({ field }) => (
+                      <SelectInput
+                        id="media"
+                        ref={field.ref}
+                        options={
+                          media && form.getValues("channel_id")
+                            ? media?.filter(
+                                (item) =>
+                                  item.channel_id ===
+                                  form.getValues("channel_id")
+                              )
+                            : []
+                        }
+                        value={field.value ? String(field.value) : ""}
+                        onChange={(e) => {
+                          field.onChange(e.value ? Number(e.value) : null);
+                          onMediaChange(e.value ? Number(e.value) : null);
+                          form.trigger("media_id");
+                        }}
+                        onBlur={field.onBlur}
+                        placeholder="Select..."
+                        message={
+                          form.formState.errors.media_id?.message as string
+                        }
+                        separator
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
 
             {form.getValues("media_id") &&
-              sources &&
-              sources?.filter(
-                (item) => item.media_id === form.getValues("media_id")
-              ).length > 0 && (
-                <div className="row mb-3">
-                  <div className="col-sm-4 col-12 text-neutral-700">
-                    <p>
-                      Lead Source <Required />{" "}
-                    </p>
-                  </div>
-                  <div className="col-sm-8 col-12">
-                    <Controller
-                      control={form.control}
-                      name="source_id"
-                      render={({ field }) => (
-                        <SelectInput
-                          id="source"
-                          ref={field.ref}
-                          options={
-                            sources && form.getValues("media_id")
-                              ? sources?.filter(
-                                  (item) =>
-                                    item.media_id === form.getValues("media_id")
-                                )
-                              : []
-                          }
-                          value={field.value ? String(field.value) : ""}
-                          onChange={(e) => {
-                            field.onChange(Number(e.value));
-                          }}
-                          onBlur={field.onBlur}
-                          placeholder="Select..."
-                          message={
-                            form.formState.errors.source_id?.message as string
-                          }
-                          separator
-                        />
-                      )}
-                    />
-                  </div>
+            sources &&
+            sources?.filter(
+              (item) => item.media_id === form.getValues("media_id")
+            ).length > 0 ? (
+              <div className="row mb-3">
+                <div className="col-sm-4 col-12 text-neutral-700">
+                  <p>
+                    Lead Source <Required />{" "}
+                  </p>
                 </div>
-              )}
+                <div className="col-sm-8 col-12">
+                  <Controller
+                    control={form.control}
+                    name="source_id"
+                    render={({ field }) => (
+                      <SelectInput
+                        id="source"
+                        ref={field.ref}
+                        options={
+                          sources && form.getValues("media_id")
+                            ? sources?.filter(
+                                (item) =>
+                                  item.media_id === form.getValues("media_id")
+                              )
+                            : []
+                        }
+                        value={field.value ? String(field.value) : ""}
+                        onChange={(e) => {
+                          field.onChange(e.value ? Number(e.value) : null);
+                        }}
+                        onBlur={field.onBlur}
+                        placeholder="Select..."
+                        message={
+                          form.formState.errors.source_id?.message as string
+                        }
+                        separator
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            <p>{JSON.stringify(form.getValues())}</p>
 
             {/* Notes */}
             <div className="row mb-3">
