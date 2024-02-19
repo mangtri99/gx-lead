@@ -28,7 +28,7 @@ interface Props {
 
 export default function List(props: Props) {
   const { data, handleDelete, handlePagination, loading, fetchLeads } = props;
-  const { probabilities, statuses } = useContext(LeadOptionContext);
+  const { probabilities, statuses, users } = useContext(LeadOptionContext);
   const { onSubmit, form } = useLeadFormState({
     isEdit: true,
   });
@@ -70,6 +70,7 @@ export default function List(props: Props) {
 
   const onDropdownChange = (data: Lead) => {
     form.reset({
+      assigne_id: data.assigne_id,
       address: data.address,
       branch_id: data.branch.id,
       channel_id: data.channel.id,
@@ -93,14 +94,14 @@ export default function List(props: Props) {
   const onUpdate = async () => {
     await onSubmit(form.getValues());
     fetchLeads();
-  }
+  };
 
   if (loading) {
     return (
       <div className="h-100 d-flex justify-content-center align-items-center flex-1">
         <Loading />
       </div>
-    )
+    );
   }
   return (
     <>
@@ -318,14 +319,74 @@ export default function List(props: Props) {
                       </div>
                     </Table.Item>
                     <Table.Item className="nowrap">
-                      <ButtonActionIcon type="button" className="py-2 px-3">
-                        <div className="d-flex align-items-center">
-                          <FiUser size={20} />
-                          <span className="text-decoration-underline fs-12 ms-2">
-                            ADD ASSIGNEE
-                          </span>
+                      <div className="d-flex align-items-center">
+                        {lead.assigne_id && (
+                          <p className="mb-0 text-black fw-medium">
+                            {lead.assigne?.name || "-"}
+                          </p>
+                        )}
+                        <div className="dropdown">
+                          <ButtonActionIcon
+                            type="button"
+                            className={lead.assigne_id ? "py-2 px-3" : ""}
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            data-bs-auto-close="outside"
+                            onClick={() => onDropdownChange(lead)}
+                          >
+                            <div className="d-flex align-items-center">
+                              {lead.assigne_id ? (
+                                <FiEdit size={14} />
+                              ) : (
+                                <>
+                                  <FiUser size={20} />
+                                  <span className="text-decoration-underline fs-12 ms-2">
+                                    ADD ASSIGNEE
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                          </ButtonActionIcon>
+                          <ul className="dropdown-menu p-2">
+                            <Controller
+                              control={form.control}
+                              name="assigne_id"
+                              render={({ field }) => (
+                                <SelectInput
+                                  id="assigne"
+                                  ref={field.ref}
+                                  options={users || []}
+                                  labelInput="Assignee To"
+                                  value={field.value ? String(field.value) : ""}
+                                  onChange={(e) => {
+                                    field.onChange(
+                                      e.value ? Number(e.value) : null
+                                    );
+                                  }}
+                                  onBlur={field.onBlur}
+                                  placeholder="Select User"
+                                  separator
+                                  width="200px"
+                                  message={
+                                    form.formState.errors.assigne_id
+                                      ?.message as string
+                                  }
+                                  isClearable={false}
+                                />
+                              )}
+                            />
+                            <div className="mt-2 d-flex justify-content-end">
+                              <Button
+                                className="fs-12"
+                                size="sm"
+                                onClick={() => onUpdate()}
+                              >
+                                Update
+                              </Button>
+                            </div>
+                          </ul>
                         </div>
-                      </ButtonActionIcon>
+                      </div>
                     </Table.Item>
                     <Table.Item className="text-end">
                       <div className="dropdown">

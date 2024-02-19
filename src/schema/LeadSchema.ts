@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const LeadSchema = z.object({
   id: z.number().nullish(),
+  assigne_id: z.number().nullish(),
   branch_id: z
     .number()
     .nullish()

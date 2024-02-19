@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { APIResponse, Option, OptionMedia, OptionSource, SelectOptions } from "../../../config/types";
 import useFetch from "../../../composables/useFetch";
-import { BRANCH_URL, CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL } from "../../../config/api";
+import { BRANCH_URL, CHANNEL_URL, MEDIA_URL, PROBABILITY_URL, SOURCE_URL, STATUS_URL, TYPE_URL, USER_URL } from "../../../config/api";
 
 export default function useLeadOptionFilter() {
   type SelectMediaOptions = SelectOptions & { channel_id: number };
@@ -14,6 +14,7 @@ export default function useLeadOptionFilter() {
   const [channels, setChannels] = useState<SelectOptions[]>();
   const [media, setMedia] = useState<SelectMediaOptions[]>();
   const [sources, setSources] = useState<SelectSourceOptions[]>();
+  const [users, setUsers] = useState<SelectOptions[]>();
 
   const { $fetch } = useFetch();
   const fetchOptions = async () => {
@@ -111,6 +112,19 @@ export default function useLeadOptionFilter() {
           });
           setSources(source);
         }),
+
+        $fetch<APIResponse<OptionSource[]>>(USER_URL, {
+          method: "GET",
+        }).then((res) => {
+          const response = res.data.data;
+          const user = response.map((item) => {
+            return {
+              value: String(item.id),
+              label: item.name,
+            };
+          });
+          setUsers(user);
+        }),
       ]);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -131,6 +145,7 @@ export default function useLeadOptionFilter() {
     channels,
     media,
     sources,
+    users,
     fetchOptions,
   };
 }

@@ -30,11 +30,12 @@ export default function Index() {
     probabilities,
     sources,
     statuses,
+    users,
     fetchOptions,
   } = useLeadOptionFilter();
 
   return (
-    <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, fetchOptions }}>
+    <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, users, fetchOptions }}>
       <Helmet>
         <title>List of Lead</title>
         <meta name="description" content="List of Lead" />

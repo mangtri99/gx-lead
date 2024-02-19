@@ -10,3 +10,4 @@ export const CHANNEL_URL = '/channel';
 export const MEDIA_URL = '/media';
 export const SOURCE_URL = '/source';
 export const PROBABILITY_URL = '/probability';
+export const USER_URL = '/user';

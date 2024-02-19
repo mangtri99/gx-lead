@@ -12,6 +12,7 @@ interface Props {
   channels?: SelectOptions[];
   media?: SelectMediaOptions[];
   sources?: SelectSourceOptions[];
+  users?: SelectOptions[];
   fetchOptions?: () => Promise<void>;
 }
 

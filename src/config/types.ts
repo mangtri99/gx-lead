@@ -44,6 +44,7 @@ export interface MetaLink {
 export interface Lead {
   id: number;
   user_id: number;
+  assigne_id: number | null;
   branch_id: number;
   status_id: number;
   probability_id: number;
@@ -64,6 +65,7 @@ export interface Lead {
   created_at: Date;
   updated_at: Date;
   user: User;
+  assigne: User | null;
   branch: Option;
   status: Option;
   probability: Option;
