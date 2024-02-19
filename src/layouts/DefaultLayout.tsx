@@ -59,7 +59,8 @@ export default function DefaultLayout() {
 
         {/* Main */}
         <div ref={mainContent} className="w-100 main-content" style={{
-          marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : '0px'
+          marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : '0px',
+          overflowX: 'hidden'
         }}>
           {/* Navbar */}
           <Navbar />
