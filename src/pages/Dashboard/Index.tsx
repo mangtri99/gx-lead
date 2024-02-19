@@ -18,67 +18,71 @@ export default function Index() {
         <title>Lead Summary</title>
         <meta name="description" content="Lead Summary" />
       </Helmet>
-      <div className="d-flex flex-lg-row flex-column justify-content-lg-between align-items-lg-end">
+      <div className="d-flex flex-xl-row flex-column justify-content-xl-between align-items-xl-end">
         <h1 className="fw-bold fs-20 mb-lg-0 mb-3">Lead Summary</h1>
-        <div className="d-flex flex-lg-row flex-column flex-wrap">
-          <DateGroupInput
-            separator="to"
-            label={
-              <>
-                Date Range (<span className="text-warning">Max 3 Month</span>)
-              </>
-            }
-            dateValueStart={query.date_start ? new Date(query.date_start) : undefined}
-            dateValueEnd={query.date_end ? new Date(query.date_end) : undefined}
-            onChangeDateStart={(e) =>
-              setQuery({
-                ...query,
-                date_start: e ? e.toISOString() : "",
-              })
-            }
-            onChangeDateEnd={(e) =>
-              setQuery({
-                ...query,
-                date_end: e ? e.toISOString() : "",
-              })
-            }
-            placeholderDateStart="21/12/2023"
-            placeholderDateEnd="21/01/2024"
-          />
-          <div className="d-flex align-items-end mt-3 mt-lg-0 ms-lg-2 ms-0">
-            <Button
-              size="sm"
-              onClick={() => filter()}
-              disabled={!query.date_start && !query.date_end}
-            >
-              Search
-            </Button>
-            <Button
-              className="mx-2"
-              size="sm"
-              onClick={() => reset()}
-              disabled={!query.date_start && !query.date_end}
-            >
-              Reset
-            </Button>
-            <Button
-              className="d-flex align-items-center"
-              size="sm"
-              onClick={() => saveToImage()}
-            >
-              Save to image
-              <LuImage size={16} className="ms-2" />
-            </Button>
+        <div className="row g-2 flex-md-row flex-column flex-wrap align-items-md-end">
+          <div className='col'>
+            <DateGroupInput
+              separator="to"
+              label={
+                <>
+                  Date Range (<span className="text-warning">Max 3 Month</span>)
+                </>
+              }
+              dateValueStart={query.date_start ? new Date(query.date_start) : undefined}
+              dateValueEnd={query.date_end ? new Date(query.date_end) : undefined}
+              onChangeDateStart={(e) =>
+                setQuery({
+                  ...query,
+                  date_start: e ? e.toISOString() : "",
+                })
+              }
+              onChangeDateEnd={(e) =>
+                setQuery({
+                  ...query,
+                  date_end: e ? e.toISOString() : "",
+                })
+              }
+              placeholderDateStart="21/12/2023"
+              placeholderDateEnd="21/01/2024"
+            />
+          </div>
+          <div className='col-auto mt-3 mt-lg-0'>
+            <div className="d-flex align-items-end ">
+              <Button
+                size="sm"
+                onClick={() => filter()}
+                disabled={!query.date_start && !query.date_end}
+              >
+                Search
+              </Button>
+              <Button
+                className="mx-2"
+                size="sm"
+                onClick={() => reset()}
+                disabled={!query.date_start && !query.date_end}
+              >
+                Reset
+              </Button>
+              <Button
+                className="d-flex align-items-center"
+                size="sm"
+                onClick={() => saveToImage()}
+              >
+                Save to image
+                <LuImage size={16} className="ms-2" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
       <div className="mt-lg-5 mt-4 bg-background" id="chart-container">
         <div className="row align-items-stretch">
-          <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+          <div className="col-6 col-sm-4 col-md-3 col-xl-2 mb-3">
             <CardWidget title={data?.data.leads.total} subtitle="Leads" />
           </div>
           {data?.data.statuses.map((status, index: number) => (
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" key={index}>
+            <div className="col-6 col-sm-4 col-md-3 col-xl-2 mb-3" key={index}>
               <CardWidget title={status.total} subtitle={status.name} />
             </div>
           ))}
