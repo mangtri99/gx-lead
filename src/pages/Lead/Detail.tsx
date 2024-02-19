@@ -17,7 +17,11 @@ export default function Detail() {
   const navigate = useNavigate();
 
   if(loading){
-    return <Loading/>
+    return (
+      <div className="h-100 d-flex justify-content-center align-items-center flex-1">
+        <Loading />
+      </div>
+    )
   }
 
   if(!data){

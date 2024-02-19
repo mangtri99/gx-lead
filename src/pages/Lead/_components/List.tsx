@@ -96,7 +96,11 @@ export default function List(props: Props) {
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div className="h-100 d-flex justify-content-center align-items-center flex-1">
+        <Loading />
+      </div>
+    )
   }
   return (
     <>

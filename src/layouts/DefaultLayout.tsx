@@ -66,9 +66,9 @@ export default function DefaultLayout() {
           <Navbar />
           {/* Content */}
           <div
-            className="w-100 p-3"
+            className="w-100 flex-1 p-3"
           >
-            <Outlet />
+            <Outlet/>
           </div>
         </div>
       </div>

@@ -1,19 +1,26 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from 'chart.js';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  Colors,
+} from "chart.js";
 import CardWidget from "../../components/Card/CardWidget";
 import useChartState from "./_hooks/useChartState";
 import PieChart from "../../components/Chart/PieChart";
 import { LuImage } from "react-icons/lu";
 import Button from "../../components/Button/Button";
 import Card from "../../components/Card/Card";
-import DateGroupInput from '../../components/Input/DateGroupInput';
-import { Helmet } from 'react-helmet-async';
+import DateGroupInput from "../../components/Input/DateGroupInput";
+import { Helmet } from "react-helmet-async";
+import Loading from "../../components/General/Loading";
 
-ChartJS.register(Colors,ArcElement, Tooltip, Legend );
+ChartJS.register(Colors, ArcElement, Tooltip, Legend);
 
 export default function Index() {
-  const { data, query, setQuery, filter, reset, saveToImage } = useChartState();
+  const { data, query, setQuery, filter, reset, saveToImage, loading } = useChartState();
   return (
-    <div>
+    <div className="h-100 d-flex flex-column">
       <Helmet>
         <title>Lead Summary</title>
         <meta name="description" content="Lead Summary" />
@@ -21,7 +28,7 @@ export default function Index() {
       <div className="d-flex flex-xl-row flex-column justify-content-xl-between align-items-xl-end">
         <h1 className="fw-bold fs-20 mb-lg-0 mb-3">Lead Summary</h1>
         <div className="row g-2 flex-md-row flex-column flex-wrap align-items-md-end">
-          <div className='col'>
+          <div className="col">
             <DateGroupInput
               separator="to"
               label={
@@ -29,8 +36,12 @@ export default function Index() {
                   Date Range (<span className="text-warning">Max 3 Month</span>)
                 </>
               }
-              dateValueStart={query.date_start ? new Date(query.date_start) : undefined}
-              dateValueEnd={query.date_end ? new Date(query.date_end) : undefined}
+              dateValueStart={
+                query.date_start ? new Date(query.date_start) : undefined
+              }
+              dateValueEnd={
+                query.date_end ? new Date(query.date_end) : undefined
+              }
               onChangeDateStart={(e) =>
                 setQuery({
                   ...query,
@@ -47,7 +58,7 @@ export default function Index() {
               placeholderDateEnd="21/01/2024"
             />
           </div>
-          <div className='col-auto mt-3 mt-lg-0'>
+          <div className="col-auto mt-3 mt-lg-0">
             <div className="d-flex align-items-end ">
               <Button
                 size="sm"
@@ -76,7 +87,12 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className="mt-lg-5 mt-4 bg-background" id="chart-container">
+      {loading ? (
+        <div className="w-100 flex-1 d-flex align-items-center justify-content-center">
+          <Loading />
+        </div>
+      ) : (
+      <div className="flex-1 mt-lg-5 mt-4 bg-background" id="chart-container">
         <div className="row align-items-stretch">
           <div className="col-6 col-sm-4 col-md-3 col-xl-2 mb-3">
             <CardWidget title={data?.data.leads.total} subtitle="Leads" />
@@ -145,6 +161,7 @@ export default function Index() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

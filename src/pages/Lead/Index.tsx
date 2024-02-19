@@ -39,7 +39,7 @@ export default function Index() {
         <title>List of Lead</title>
         <meta name="description" content="List of Lead" />
       </Helmet>
-      <Card className="p-3">
+      <Card className="p-3 h-100">
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="fs-20">Leads Manage</h1>
           <Link to={"/leads/create"} className="text-decoration-none">
@@ -55,7 +55,7 @@ export default function Index() {
           filter={filter}
           resetFilter={resetFilter}
         />
-        <div className="mt-4 w-100">
+        <div className="mt-4 w-100 d-flex flex-column flex-1">
           <List
             data={data}
             handleDelete={deleteLead}
