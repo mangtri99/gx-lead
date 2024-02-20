@@ -17,6 +17,8 @@ import SelectInput from "../../../components/Input/SelectInput";
 import useLeadFormState from "../_hooks/useLeadFormState";
 import { Controller } from "react-hook-form";
 import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
+import { IoIosCloseCircle } from "react-icons/io";
+
 
 interface Props {
   data: APIResponsePagination<Lead[]> | undefined;
@@ -438,7 +440,8 @@ export default function List(props: Props) {
               return (
                 <Table.Row>
                   <Table.Item colSpan={5} className="text-center">
-                    No data available
+                    <IoIosCloseCircle size={40} />
+                    <p className="mt-2">No data available</p>
                   </Table.Item>
                 </Table.Row>
               );
