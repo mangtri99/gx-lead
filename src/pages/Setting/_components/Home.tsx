@@ -101,7 +101,7 @@ export default function Home() {
             types &&
             types?.length > 0 &&
             types.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
@@ -114,7 +114,7 @@ export default function Home() {
             channels &&
             channels?.length > 0 &&
             channels.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
@@ -127,7 +127,7 @@ export default function Home() {
             media &&
             media?.length > 0 &&
             media.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
@@ -140,7 +140,7 @@ export default function Home() {
             probabilities &&
             probabilities?.length > 0 &&
             probabilities.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
@@ -153,7 +153,7 @@ export default function Home() {
             sources &&
             sources?.length > 0 &&
             sources.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}
@@ -166,7 +166,7 @@ export default function Home() {
             statuses &&
             statuses?.length > 0 &&
             statuses.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-6">
+              <div key={index} className="col-lg-3 col-md-4 col-12">
                 <SettingItem
                   item={item}
                   onDelete={() => handleDelete(String(item.id))}

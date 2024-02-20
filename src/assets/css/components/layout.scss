@@ -13,3 +13,10 @@
   display: flex;
   flex-direction: column;
 }
+
+.main-content-inner {
+  width: 100%;
+  flex: 1;
+  padding: 1rem;
+  margin-top: 5rem;
+}

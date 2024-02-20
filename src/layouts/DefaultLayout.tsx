@@ -58,15 +58,14 @@ export default function DefaultLayout() {
         </div>
 
         {/* Main */}
-        <div ref={mainContent} className="w-100 main-content" style={{
+        <div ref={mainContent} className="w-100 main-content overflow-x-hidden" style={{
           marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : '0px',
-          overflowX: 'hidden'
         }}>
           {/* Navbar */}
           <Navbar />
           {/* Content */}
           <div
-            className="w-100 flex-1 p-3"
+            className="main-content-inner"
           >
             <Outlet/>
           </div>
