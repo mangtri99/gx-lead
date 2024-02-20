@@ -10,30 +10,29 @@ import TextInfo from "./_components/TextInfo";
 import NotFound from "../../components/General/NotFound";
 import Loading from "../../components/General/Loading";
 import Button from "../../components/Button/Button";
-import { Helmet } from "react-helmet-async";
+import HeadWrapper from "../../components/General/HeadWrapper";
 
 export default function Detail() {
   const { data, loading } = useLeadDetailState();
   const navigate = useNavigate();
 
-  if(loading){
+  if (loading) {
     return (
       <div className="h-100 d-flex justify-content-center align-items-center flex-1">
         <Loading />
       </div>
-    )
+    );
   }
 
-  if(!data){
-    return <NotFound />
+  if (!data) {
+    return <NotFound />;
   }
 
   return (
-    <div>
-      <Helmet>
-        <title>Lead Detail - {data.lead_number}</title>
-        <meta name="description" content="Info Lead" />
-      </Helmet>
+    <HeadWrapper
+      title={`Lead Detail - ${data.lead_number}`}
+      description="Info Lead"
+    >
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="fs-20 fw-medium mb-0">Lead Detail</h1>
         <div className="d-flex align-items-center">
@@ -57,7 +56,11 @@ export default function Detail() {
               <p className="fs-20 fw-medium text-primary mb-0">
                 #{data?.lead_number}
               </p>
-              <Button variant="secondary" className="mx-3 d-flex align-items-center p-2 rounded-circle" onClick={() => navigate(`/leads/${data.id}/edit`)}>
+              <Button
+                variant="secondary"
+                className="mx-3 d-flex align-items-center p-2 rounded-circle"
+                onClick={() => navigate(`/leads/${data.id}/edit`)}
+              >
                 <FaEdit size={12} />
               </Button>
             </div>
@@ -96,7 +99,10 @@ export default function Detail() {
               <TextInfo title="Phone No." value={data?.phone_number} />
             </div>
             <div className="mb-3">
-              <TextInfo title="Is Coverage" value={data?.is_coverage ? 'Yes' : 'No'} />
+              <TextInfo
+                title="Is Coverage"
+                value={data?.is_coverage ? "Yes" : "No"}
+              />
             </div>
           </div>
           <div className="col-md-6 col-12">
@@ -157,6 +163,6 @@ export default function Detail() {
           </div>
         </div>
       </div>
-    </div>
+    </HeadWrapper>
   );
 }

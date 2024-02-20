@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 import useLeadListState from "./_hooks/useLeadListState";
 import { LeadOptionContext } from "./_hooks/context/LeadOptionContext";
 import useLeadOptionFilter from "./_hooks/useLeadOptionFilter";
-import { Helmet } from "react-helmet-async";
+import HeadWrapper from "../../components/General/HeadWrapper";
 
 export default function Index() {
   const {
@@ -19,7 +19,7 @@ export default function Index() {
     setQuery,
     filter,
     resetFilter,
-    fetchLeads
+    fetchLeads,
   } = useLeadListState();
 
   const {
@@ -35,37 +35,47 @@ export default function Index() {
   } = useLeadOptionFilter();
 
   return (
-    <LeadOptionContext.Provider value={{ branch, types, channels, media, sources, probabilities, statuses, users, fetchOptions }}>
-      <Helmet>
-        <title>List of Lead</title>
-        <meta name="description" content="List of Lead" />
-      </Helmet>
-      <Card className="p-3 h-100">
-        <div className="d-flex justify-content-between align-items-center">
-          <h1 className="fs-20">Leads Manage</h1>
-          <Link to={"/leads/create"} className="text-decoration-none">
-            <Button size="sm" className="d-flex align-items-center me-2">
-              <span className="me-2 fs-14">Add New</span>
-              <LuPlus size={24} />
-            </Button>
-          </Link>
-        </div>
-        <Filter
-          query={query}
-          setQuery={setQuery}
-          filter={filter}
-          resetFilter={resetFilter}
-        />
-        <div className="mt-4 w-100 d-flex flex-column flex-1">
-          <List
-            data={data}
-            handleDelete={deleteLead}
-            handlePagination={handlePagination}
-            loading={loading}
-            fetchLeads={fetchLeads}
+    <HeadWrapper title="List of Lead" description="List of Lead">
+      <LeadOptionContext.Provider
+        value={{
+          branch,
+          types,
+          channels,
+          media,
+          sources,
+          probabilities,
+          statuses,
+          users,
+          fetchOptions,
+        }}
+      >
+        <Card className="p-3 h-100">
+          <div className="d-flex justify-content-between align-items-center">
+            <h1 className="fs-20">Leads Manage</h1>
+            <Link to={"/leads/create"} className="text-decoration-none">
+              <Button size="sm" className="d-flex align-items-center me-2">
+                <span className="me-2 fs-14">Add New</span>
+                <LuPlus size={24} />
+              </Button>
+            </Link>
+          </div>
+          <Filter
+            query={query}
+            setQuery={setQuery}
+            filter={filter}
+            resetFilter={resetFilter}
           />
-        </div>
-      </Card>
-    </LeadOptionContext.Provider>
+          <div className="mt-4 w-100 d-flex flex-column flex-1">
+            <List
+              data={data}
+              handleDelete={deleteLead}
+              handlePagination={handlePagination}
+              loading={loading}
+              fetchLeads={fetchLeads}
+            />
+          </div>
+        </Card>
+      </LeadOptionContext.Provider>
+    </HeadWrapper>
   );
 }

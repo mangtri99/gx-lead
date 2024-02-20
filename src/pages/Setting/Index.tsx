@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import HeadWrapper from "../../components/General/HeadWrapper";
 import Home from "./_components/Home";
 import { SettingContext } from "./_hooks/context/SettingContext";
 import useSettingState from "./_hooks/useSettingState";
@@ -13,14 +13,22 @@ export default function Index() {
     statuses,
     fetchOptions,
   } = useSettingState();
-  
+
   return (
-    <SettingContext.Provider value={{ types, channels, media, sources, probabilities, statuses, fetchOptions }}>
-      <Helmet>
-        <title>Lead Setting</title>
-        <meta name="description" content="All lead settings" />
-      </Helmet>
-      <Home />
-    </SettingContext.Provider>
+    <HeadWrapper title="Lead Setting" description="All lead settings">
+      <SettingContext.Provider
+        value={{
+          types,
+          channels,
+          media,
+          sources,
+          probabilities,
+          statuses,
+          fetchOptions,
+        }}
+      >
+        <Home />
+      </SettingContext.Provider>
+    </HeadWrapper>
   );
 }

@@ -7,13 +7,10 @@ import { RouterProvider } from 'react-router-dom'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { router } from './router.tsx';
 import { Toaster } from "react-hot-toast";
-import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router}/>
-    </HelmetProvider>
+    <RouterProvider router={router}/>
     <Toaster position="top-right" />
   </React.StrictMode>,
 )
