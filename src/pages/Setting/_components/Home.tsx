@@ -27,7 +27,6 @@ export default function Home() {
     probabilities,
     sources,
     statuses,
-    fetchOptions,
   } = useContext(SettingContext);
 
   const {
@@ -47,13 +46,6 @@ export default function Home() {
   const [mediaOptions, setMediaOptions] = useState<SelectOptions[]>();
   const [channelOptions, setChannelOptions] = useState<SelectOptions[]>();
 
-  // fetch options on first load
-  useEffect(() => {
-    if (fetchOptions) {
-      fetchOptions();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (media) {
