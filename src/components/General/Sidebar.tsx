@@ -2,11 +2,16 @@ import { forwardRef } from "react";
 import MenuLink from "./MenuLink";
 import { LuArchive, LuLayoutDashboard } from "react-icons/lu";
 import Logo2 from "@/assets/images/logo2.svg";
+import LogoCircle from "@/assets/images/logo.jpeg";
 import { IoCubeOutline } from "react-icons/io5";
-import { SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH, VERSION_APP } from "../../config/general";
+import {
+  SIDEBAR_COLLAPSED_WIDTH,
+  SIDEBAR_WIDTH,
+  VERSION_APP,
+} from "../../config/general";
 
 interface Props {
-  isShow?: boolean
+  isShow?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,15 +25,21 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
       ref={ref}
       className="bg-white d-flex flex-column h-100 p-3 "
       style={{
-        width: isShow ? `${SIDEBAR_WIDTH}px` : `${SIDEBAR_COLLAPSED_WIDTH}px`
+        width: isShow ? `${SIDEBAR_WIDTH}px` : `${SIDEBAR_COLLAPSED_WIDTH}px`,
       }}
     >
       <div className="text-center">
-        <img src={Logo2} alt="Logo" className={isShow ? 'visible' : 'invisible'} />
+        {isShow ? (
+          <img src={Logo2} alt="Logo" />
+        ) : (
+          <img src={LogoCircle} alt="Logo" className="pt-2" style={{
+            width: '32px',
+          }} />
+        )}
       </div>
       <div className="flex-1 mt-5">
-        <p className='menu-title uppercase mb-3'>
-          {isShow ? 'Leads Management' : ''}
+        <p className="menu-title uppercase mb-3">
+          {isShow ? "Leads Management" : ""}
         </p>
         <ul className="list-unstyled">
           <li className="menu-item">
