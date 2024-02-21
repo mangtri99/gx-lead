@@ -14,7 +14,7 @@ interface Props<K> {
 }
 
 export default function useListState<T, K>(props: Props<K>) {
-  const { url, queryParams, } = props;
+  const { url, queryParams } = props;
   const [data, setData] = useState<APIResponsePagination<T[]>>();
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState<typeof queryParams>(queryParams);

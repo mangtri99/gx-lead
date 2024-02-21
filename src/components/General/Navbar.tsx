@@ -7,12 +7,9 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../composables/useAuth";
 import ButtonActionIcon from "../Button/ButtonActionIcon";
 import { LayoutContext } from "../../layouts/context/LayoutContext";
-import { useMedia } from "react-use";
-import { SIDEBAR_WIDTH } from "../../config/general";
 
 export default function Navbar() {
-  const { isShowSidebar, setIsShowSidebar } = useContext(LayoutContext);
-  const isMobile = useMedia('(max-width: 992px)');
+  const { isShowSidebar, setIsShowSidebar, setMarginContent } = useContext(LayoutContext);
   const [title, setTitle] = useState("Dashboard");
   const location = useLocation();
   const { logout } = useAuth();
@@ -35,7 +32,7 @@ export default function Navbar() {
     <div
       className="fixed-top main-content"
       style={{
-        marginLeft: isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : '0px',
+        marginLeft: setMarginContent(),
       }}
     >
       <div className="w-100 bg-white shadow-sm p-3">
