@@ -4,10 +4,11 @@ import { RiGoogleFill } from "react-icons/ri";
 
 interface Props {
   map: google.maps.Map | undefined;
+  onChangePlace?: (place: google.maps.places.PlaceResult) => void;
 }
 
 export default function AutocompleteGoogleMapInput(props: Props) {
-  const { map } = props;
+  const { map, onChangePlace } = props;
   const [search, setSearch] = useState<google.maps.places.Autocomplete>();
 
   const onLoadAutoComplete = useCallback(function callback(
@@ -20,13 +21,8 @@ export default function AutocompleteGoogleMapInput(props: Props) {
   function onPlaceChanged() {
     if (search != null) {
       const place = search.getPlace();
-      // const name = place.name;
-      // const status = place.business_status;
-      // const formattedAddress = place.formatted_address;
-      // console.log(place);
-      // console.log(`Name: ${name}`);
-      // console.log(`Business Status: ${status}`);
-      // console.log(`Formatted Address: ${formattedAddress}`);
+      console.log(place.geometry?.location?.lat());
+      console.log(place.geometry?.location?.lng());
 
       // set map center
       if (place.geometry?.viewport) {
@@ -36,6 +32,9 @@ export default function AutocompleteGoogleMapInput(props: Props) {
         // @ts-ignore
         map?.setCenter(place.geometry?.location);
         map?.setZoom(17);
+      }
+      if (onChangePlace) {
+        onChangePlace(place);
       }
     } else {
       console.log("please input place or address");

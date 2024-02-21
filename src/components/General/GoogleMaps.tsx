@@ -22,11 +22,12 @@ interface Props {
   onClickMap: (e: google.maps.MapMouseEvent) => void
   onMount?: () => void
   onMarkerClick?: (e: google.maps.MapMouseEvent) => void
+  onChangePlace?: (place: google.maps.places.PlaceResult) => void
   mapContainerStyle?: React.CSSProperties
 }
 
 export default function GoogleMaps(props: Props) {
-  const { onMarkerDragEnd, onMarkerClick, mapContainerStyle, onClickMap, markers } = props;
+  const { onMarkerDragEnd, onMarkerClick, mapContainerStyle, onClickMap, onChangePlace, markers } = props;
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
@@ -48,7 +49,7 @@ export default function GoogleMaps(props: Props) {
 
   return isLoaded ? (
     <div className="w-100 position-relative">
-      <AutocompleteGoogleMapInput map={map} />
+      <AutocompleteGoogleMapInput map={map} onChangePlace={onChangePlace} />
       <GoogleMap
         onClick={(e) => {
           onClickMap(e)

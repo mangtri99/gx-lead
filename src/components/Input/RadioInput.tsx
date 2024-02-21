@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import React, { forwardRef } from "react";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -14,7 +13,7 @@ const RadioInput = forwardRef(function RadioInput(props: Props, ref) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         ref={ref}
-        className={clsx("form-check-input", className)}
+        className={`form-check-input ${className}`}
         type="radio"
         id={id}
         {...props}

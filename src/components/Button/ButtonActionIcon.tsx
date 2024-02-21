@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import React, { forwardRef } from "react";
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
@@ -16,7 +15,7 @@ const ButtonActionIcon = forwardRef(function ButtonActionIcon(props: Props, ref)
       // @ts-ignore
       ref={ref}
       type={type || "button"}
-      className={clsx( className)}
+      className={className}
       disabled={disabled}
       {...rest}
     >

@@ -29,6 +29,13 @@ export default function FormGeneral(props: Props) {
     form.trigger("longitude");
   };
 
+  const onChangePlace = (place: google.maps.places.PlaceResult) => {
+    form.setValue("latitude", place.geometry?.location?.lat().toString());
+    form.setValue("longitude", place.geometry?.location?.lng().toString());
+    form.trigger("latitude");
+    form.trigger("longitude");
+  }
+
   // set current position on first load
   useEffect(() => {
     if (navigator.geolocation) {
@@ -263,6 +270,7 @@ export default function FormGeneral(props: Props) {
                     }
                   : currentPosition
               }
+              onChangePlace={(place) => {onChangePlace(place)}}
             />
           </div>
         </div>

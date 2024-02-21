@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import React from "react";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,7 +9,7 @@ export default function CheckboxInput(props: Props) {
   return (
     <div className="form-check">
       <input
-        className={clsx("form-check-input", className)}
+        className={`form-check-input ${className}` }
         type="checkbox"
         value={value}
         id={id}

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import React from "react";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -19,9 +18,7 @@ export default function Dialog(props: Props) {
       aria-labelledby={`${id}Label`}
       aria-hidden="true"
     >
-      <div
-        className={clsx(`modal-dialog modal-dialog-centered ${sizeClass}`)}
-      >
+      <div className={`modal-dialog modal-dialog-centered ${sizeClass}`}>
         <div className="modal-content">
           <div className="modal-header">
             <p className="modal-title mb-0 fs-5" id={`${id}Label`}>

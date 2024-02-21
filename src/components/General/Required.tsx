@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react'
 
 interface Props {
@@ -8,7 +7,7 @@ interface Props {
 export default function Required(props: Props) {
   const { children, className } = props;
   return (
-    <span className={clsx('text-danger', className)}>
+    <span className={`text-danger ${className}`}>
       {children || '*'}
     </span>
   )

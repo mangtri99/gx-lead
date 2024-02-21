@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useEffect, useState } from "react";
 import ButtonActionIcon from "../Button/ButtonActionIcon";
 import "react-day-picker/dist/style.css";
@@ -58,7 +57,7 @@ const DatePickerInput = (props: Props) => {
         <input
           type={type || "text"}
           id={id}
-          className={clsx(`form-control fs-14`)}
+          className='form-control fs-14'
           placeholder={placeholder || ""}
           readOnly
           value={labelValue}
