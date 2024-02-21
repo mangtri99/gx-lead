@@ -10,19 +10,10 @@ import Modal from "bootstrap/js/dist/modal";
 import { useContext } from "react";
 import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
 
+
 interface Props {
-  query: {
-    search: string;
-    date_start: string;
-    date_end: string;
-    status: string;
-    branch: string;
-    type: string;
-    probability: string;
-    channel: string;
-    media: string;
-    source: string;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  query: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setQuery: (val: any) => void;
   filter: () => void;

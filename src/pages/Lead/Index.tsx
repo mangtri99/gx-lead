@@ -4,51 +4,44 @@ import Filter from "./_components/Filter";
 import List from "./_components/List";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
-import useLeadListState from "./_hooks/useLeadListState";
-import { LeadOptionContext } from "./_hooks/context/LeadOptionContext";
-import useLeadOptionFilter from "./_hooks/useLeadOptionFilter";
 import HeadWrapper from "../../components/General/HeadWrapper";
+import useListState from "../../composables/useListState";
+import { Lead } from "../../config/types";
+import { LEADS_URL } from "../../config/api";
+import LeadOptionProvider from "./_components/Provider/LeadOptionProvider";
 
 export default function Index() {
+  const queryParams = {
+    search: "",
+    date_start: "",
+    date_end: "",
+    status: "",
+    probability: "",
+    branch: "",
+    type: "",
+    channel: "",
+    media: "",
+    source: "",
+    page: "",
+  };
   const {
     data,
-    deleteLead,
+    destroy,
     handlePagination,
     loading,
     query,
     setQuery,
     filter,
     resetFilter,
-    fetchLeads,
-  } = useLeadListState();
-
-  const {
-    branch,
-    types,
-    channels,
-    media,
-    probabilities,
-    sources,
-    statuses,
-    users,
-    fetchOptions,
-  } = useLeadOptionFilter();
+    fetchData,
+  } = useListState<Lead, typeof queryParams>({
+    queryParams,
+    url: LEADS_URL,
+  });
 
   return (
     <HeadWrapper title="List of Lead" description="List of Lead">
-      <LeadOptionContext.Provider
-        value={{
-          branch,
-          types,
-          channels,
-          media,
-          sources,
-          probabilities,
-          statuses,
-          users,
-          fetchOptions,
-        }}
-      >
+      <LeadOptionProvider>
         <Card className="p-3 h-100">
           <div className="d-flex justify-content-between align-items-center">
             <h1 className="fs-20">Leads Manage</h1>
@@ -68,14 +61,14 @@ export default function Index() {
           <div className="mt-4 w-100 d-flex flex-column flex-1">
             <List
               data={data}
-              handleDelete={deleteLead}
+              handleDelete={destroy}
               handlePagination={handlePagination}
               loading={loading}
-              fetchLeads={fetchLeads}
+              fetchLeads={fetchData}
             />
           </div>
         </Card>
-      </LeadOptionContext.Provider>
+      </LeadOptionProvider>
     </HeadWrapper>
   );
 }
