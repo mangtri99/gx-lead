@@ -38,7 +38,7 @@ export default function DefaultLayout() {
       <div className="min-h-screen d-flex">
 
         {/* Desktop */}
-        <div ref={sidebar} className="d-none d-lg-block position-fixed h-100" style={{
+        <div ref={sidebar} className="d-none d-lg-block sidebar-wrapper-desktop" style={{
           width: isShowSidebar ? `${SIDEBAR_WIDTH}px` : `${SIDEBAR_COLLAPSED_WIDTH}px`
         }}>
           <Sidebar isShow={isShowSidebar} />

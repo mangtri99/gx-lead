@@ -25,8 +25,8 @@ function MenuLink(props: Props) {
         }
       )}
     >
-      {icon}
-      {isShowSidebar && <span className="ms-3">{title}</span>}
+      <span>{icon}</span>
+      <span className={`menu-item-link-title text-truncate ${isShowSidebar ? 'visible' : 'invisible'}`}>{title}</span>
     </Link>
   );
 }

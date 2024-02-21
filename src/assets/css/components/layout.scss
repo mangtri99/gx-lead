@@ -5,7 +5,7 @@
 }
 
 .main-content {
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
   display: flex;
   flex-direction: column;
 }
@@ -15,4 +15,27 @@
   flex: 1;
   padding: 1rem;
   margin-top: 5rem;
+}
+
+.sidebar-wrapper-desktop {
+  height: 100%;
+  position: fixed;
+  z-index: 1100;
+}
+
+.w-aside {
+  transition: all 0.3s ease-in;
+  &:hover {
+    width: 256px !important;
+  }
+
+  @at-root &:hover .menu-item-link-title {
+    visibility: visible !important;
+    transition: all 0.3s ease-in;
+  }
+
+  @at-root &:hover .menu-title {
+    visibility: visible !important;
+    transition: all 0.3s ease-in;
+  }
 }

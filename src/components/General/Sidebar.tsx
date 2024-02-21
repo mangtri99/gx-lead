@@ -23,7 +23,7 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       ref={ref}
-      className="bg-white d-flex flex-column h-100 p-3 "
+      className="bg-white d-flex flex-column h-100 p-3 w-aside"
       style={{
         width: isShow ? `${SIDEBAR_WIDTH}px` : `${SIDEBAR_COLLAPSED_WIDTH}px`,
       }}
@@ -38,8 +38,8 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
         )}
       </div>
       <div className="flex-1 mt-5">
-        <p className="menu-title uppercase mb-3">
-          {isShow ? "Leads Management" : ""}
+        <p className={`text-truncate menu-title uppercase mb-3 ${isShow ? 'visible' : 'invisible'}`}>
+          Leads Management
         </p>
         <ul className="list-unstyled">
           <li className="menu-item">
