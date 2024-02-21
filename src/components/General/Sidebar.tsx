@@ -32,13 +32,22 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
         {isShow ? (
           <img src={Logo2} alt="Logo" />
         ) : (
-          <img src={LogoCircle} alt="Logo" className="pt-2" style={{
-            width: '32px',
-          }} />
+          <img
+            src={LogoCircle}
+            alt="Logo"
+            className="pt-2"
+            style={{
+              width: "32px",
+            }}
+          />
         )}
       </div>
       <div className="flex-1 mt-5">
-        <p className={`text-truncate menu-title uppercase mb-3 ${isShow ? 'visible' : 'invisible'}`}>
+        <p
+          className={`text-truncate menu-title uppercase mb-3 ${
+            isShow ? "visible" : "invisible"
+          }`}
+        >
           Leads Management
         </p>
         <ul className="list-unstyled">
@@ -69,7 +78,10 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
         </ul>
       </div>
       <div className="text-center">
-        <p className="text-secondary fs-12 fw-medium">Version {VERSION_APP}</p>
+        <p className="text-secondary fs-12 fw-medium d-flex align-items-center justify-content-center">
+          <span className={isShow ? "d-inline-flex me-1" : "d-none"}>Version</span>
+          <span>{VERSION_APP}</span>
+        </p>
       </div>
     </div>
   );
