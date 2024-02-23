@@ -30,7 +30,9 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
     >
       <div className="text-center">
         {isShow ? (
-          <img src={Logo2} alt="Logo" />
+          <img style={{
+            width: "172px",
+          }} src={Logo2} alt="Logo" />
         ) : (
           <img
             src={LogoCircle}
@@ -78,10 +80,10 @@ const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
         </ul>
       </div>
       <div className="text-center">
-        <p className="text-secondary fs-12 fw-medium d-flex align-items-center justify-content-center">
-          <span className={isShow ? "d-inline-flex me-1" : "d-none"}>Version</span>
-          <span>{VERSION_APP}</span>
-        </p>
+        <div className={`text-secondary fs-12 fw-medium d-flex align-items-center justify-content-center ${isShow ? 'flex-lg-row ' : 'flex-column'}`}>
+          <p className={isShow ? 'me-1' : 'me-0'}>Version</p>
+          <p>{VERSION_APP}</p>
+        </div>
       </div>
     </div>
   );

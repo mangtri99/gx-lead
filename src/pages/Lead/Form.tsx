@@ -7,11 +7,8 @@ import FormOther from "./_components/Form/FormOther";
 import FormGeneral from "./_components/Form/FormGeneral";
 import { useContext, useState } from "react";
 import { LayoutContext } from "../../layouts/context/LayoutContext";
-import { SIDEBAR_WIDTH } from "../../config/general";
-import { useMedia } from "react-use";
-import { LeadOptionContext } from "./_hooks/context/LeadOptionContext";
-import useLeadOptionFilter from "./_hooks/useLeadOptionFilter";
 import HeadWrapper from "../../components/General/HeadWrapper";
+import LeadOptionProvider from "./_components/Provider/LeadOptionProvider";
 
 interface Props {
   isEdit: boolean;
@@ -19,41 +16,18 @@ interface Props {
 
 export default function Form(props: Props) {
   const { isEdit } = props;
-  const isMobile = useMedia("(max-width: 992px)");
   const params = useParams();
   const navigate = useNavigate();
   const [agreement, setAgreement] = useState(false);
   const { form, onSubmit, onInvalid, coverages } = useLeadFormState({ isEdit });
-  const { isShowSidebar } = useContext(LayoutContext);
-
-  const {
-    branch,
-    types,
-    channels,
-    media,
-    probabilities,
-    sources,
-    statuses,
-    fetchOptions,
-  } = useLeadOptionFilter();
+  const { setMarginContent } = useContext(LayoutContext);
 
   return (
     <HeadWrapper
       title={params.id ? "Edit Lead" : "Create Lead"}
       description="Lead Form"
     >
-      <LeadOptionContext.Provider
-        value={{
-          branch,
-          types,
-          channels,
-          media,
-          sources,
-          probabilities,
-          statuses,
-          fetchOptions,
-        }}
-      >
+      <LeadOptionProvider>
         <div className="position-relative h-100">
           <form
             className="d-block mb-5"
@@ -76,8 +50,7 @@ export default function Form(props: Props) {
               bottom: "0px",
               left: "0px",
               right: "0px",
-              marginLeft:
-                isShowSidebar && !isMobile ? `${SIDEBAR_WIDTH}px` : "0px",
+              marginLeft: setMarginContent(),
             }}
           >
             <div className="bg-white d-flex justify-content-between align-items-center shadow-sm py-3 px-4">
@@ -114,7 +87,7 @@ export default function Form(props: Props) {
             </div>
           </div>
         </div>
-      </LeadOptionContext.Provider>
+      </LeadOptionProvider>
     </HeadWrapper>
   );
 }
