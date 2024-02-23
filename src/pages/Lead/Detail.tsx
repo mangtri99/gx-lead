@@ -4,16 +4,20 @@ import { FaEdit } from "react-icons/fa";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import Badge from "../../components/General/Badge";
-import useLeadDetailState from "./_hooks/useLeadDetailState";
 import dayjs from "dayjs";
 import TextInfo from "./_components/TextInfo";
 import NotFound from "../../components/General/NotFound";
 import Loading from "../../components/General/Loading";
 import Button from "../../components/Button/Button";
 import HeadWrapper from "../../components/General/HeadWrapper";
+import useDetailState from "../../composables/useDetailState";
+import { Lead } from "../../config/types";
+import { LEADS_URL } from "../../config/api";
 
 export default function Detail() {
-  const { data, loading } = useLeadDetailState();
+  const { data, loading } = useDetailState<Lead>({
+    url: LEADS_URL
+  });
   const navigate = useNavigate();
 
   if (loading) {

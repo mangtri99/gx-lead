@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import { APIResponse, Lead } from "../../../config/types";
-import useFetch from "../../../composables/useFetch";
-import { LEADS_URL } from "../../../config/api";
 import { useParams } from "react-router-dom";
+import useFetch from "./useFetch";
+import { APIResponse } from "../config/types";
 
-export default function useLeadDetailState() {
-  const [data, setData] = useState<Lead>();
+interface Props {
+  url: string;
+}
+
+
+export default function useDetailState<T>(props: Props) {
+  const { url } = props;
+  const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(false)
   const params = useParams();
   const { $fetch } = useFetch();
 
-  const fetchLeads = async () => {
+  const fetchData = async () => {
     setLoading(true)
     try {
-      const res = await $fetch<APIResponse<Lead>>(`${LEADS_URL}/${params.id}`, {
+      const res = await $fetch<APIResponse<T>>(`${url}/${params.id}`, {
         method: 'GET',
       })
       setData(res.data.data);
@@ -26,7 +31,7 @@ export default function useLeadDetailState() {
   }
 
   useEffect(() => {
-    fetchLeads();
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
