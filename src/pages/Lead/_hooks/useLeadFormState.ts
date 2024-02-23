@@ -40,7 +40,6 @@ export default function useLeadFormState(props: Props) {
         method: 'GET',
       })
       form.reset(res.data.data)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err.response.data.message)
     }
@@ -95,7 +94,6 @@ export default function useLeadFormState(props: Props) {
       if(params.id || location.pathname.includes('create')){
         navigate('/leads')
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       const validationErrors = err.response?.data?.errors
       // if status 422, show validation
@@ -116,7 +114,6 @@ export default function useLeadFormState(props: Props) {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onInvalid = (data: any) => {
     console.log(data);
   }

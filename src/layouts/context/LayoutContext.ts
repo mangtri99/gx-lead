@@ -6,7 +6,6 @@ interface Props {
   setMarginContent: () => string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const LayoutContext = createContext<Props>({
   isShowSidebar: true,
   setIsShowSidebar: () => {},

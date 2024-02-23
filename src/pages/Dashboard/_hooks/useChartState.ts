@@ -28,7 +28,6 @@ export default function useChartState() {
   const [query, setQuery] = useState(defaultQuery)
   const { $fetch } = useFetch();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fetchChartData = async (params?: typeof defaultQuery) => {
     setLoading(true)
     try {

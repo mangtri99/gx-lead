@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import useLeadFormState from "./_hooks/useLeadFormState";
 import Button from "../../components/Button/Button";

@@ -14,7 +14,6 @@ interface Props {
   isShow?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Sidebar = forwardRef(function Sidebar(props: Props, ref) {
   const { isShow } = props;
 
