@@ -87,7 +87,7 @@ export default function Index() {
                         onClick={() => setTooglePassword(!tooglePassword)}
                         style={{
                           right: "10px",
-                          top: "27px",
+                          top: "30px",
                         }}
                       >
                         {tooglePassword ? <FaEye /> : <FaEyeSlash />}
