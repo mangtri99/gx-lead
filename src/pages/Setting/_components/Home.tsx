@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { SettingContext } from "../_hooks/context/SettingContext";
 import Tabs from "../../../components/General/Tabs";
-import { SelectOptions } from "../../../config/types";
+import { Option, SelectOptions } from "../../../config/types";
 import useSettingFormState from "../_hooks/useSettingFormState";
 import Button from "../../../components/Button/Button";
 import { LuPlus } from "react-icons/lu";
@@ -18,6 +18,7 @@ import Dialog from "../../../components/General/Dialog";
 import TextInput from "../../../components/Input/TextInput";
 import SelectInput from "../../../components/Input/SelectInput";
 import { Controller } from "react-hook-form";
+import DialogConfirmDelete from "./DialogConfirmDelete";
 
 export default function Home() {
   const {
@@ -66,6 +67,18 @@ export default function Home() {
       setChannelOptions(options);
     }
   }, [channels]);
+
+  const optionTabs = {
+    [TYPE_URL]: types,
+    [CHANNEL_URL]: channels,
+    [MEDIA_URL]: media,
+    [PROBABILITY_URL]: probabilities,
+    [SOURCE_URL]: sources,
+    [STATUS_URL]: statuses,
+  } as Record<string, Option[]>;
+
+  const currentDataTab = optionTabs[tab]
+
   return (
     <>
       <h1 className="mb-0 fs-20 fw-medium text-black">Lead Setting</h1>
@@ -89,83 +102,18 @@ export default function Home() {
           </Button>
         </div>
         <div className="row g-2 mt-3">
-          {tab === TYPE_URL &&
-            types &&
-            types?.length > 0 &&
-            types.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
 
-          {tab === CHANNEL_URL &&
-            channels &&
-            channels?.length > 0 &&
-            channels.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
-
-          {tab === MEDIA_URL &&
-            media &&
-            media?.length > 0 &&
-            media.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
-
-          {tab === PROBABILITY_URL &&
-            probabilities &&
-            probabilities?.length > 0 &&
-            probabilities.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
-
-          {tab === SOURCE_URL &&
-            sources &&
-            sources?.length > 0 &&
-            sources.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
-
-          {tab === STATUS_URL &&
-            statuses &&
-            statuses?.length > 0 &&
-            statuses.map((item, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-12">
-                <SettingItem
-                  item={item}
-                  onDelete={() => handleDelete(String(item.id))}
-                  onEdit={() => handleEdit(item)}
-                />
-              </div>
-            ))}
+        {currentDataTab &&
+          currentDataTab.length > 0 &&
+          currentDataTab.map((item, index) => (
+            <div key={index} className="col-lg-3 col-md-4 col-12">
+              <SettingItem
+                item={item}
+                onDelete={() => handleDelete(String(item.id))}
+                onEdit={() => handleEdit(item)}
+              />
+            </div>
+          ))}
         </div>
       </div>
       {/* Modal Dialog Form Add/Edit */}
@@ -259,25 +207,7 @@ export default function Home() {
       </Dialog>
 
       {/* Dialog Confirm Delete */}
-      <Dialog id="modalConfirmDelete" title="Confirm Delete">
-        <div>
-          <p className="text-black fs-14">Are you sure to delete this?</p>
-          <div className="d-flex align-items-center justify-content-end mt-4">
-            <Button
-              id="btn-close-confirm-delete"
-              type="button"
-              size="sm"
-              data-bs-dismiss="modal"
-              className="me-2"
-            >
-              Cancel
-            </Button>
-            <Button variant="danger" size="sm" onClick={() => onDelete()}>
-              Delete
-            </Button>
-          </div>
-        </div>
-      </Dialog>
+      <DialogConfirmDelete onDelete={onDelete} />
     </>
   );
 }
