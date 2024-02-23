@@ -8,7 +8,7 @@ import Pagination from "../../../components/General/Pagination";
 import Loading from "../../../components/General/Loading";
 import Dialog from "../../../components/General/Dialog";
 import Button from "../../../components/Button/Button";
-import { APIResponsePagination, Lead } from "../../../config/types";
+import { Lead } from "../../../config/types";
 import Modal from "bootstrap/js/dist/modal";
 import { useContext, useState } from "react";
 import ButtonActionIcon from "../../../components/Button/ButtonActionIcon";
@@ -18,18 +18,11 @@ import useLeadFormState from "../_hooks/useLeadFormState";
 import { Controller } from "react-hook-form";
 import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
 import { IoIosCloseCircle } from "react-icons/io";
+import { LeadListContext } from "../_hooks/context/LeadListContext";
 
-
-interface Props {
-  data: APIResponsePagination<Lead[]> | undefined;
-  handleDelete: (val: string) => void;
-  handlePagination: (val: string) => void;
-  loading: boolean;
-  fetchLeads: () => Promise<void>;
-}
-
-export default function List(props: Props) {
-  const { data, handleDelete, handlePagination, loading, fetchLeads } = props;
+export default function List() {
+  const { data, destroy, handlePagination, loading, fetchData } =
+    useContext(LeadListContext);
   const { probabilities, statuses, users } = useContext(LeadOptionContext);
   const { onSubmit, form } = useLeadFormState({
     isEdit: true,
@@ -62,7 +55,9 @@ export default function List(props: Props) {
 
   const onDelete = async () => {
     // perform delete
-    handleDelete(item?.id ? String(item.id) : "");
+    if (destroy) {
+      destroy(item?.id ? String(item.id) : "");
+    }
     // close modal after delete
     const btnCloseModal = document.getElementById(
       "btn-close-confirm-delete"
@@ -95,7 +90,9 @@ export default function List(props: Props) {
 
   const onUpdate = async () => {
     await onSubmit(form.getValues());
-    fetchLeads();
+    if (fetchData) {
+      fetchData();
+    }
   };
 
   if (loading) {
@@ -454,7 +451,11 @@ export default function List(props: Props) {
           <Pagination
             currentPage={data?.meta.current_page}
             lastPage={data?.meta.last_page}
-            handleChangePage={(e) => handlePagination(e)}
+            handleChangePage={(e) => {
+              if (handlePagination) {
+                handlePagination(e);
+              }
+            }}
           />
         )}
       </div>

@@ -9,20 +9,12 @@ import Dialog from "../../../components/General/Dialog";
 import Modal from "bootstrap/js/dist/modal";
 import { useContext } from "react";
 import { LeadOptionContext } from "../_hooks/context/LeadOptionContext";
+import { LeadListContext } from "../_hooks/context/LeadListContext";
 
 
-interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  query: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setQuery: (val: any) => void;
-  filter: () => void;
-  resetFilter: () => void;
-}
-
-export default function Filter(props: Props) {
+export default function Filter() {
+  const { query, setQuery, filter, resetFilter } = useContext(LeadListContext);
   const { branch, channels, media, probabilities, sources, statuses, types } = useContext(LeadOptionContext);
-  const { query, setQuery, filter, resetFilter } = props;
   const openAdvanceFilter = () => {
     const formModal = new Modal("#modalFilterAdvance");
     formModal.show();
@@ -54,7 +46,7 @@ export default function Filter(props: Props) {
           value={query.search}
           id="search"
           onChange={(e) => {
-            setQuery({
+            setQuery && setQuery({
               ...query,
               search: e.target.value,
             });
@@ -71,7 +63,7 @@ export default function Filter(props: Props) {
           id="date"
           label="Date"
           handleChange={(selected) => {
-            setQuery({
+            setQuery && setQuery({
               ...query,
               date_start: selected && selected.from ? selected.from : undefined,
               date_end: selected && selected.to ? selected.to : undefined,
@@ -86,7 +78,7 @@ export default function Filter(props: Props) {
           options={statuses || []}
           value={query.status}
           onChange={(e) =>
-            setQuery({
+            setQuery && setQuery({
               ...query,
               status: e.value,
             })
@@ -101,7 +93,7 @@ export default function Filter(props: Props) {
           options={branch || []}
           value={query.branch}
           onChange={(e) =>
-            setQuery({
+            setQuery && setQuery({
               ...query,
               branch: e.value,
             })
@@ -110,7 +102,7 @@ export default function Filter(props: Props) {
         />
       </div>
       <div className="col-auto d-flex">
-        <Button className="me-2" onClick={() => filter()}>
+        <Button className="me-2" onClick={() => filter && filter()}>
           <span className="me-2 fs-14">Search</span>
           <FiSearch size={20} />
         </Button>
@@ -122,7 +114,7 @@ export default function Filter(props: Props) {
           <LuFilter size={20} />
           {checkAdvanceFilter()}
         </Button>
-        <Button variant="danger" onClick={() => resetFilter()}>
+        <Button variant="danger" onClick={() => resetFilter && resetFilter()}>
           <LuTrash2 size={20} />
         </Button>
       </div>
@@ -137,7 +129,7 @@ export default function Filter(props: Props) {
                 options={probabilities || []}
                 value={query.probability}
                 onChange={(e) =>
-                  setQuery({
+                  setQuery && setQuery({
                     ...query,
                     probability: e.value,
                   })
@@ -152,7 +144,7 @@ export default function Filter(props: Props) {
                 options={types || []}
                 value={query.type}
                 onChange={(e) =>
-                  setQuery({
+                  setQuery && setQuery({
                     ...query,
                     type: e.value,
                   })
@@ -168,7 +160,7 @@ export default function Filter(props: Props) {
                 value={query.channel}
                 onChange={(e) => {
                   // reset source and media
-                  setQuery({
+                  setQuery && setQuery({
                     ...query,
                     media: "",
                     source: "",
@@ -191,7 +183,7 @@ export default function Filter(props: Props) {
                 }
                 value={query.media}
                 onChange={(e) =>
-                  setQuery({
+                  setQuery && setQuery({
                     ...query,
                     source: "",
                     media: e.value,
@@ -213,7 +205,7 @@ export default function Filter(props: Props) {
                 }
                 value={query.source}
                 onChange={(e) =>
-                  setQuery({
+                  setQuery && setQuery({
                     ...query,
                     source: e.value,
                   })
@@ -236,7 +228,7 @@ export default function Filter(props: Props) {
               size="sm"
               variant="danger"
               onClick={() => {
-                filter();
+                filter && filter();
                 document.getElementById("btn-close-modal-filter")?.click();
               }}
             >
