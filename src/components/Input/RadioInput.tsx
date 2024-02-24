@@ -1,12 +1,11 @@
 import React, { forwardRef } from "react";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string | React.ReactNode;
-  
+  label?: string | React.ReactNode;
 }
 
 const RadioInput = forwardRef(function RadioInput(props: Props, ref) {
-  const { id, className, label } = props;
+  const { id, className = '', label } = props;
   return (
     <div className="form-check">
       <input

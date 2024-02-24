@@ -5,10 +5,10 @@ import { forwardRef } from "react";
 import clsx from "clsx";
 
 interface Props extends React.HTMLProps<HTMLSelectElement> {
-  value: string;
+  value?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (e: any) => void;
-  options: SelectOptions[];
+  onChange?: (e: any) => void;
+  options?: SelectOptions[];
   labelInput?: string | React.ReactNode;
   width?: string;
   message?: string;
@@ -43,6 +43,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         ref={ref}
+        data-testid={id}
         className={clsx("fs-14", {
           "is-invalid": message,
         }, className)}
@@ -61,7 +62,7 @@ const SelectInput = forwardRef(function SelectInput(props: Props, ref) {
               value: "", // used to reset the value
             }
           }
-          onChange(val);
+          onChange && onChange(val);
         }}
         placeholder={placeholder}
         isClearable={isClearable}

@@ -26,7 +26,7 @@ export default function Accordion(props: Props) {
           {title}
         </div>
         <div className="accordion-btn">
-          {icon ? icon : <IoChevronUp size={20} />}
+          {icon ? icon : <IoChevronUp data-testid='chevron-icon' size={20} />}
         </div>
       </a>
       <div className='accordion-content'>

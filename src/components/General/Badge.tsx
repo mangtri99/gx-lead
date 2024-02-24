@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Badge(props: Props) {
-  const { color, children, className } = props;
+  const { color, children, className = '' } = props;
   return (
     <span className={clsx(`badge w-fit ${className}`, {
       'text-bg-primary': color === 'primary',
