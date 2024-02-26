@@ -21,7 +21,7 @@ export default function SettingItem(props: Props) {
       <div className="row justify-content-between align-items-start">
         <div className="col-9">
           <p className="mb-0 text-black fs-14">{item.name}</p>
-          <p className="mb-0 text-secondary fs-12">{item.description || "-"}</p>
+          <p className="mb-0 text-secondary fs-12 line-clamp-2">{item.description || "-"}</p>
         </div>
         <div className="col-3 d-flex align-items-start justify-content-end">
           <ButtonActionIcon className="d-flex align-items-center me-2" onClick={() => onDelete(item.id)}>
