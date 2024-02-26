@@ -87,6 +87,7 @@ export default function useSettingFormState() {
       // if status 422, show validation
       if(err.response.status === 422){
         if(validationErrors){
+          toast.error(validationErrors[Object.keys(validationErrors)[0]][0])
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           Object.keys(validationErrors).forEach((key: any) => {
             form.setError(key, {

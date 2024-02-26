@@ -5,6 +5,7 @@ import { Option, SelectOptions } from "../../../config/types";
 import useSettingFormState from "../_hooks/useSettingFormState";
 import Button from "../../../components/Button/Button";
 import { LuPlus } from "react-icons/lu";
+import { BsDatabaseX } from "react-icons/bs";
 import {
   CHANNEL_URL,
   MEDIA_URL,
@@ -104,7 +105,7 @@ export default function Home() {
         <div className="row g-2 mt-3">
 
         {currentDataTab &&
-          currentDataTab.length > 0 &&
+          currentDataTab.length > 0 ?
           currentDataTab.map((item, index) => (
             <div key={index} className="col-lg-3 col-md-4 col-12">
               <SettingItem
@@ -113,7 +114,12 @@ export default function Home() {
                 onEdit={() => handleEdit(item)}
               />
             </div>
-          ))}
+          )) : (
+            <div className="d-flex flex-column align-items-center">
+              <BsDatabaseX size={50} />
+              <p className="mt-3">No data found</p>
+            </div>
+          )}
         </div>
       </div>
       {/* Modal Dialog Form Add/Edit */}
