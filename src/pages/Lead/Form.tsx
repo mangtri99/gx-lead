@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { LayoutContext } from "../../layouts/context/LayoutContext";
 import HeadWrapper from "../../components/General/HeadWrapper";
 import LeadOptionProvider from "./_components/Provider/LeadOptionProvider";
+import NotFound from "../../components/General/NotFound";
 
 interface Props {
   isEdit: boolean;
@@ -18,8 +19,15 @@ export default function Form(props: Props) {
   const params = useParams();
   const navigate = useNavigate();
   const [agreement, setAgreement] = useState(false);
-  const { form, onSubmit, onInvalid, coverages } = useLeadFormState({ isEdit });
+  const { form, onSubmit, onInvalid, coverages, isError } = useLeadFormState({
+    isEdit,
+  });
   const { setMarginContent } = useContext(LayoutContext);
+
+  // if page is edit and data not found
+  if (isError && isEdit) {
+    return <NotFound />;
+  }
 
   return (
     <HeadWrapper

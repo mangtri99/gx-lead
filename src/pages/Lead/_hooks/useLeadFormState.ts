@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod';
 import { LeadSchema } from '../../../schema/LeadSchema';
 import { 
-  useEffect, 
+  useEffect, useState, 
  } from 'react';
 import useFetch from '../../../composables/useFetch';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +21,7 @@ export default function useLeadFormState(props: Props) {
   const navigate = useNavigate()
   const params = useParams<{ id: string }>();
   const location = useLocation();
+  const [isError, setIsError] = useState(false);
 
   const coverages = [
     {
@@ -40,8 +41,10 @@ export default function useLeadFormState(props: Props) {
         method: 'GET',
       })
       form.reset(res.data.data)
+      setIsError(false)
     } catch (err: any) {
-      console.log(err.response.data.message)
+      setIsError(true)
+      console.log(err.response)
     }
   }
 
@@ -122,6 +125,7 @@ export default function useLeadFormState(props: Props) {
     form,
     onSubmit,
     onInvalid,
-    coverages
+    coverages,
+    isError
   }
 }

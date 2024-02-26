@@ -8,8 +8,8 @@ export default function Index() {
     <HeadWrapper title={title} description={description}>
       <div className="h-screen w-100 flex flex-column align-items-center">
         <NotFound
-          title="404 Not Found"
-          description="The page you are looking for does not exist"
+          title={title}
+          description={description}
         />
       </div>
     </HeadWrapper>
