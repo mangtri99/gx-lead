@@ -102,6 +102,7 @@ export default function useLeadFormState(props: Props) {
       // if status 422, show validation
       if(err.response.status === 422){
         if(validationErrors){
+          toast.error(validationErrors[Object.keys(validationErrors)[0]][0])
           Object.keys(validationErrors).forEach((key: any) => {
             form.setError(key, {
               type: "manual",
